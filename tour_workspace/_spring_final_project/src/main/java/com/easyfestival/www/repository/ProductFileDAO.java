@@ -7,15 +7,17 @@ import com.easyfestival.www.domain.ProductFileVO;
 
 public interface ProductFileDAO {
 
-	int registerFile(ProductFileVO pfvo);
+	int insertFile(ProductFileVO pfvo);
 
-	List<ProductFileVO> getfileList(long pkNo);
+	ProductFileVO selectFile();
 
-	int modifyFile(ProductFileVO pfvo);
+	List<ProductFileVO> getFileList();
 
-	int removeFile(long pkNo);
+	ProductFileVO getFile();
 
+	List<ProductFileVO> getImgList();
 
+	List<ProductFileVO> getImgDetail(long pkNo);
 
 
 }

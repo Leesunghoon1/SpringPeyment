@@ -17,5 +17,4 @@ public class PlaceVO {
 	private String plName;
 	private String plCountry;
 	private long pkNo;
-	private String plContinent; // 대륙
 }

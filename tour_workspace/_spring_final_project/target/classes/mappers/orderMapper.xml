@@ -7,17 +7,17 @@
 
 	<!-- 주문 정보 생성 -->
 	<insert id="insert_pay"
-		parameterType="com.easyfestival.www.domain.OrderDTO">
+		parameterType="com.easyfestival.www.repository.OrderDTO">
 		insert into pay_order_user(order_num, product_num, id, product_name,
 		order_date, total_price, imp_uid, resur_num)
 		values(#{orderNum},#{productNum},
 		#{id},#{productName},#{orderDate},#{totalPrice},
-		#{imp_uid},#{resurNum})
+		#{impUid},#{resurNum})
 	</insert>
 
 
 	<insert id="insert_payinfo"
-		parameterType="com.easyfestival.www.domain.PayDTO">
+		parameterType="com.easyfestival.www.repository.PayDTO">
 		insert into sc_pay(id, order_num, pay_method, pay_name, pay_date,
 		pay_amount)
 		values(#{id},#{orderNum},#{payMethod},#{payName},#{payDate},#{payAmount})
@@ -25,16 +25,30 @@
 
 	<!-- 마지막에 결제된 방금 결제된 주문정보 가져오기 -->
 	<select id="getLastPay"
-		parameterType="com.easyfestival.www.domain.PayDTO"
-		resultType="com.easyfestival.www.domain.PayDTO">
+		parameterType="com.easyfestival.www.repository.PayDTO"
+		resultType="com.easyfestival.www.repository.PayDTO">
 		SELECT * FROM sc_pay WHERE pay_num = (SELECT MAX(pay_num) FROM sc_pay)
 	</select>
 
 	<!-- 결제 정보 가져오기 -->
 	<select id="getPay"
-		resultType="com.easyfestival.www.domain.PayDTO">
+		resultType="com.easyfestival.www.repository.PayDTO">
 		SELECT * FROM
 		sc_pay WHERE pay_num = #{payNum}
+	</select>
+	
+	 <delete id="orderCancle" parameterType="com.easyfestival.www.repository.OrderDTO">
+		delete from pay_order_user WHERE order_num=#{orderNum}
+	</delete>
+	
+	<delete id="payMentCancle" parameterType="com.easyfestival.www.repository.PayDTO">
+		delete from sc_pay WHERE order_num=#{orderNum}
+	</delete>
+	
+	<select id="adminList" parameterType="com.easyfestival.www.repository.OrderDTO" resultType="com.easyfestival.www.repository.OrderDTO">
+		SELECT *
+		from pay_order_user
+		WHERE order_num=#{orderNum}
 	</select>
 
 

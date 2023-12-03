@@ -14,9 +14,9 @@ import lombok.ToString;
 public class ProductFileVO {
 	
 	private String pfUuid;
-	private long pkNo;
+	private long pdNo;
 	private String pfName;
 	private long pfSize;
-	private String pfRegAt;
+	private String regAt;
 	private String pfSaveDir;
 }

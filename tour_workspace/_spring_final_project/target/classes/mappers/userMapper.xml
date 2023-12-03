@@ -19,58 +19,7 @@
   	</insert>
   	
   	<insert id="authUser">
-  		insert into auth_user(id, auth) values(#{id}, #{auth})
+  		insert into auth_user(id) values(#{id})
   	</insert>
   	
-  	<select id="getList" resultType="uvo">
-  		select * from user
-  	</select>
-  	
-  	<update id="modifyUser">
-  		update user set 
-  		<include refid="modify"></include>
-  		where id = #{id}
-  	</update>
-  	
-  	<delete id="deleteUser">
-  		delete from user where id = #{id}
-  	</delete>
-  	
-  	<select id="getUserCount" resultType="int">
-  		select count(id) from user;
-  	</select>
-  	
-  	<select id="getUserList" resultType="uvo">
-  		select * from user
-  		limit #{limitStart}, #{listQty}
-  	</select>
-  	
-  	
-  	
-  	<sql id="modify">
-  		<trim suffixOverrides=",">
-  			<if test="!pwd.equals('')">
-  				pwd = #{pwd},
-  			</if>
-  			<if test="!name.equals('')">
-  				name = #{name},
-  			</if>
-  			<if test="!age.equals('')">
-  				age = #{age},
-  			</if>
-  			<if test="!email.equals('')">
-  				email = #{email},
-  			</if>
-  			<if test="!phoneNumber.equals('')">
-  				phone_number = #{phoneNumber},
-  			</if>
-  			<if test="!address.equals('')">
-  				address = #{address},
-  			</if>
-  		</trim>
-  	</sql>
-  	
-  	
   </mapper>
-  
-  

@@ -2,144 +2,88 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/product/product_list.css">
+<link rel="stylesheet" href="/resources/css/product_list.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
+</head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
 	 
-	 
+	 <a href="/">홈</a>
 	 
 	<div class="product-container">
 		<div class="sub-container">
-			
-			<div class="place-container">
+	
+			<div>
 			<!-- 서치라인 -->
 				<div class="place-h2">
 					<h2>
-						<a href="#" id="placeAll">지역보기</a>
-					</h2>		
+						<a href="#" class="placeAll" id="placeAll">
+						지역보기
+						<span class="material-symbols-outlined" id="arrow"></span>
+						<!-- 업 <span class="material-symbols-outlined">expand_less</span> -->
+						<!-- 다운 <span class="material-symbols-outlined">expand_more</span> -->
+						</a>
+					</h2>
 				</div>
-				
-				<div class="placeDiv" id="placeDiv">
-				
-					<div class="place-drop-menu">
-						<span>
-							<a href="/product/list?pkContinent=동북아">동북아</a>
-						</span>
-						
-						<span>
-							<a href="/product/list?pkContinent=동남아">동남아</a>
-						</span>
-							
-						<span>
-							<a href="/product/list?pkContinent=유럽">유럽</a>
-						</span>
-							
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
-						</span>	
-																									
-					</div>
-					
+			</div>
+			
+			<div style="display:none" class="placeDiv" id="placeDiv">
+				<div id="chcekBox" class="chcekBox">
+					<ul class="country">
+						<c:forEach items="${plvo }" var="plvo">
+							<li>
+								<a href="#">
+									${plvo.plCountry }
+								</a>
+							</li>
+						</c:forEach>
+					</ul>
 				</div>
 			</div>
 			
 			
 			
-			 
 			
 			
 			
 			<!-- 리스트  -->
-			<div class="list-container">			
-				<c:forEach items="${pldto }" var="pldto">
-
-						<input type="hidden" value="${pldto.packvo.pkNo }" name="pkNo"> 
-						<input type="hidden" id="textNumber" value="${pldto.packvo.pkNo }">
-
-					<div class="itemBox">										
-						<div class="imgZone">
-							<c:forEach items="${pldto.pfList }" var="pfList">
-								<img class="listImg" src="/product_upload/${fn:replace(pfList.pfSaveDir,'-','/')}/${pfList.pfUuid}_${pfList.pfName}">
-							</c:forEach>
-						</div>							
-						<div class="textDiv">
-							<div class="list-product">
-								<div>
-									<h5>상품명</h5>
-									${pldto.packvo.pkName }
+			<div class="list-container">
+				<c:forEach items="${pdto.packList }" var="packList">
+				
+					<div class="itemBox">
+						<a href="/product/detail?pkNo=${packList.pkNo }" style="display:block">
+							<input type="hidden" value="${packList.pkNo }" name="pkNo"> 
+							<!-- 사진이 여러개면 옆으로 넘길수 있게  -->
+							<div class="imgBox">
+								<div class="imgZone" id="imgZone${packList.pkNo}"></div>
+							</div>	
+										
+							<div class="textBox" id="textZone">
+								<div class="textDiv">
+										상품명 : ${packList.pkName } <br>
+										가격 : ${packList.pkPrice }
 								</div>
-								
-								<div id="countryZone">
-									<h5>나라</h5>
-									${pldto.plvo.plCountry }
-								</div>
-								
-								<div id="festivalZone">
-									<h5>축제</h5>
-									${pldto.fvo.fvName }
-								</div>
-							
-								<div id="airZone">
-									<h5>출발 ~ 도착일</h5>
-									${pldto.avo.apArrival } ~ ${pldto.avo.apDeparture }
-								</div>
+								<input type="hidden" id="textNumber" value="${packList.pkNo }">
 							</div>
-							<div class="list-price">
-								<div class="list-price-heart">
-									<div>
-										가격
-									</div>
-									<div>
-										<i class="fa-solid fa-heart heart-btn" style="color: #787878;"></i>
-									</div>
-								</div>
-								<div class="list-product-price"><fmt:formatNumber value="${pldto.packvo.pkPrice}" pattern="#,###"/> 원</div>
-								<div>
-									<a href="/product/detail?pkNo=${pldto.packvo.pkNo }"><button type="button" class="detailBtn">자세히보기</button></a>
-								</div>
-							</div>
-						</div>					
+						</a>
 					</div>			
 				</c:forEach>
-			
 			</div>
+		
 		</div>
 	</div>
-	
-	
-	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-<script type="text/javascript" src="/resources/js/product/product_list.js"></script>
-
-
+<script type="text/javascript" src="/resources/js/product_list.js"></script>
+<script type="text/javascript">
+	arrowUpDown();
+</script>
+<script type="text/javascript">
+	getImageList();
+</script>
 </body>
 </html>

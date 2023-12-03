@@ -9,7 +9,7 @@ public interface EventDAO
 
 	int eventRegister(eventVO evo);
 
-	List<eventVO> eventList();
+	List<eventVO> list();
 
 	eventVO detail(int evNo);
 

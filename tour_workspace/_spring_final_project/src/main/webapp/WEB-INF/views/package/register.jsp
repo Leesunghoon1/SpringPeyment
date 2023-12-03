@@ -23,6 +23,7 @@
 			<span>가격</span> <input type="text" name="pkPrice">
 		</div>
 		
+		
 		<button type="submit" id="button">등록</button>
 	</form>
 

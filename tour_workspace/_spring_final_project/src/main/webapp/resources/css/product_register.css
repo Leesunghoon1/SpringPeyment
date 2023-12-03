@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body{
+
+
+}
+
+.product-register-form{
+    background-color: #f7f7f7;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 100px;
+}
+
+.regImg{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+   
+}
+
+.imgBtn{
+    display: block;
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid gray;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+.imgBtn:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.regBtn{
+    display: block;
+    width: 500px;
+    height: 50px;    
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+.regBtn:hover{
+    cursor: pointer;
+    background-color: #323232;
+} 
+.div-date{
+
+}
+.table-date{
+    text-align: center;
+}
+
+
+td{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px 15px 15px 15px;
+}
+
+td:hover{
+    cursor: pointer;
+}
+
+td:focus{
+    background: red;
+    border-radius: 50px;
+    color: white;
+}
+
+.yearMonth{
+    font-size: 23px;
+}
+
+.sunday{
+    color: red;
+}
+
+.saturday{
+    color: #006f80;
+}
+
+input{
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+textarea{
+    width: 500px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-left: 5px;
+
+}

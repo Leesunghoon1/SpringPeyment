@@ -7,11 +7,11 @@
 		insert into event (ev_name,ev_start,ev_end,ev_type,ev_content)
 		values (#{evName},#{evStart},#{evEnd},#{evType},#{evContent})
 	</insert>
-	<select id="eventList" resultType="com.easyfestival.www.domain.eventVO">
+	<select id="list" resultType="com.easyfestival.www.domain.eventVO">
 		select * from event order by ev_no desc
 	</select>
 	<select id="detail" resultType="com.easyfestival.www.domain.eventVO">
-		select * from event where ev_no=#{evNo}
+		select * from event where ev_no=${evNo}
 	</select>
 	<delete id="eventRemove">
 		delete from event where ev_no=#{evNo}
@@ -20,4 +20,5 @@
 		update event set ev_name=#{evName},ev_start=#{evStart},ev_end=#{evEnd},ev_type=#{evType},ev_content=#{evContent}
 		where ev_no=#{evNo}
 	</update>
+
 </mapper>

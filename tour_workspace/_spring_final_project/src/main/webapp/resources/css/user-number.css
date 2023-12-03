@@ -1,0 +1,408 @@
+div {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: Pretendard, "Pretendard_Alt", "Apple SD Gothic Neo",
+		"맑은 고딕", "Malgun Gothic", sans-serif !important;
+}
+
+@media screen and (max-width: 767px) {
+	.payment-box-left, .payment-box-right {
+		width: 100%; /* 전체 폭으로 설정 */
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.payment-box-left, .payment-box-right {
+		width: 48%;
+		margin-right: 2%;
+		margin-left: 0;
+	}
+}
+
+.user-nmuber-top {
+	width: 100%;
+}
+
+.form-group-two {
+	width: 100%;
+}
+
+.payment-container-main {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	z-index: -2;
+}
+
+.payment-box-left {
+	box-sizing: border-box;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 40%; /* 수정: 전체 폭으로 설정 */
+	margin-top: 60px;
+	margin-bottom: 20px; /* 수정: 아래 여백 추가 */
+	margin-left: 40px;
+	text-align: center;
+	background-color: #fff; /* 배경색 추가 */
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.payment-box-right {
+	box-sizing: border-box;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 40%; /* 수정: 전체 폭으로 설정 */
+	margin-top: 60px; /* 수정: 위 여백 추가 */
+	margin-bottom: 20px; /* 수정: 아래 여백 추가 */
+	text-align: center;
+	background-color: #fff;
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.product-table {
+	width: 100%;
+}
+
+h2 {
+	text-align: center;
+}
+
+span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+input {
+	box-sizing: border-box;
+	padding: 8px 14px 8px 16px;
+	width: 100%;
+	height: 48px;
+	border: none;
+	border: 1px solid rgba(0, 0, 0, .08);
+	border-radius: 4px;
+	font-weight: 400;
+	font-size: 18px;
+	color: rgba(0, 0, 0, .56);
+}
+
+/* button {
+	
+}
+
+button:hover {
+	background-color: #45a049;
+} */
+.user-number {
+	margin: 220 200 100 0;
+	padding: 0 0;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+
+.product-amout {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.event-box {
+	margin: 0 0 0 0;
+	padding: 0 0;
+	height: 300px;
+	width: 100%;
+	display: inline-block;
+	padding: 0 0;
+}
+
+.payment-box-light {
+	background-color: #00ef0c;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 35%;
+}
+
+.phon-button {
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 48px;
+	padding: 13px 0 10px;
+	border: none;
+	border-radius: 4px;
+	background: #ccc;
+	font-size: 15px;
+	color: #fff;
+}
+
+.phon-button {
+	margin-top: 10px;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+.user-walk {
+	display: inline-block;
+	width: 86px;
+	height: 32px;
+	border: 1px solid rgb(242, 17, 76);
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px;
+	color: rgb(230, 28, 81);
+}
+
+.user-car {
+	display: inline-block;
+	width: 86px;
+	height: 32px;
+	border: 1px solid rgb(242, 17, 76);
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px;
+	color: rgb(230, 28, 81);
+}
+
+.user-walk span {
+	display: inline-block;
+	padding-left: 20px;
+}
+
+.user-car span {
+	display: inline-block;
+	padding-left: 20px;
+}
+
+.form-group-rogin {
+	margin-top: 20px;
+	padding: 22px 0;
+	font-size: 15px;
+	line-height: 22px;
+	text-align: center;
+	background: #ff0055
+		url(//image.goodchoice.kr/images/web_v3/bg_login_m.png);
+	background-size: cover;
+	padding: 22px 0;
+}
+
+form-group-rogin span {
+	display: inline-block;
+	padding-right: 14px;
+	background: url(//image.goodchoice.kr/images/web_v3/ico_arr_gt.png) 100%
+		50% no-repeat;
+	background-size: 12px auto;
+	font-size: 16px;
+}
+
+.cupon-button {
+	padding: 0 14px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid rgba(0, 0, 0, .08);
+	border-radius: 4px;
+	background: #fafafa;
+	font-size: 16px;
+	color: rgba(0, 0, 0, .56);
+	cursor: pointer;
+	
+}
+
+.form-group-cupon-mid {
+	width: 100%;
+}
+
+.form-group-cupon-mid::after {
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.cash-box {
+	margin: 0 0 0 0;
+	padding: 0 0;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+	height: 300px;
+	width: 600px;
+	display: inline-block;
+	padding: 0 0;
+	F
+}
+
+.form-select {
+	height: 48px;
+	padding: 0 12px;
+	border: 1px solid rgba(0, 0, 0, .08);
+	border-radius: 4px;
+	background: #fafafa;
+	background-size: 25px auto;
+	font-size: 18px;
+	color: rgba(0, 0, 0, .56);
+	cursor: pointer;
+	background-size: 25px auto;
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.price-box {
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.product-eventTap {
+	width: 100%;
+}
+
+.selectBox * {
+	box-sizing: border-box;
+}
+
+.selectBox {
+	position: relative;
+	width: 150px;
+	height: 35px;
+	border-radius: 4px;
+	border: 2px solid lightcoral;
+	background: calc(100% - 7px) center no-repeat;
+	background-size: 20px;
+	cursor: pointer;
+}
+
+.selectBox:after {
+	content: '';
+	display: block;
+	width: 2px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 35px;
+	background: lightcoral;
+}
+
+.selectBox .label {
+	display: flex;
+	align-items: center;
+	width: inherit;
+	height: inherit;
+	border: 0 none;
+	outline: 0 none;
+	padding-left: 15px;
+	background: transparent;
+	cursor: pointer;
+}
+
+.selectBox .optionList {
+	position: absolute;
+	top: 28px;
+	left: 0;
+	width: 100%;
+	background: lightcoral;
+	color: #fff;
+	list-style-type: none;
+	padding: 0;
+	border-radius: 6px;
+	overflow: hidden;
+	max-height: 0;
+	transition: .3s ease-in;
+}
+
+.selectBox .optionList::-webkit-scrollbar {
+	width: 6px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb {
+	background: #303030;
+	border-radius: 45px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb:hover {
+	background: #303030;
+}
+
+.selectBox.active .optionList {
+	max-height: 500px;
+}
+
+.selectBox .optionItem {
+	border-bottom: 1px dashed rgb(170, 72, 72);
+	padding: 5px 15px 5px;
+	transition: .1s;
+}
+
+.selectBox .optionItem:hover {
+	background: rgb(175, 93, 93);
+}
+
+.selectBox .optionItem:last-child {
+	border-bottom: 0 none;
+}
+
+.box-left {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.bg-video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.bg-video__content {
+	z-index: -2;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	background-size: cover 와 비슷함.(HTML 요소 or 비디오와 작동)
+}
+
+.btn-gradient {
+	margin: 5px;
+}
+
+.btn-gradient {
+	position: relative;
+	width: 150px;
+	background: calc(100% - 7px) center no-repeat;
+	padding: 8px 18px;
+	font-size: 14px;
+	border-radius: 10px;
+	
+}
+
+.btn-gradient .optionList::-webkit-scrollbar-track {
+	background: #303030;
+}

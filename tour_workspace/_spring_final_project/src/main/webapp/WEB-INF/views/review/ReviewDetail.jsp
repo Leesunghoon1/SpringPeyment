@@ -20,8 +20,8 @@
 			<td>${rvo.title }</td>
 		</tr>
 		<tr>
-			<th>id</th>
-			<td>${rvo.id }</td>
+			<th>userNo</th>
+			<td>${rvo.userNo }</td>
 		</tr>
 		<tr>
 			<th>readCount</th>
@@ -35,37 +35,24 @@
 	<div id="contentArea">
 		${rvo.content}
 	</div>
-	<button type="button" id="like">좋아요</button>
+	<a><button type="button">좋아요</button></a>
 	<a href="/review/remove?rvNo=${rvo.rvNo}"><button type="button">삭제</button></a>
 	<a href="/review/modify?rvNo=${rvo.rvNo}"><button type="button">수정</button></a>
 	
 	<!-- 댓글 영역 -->
 	<!-- 댓글 등록 영역 -->
 	<div class="input-group mb-3">
-			<span id="cmtWriter" >${uvo.id}</span> 
+			<span id="cmtWriter" >123</span> 
 			<input type="text"  placeholder="Comment Content" id="cmtText">
 			<button  type="button" id="cmtPostBtn">POST</button>
-	</div>
+		</div>
 	<!-- 댓글 표시 영역 -->
-	<div id="ReviewCmtArea"></div>
-	
-	
 	
 	<script type="text/javascript">
-		let rnoVal=`<c:out value='${rvo.rvNo}'/>`;
-		let idVal=`<c:out value='${uvo.id}'/>`;
-		console.log('rnoVal:'+rnoVal+',idVal:'+idVal);
+		let rnoVal=`<c:out value='${rvo.rvNo }'/>`;
+		console.log(rnoVal);
 	</script>
-	
 	<script type="text/javascript" src="/resources/js/ReviewComment.js"></script>
-	<script type="text/javascript">
-		getCommentList(rnoVal);
-	</script>
-	
-	<script type="text/javascript" src="/resources/js/ReviewLike.js"></script>
-	<script type="text/javascript">
-		UserLikeDisplay();
-	</script>
 
 </body>
 </html>

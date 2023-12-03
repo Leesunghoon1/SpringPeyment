@@ -19,8 +19,6 @@ public class reviewVO
 	private String regAt;
 	private int readCount;
 	private int cmtCount;
-	private int fileCount;
-	private String id;
+	private int userNo;
 	private char secret;
-	private int likeCount;
 }

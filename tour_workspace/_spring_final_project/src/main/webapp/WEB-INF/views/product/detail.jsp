@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/product/product_detail.css">
-<link rel="stylesheet" href="/resources/css/product/product_modal.css">
+<link rel="stylesheet" href="/resources/css/product_detail.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
 	
@@ -17,21 +16,10 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
-	<c:set value="${pldto.packvo }" var="packvo"/>
-	<c:set value="${pldto.pfList }" var="pfList"/>
-	<c:set value="${pldto.avo }" var="avo"/>
-	<c:set value="${pldto.hvo }" var="hvo"/>
-	<c:set value="${pldto.fvo }" var="fvo"/>
-	<c:set value="${pldto.plvo }" var="plvo"/>
-
-
-
 	<div class="product-container">
 		<div class="inner-container">	
 		
-			<div class="product-title">${packvo.pkName }</div>
+			<div class="product-title">${pbvo.pdTitle }</div>
 			
 			<div class="main-section">
 			
@@ -45,19 +33,17 @@
 					</div>
 					
 					<!-- 사진 리스트 -->
-					<div class="div-img">
-						<c:forEach items="${pfList }" var="flist">
-							<img class="div-imgzone" alt="그림없음" src="/product_upload/${fn: replace(flist.pfSaveDir,'\\','/')}/${flist.pfUuid }_${flist.pfName}">
-						</c:forEach>
-					</div>
+					<c:forEach items="${pfvo }" var="flist">
+						<img alt="그림없음" src="/product_upload/${fn: replace(flist.pfSaveDir,'\\','/')}/${flist.pfUuid }_${flist.pfName}">
+					</c:forEach>
 					
 					<div>
 						<div>
-							<div class="manager-div">
-								<span id="managerInfoA" class="manager-div-a">담당자 정보 <span class="material-symbols-outlined" id="managerInfoSpan">error</span></span>	
+							<div>
+								<a href="#" id="managerInfoA">담당자 정보 <span class="material-symbols-outlined" id="managerInfoSpan">error</span></a>	
 								<!-- 여행 후기 갯수 늘어나게 만들기 클릭하면 리뷰창으로 이동 -->
 								<!-- 여행후기 갯수  -->
-								<a href="#" class="tourreview manager-div-a">여행후기 <span>0</span></a>
+								<a href="#" class="tourreview">여행후기 <span>0</span></a>
 							</div>
 							
 						</div>
@@ -71,9 +57,9 @@
 							<th>한국도착</th>
 						</tr>
 						<tr>
-							<td class="table-td"><span class="apprice air-info"><fmt:formatNumber value="${packvo.pkPrice}" pattern="#,###"/></span>  원 <br><p class="price-info">유류할증료 포함<br>제세공과금 포함</p></td>
-							<td class="table-td"><span class="air-info">${avo.apArrival }</span> <br><p class="price-info">유류할증료 포함<br>제세공과금 포함</p></td>
-							<td class="table-td"><span class="air-info">${avo.apDeparture }</span> <br><p class="price-info">유류할증료 포함<br>제세공과금 포함</p></td>
+							<td><span class="apprice"><fmt:formatNumber value="${packvo.pkPrice}" pattern="#,###"/></span>  원 <br><p>유류할증료 포함<br>제세공과금 포함</p></td>
+							<td>${avo.apArrival } <br><p>유류할증료 포함<br>제세공과금 포함</p></td>
+							<td>${avo.apDeparture } <br><p>유류할증료 포함<br>제세공과금 포함</p></td>
 						</tr>	
 					</table>
 					<!-- 버튼그룹 -->
@@ -130,31 +116,18 @@
 						</div>	
 						
 					</div>
-					
-					<div class="option-final-price">
-						<!-- 최종금액 -->
-						<strong class="option-price-text">최종 합계금액</strong>
-						<div class="finalPrice-info">
-							<strong id="finalPrice" ><fmt:formatNumber value="${packvo.pkPrice}"  pattern="#,###" /></strong>
-							<span class="finalPrice-won">원</span>
+					<form action="/product/reservation" method="post">
+						<div class="option-final-price">
+							<!-- 최종금액 -->
+							<strong class="option-price-text">최종 합계금액</strong>
+							<strong id="finalPrice"><fmt:formatNumber value="${packvo.pkPrice}" pattern="#,###" /></strong>
+							<span>원</span>
+							<input type="hidden" value="${packvo.pkPrice }" id="hiddenPrice">
 						</div>
-						<input type="hidden" id="price">
-						<input type="hidden" value="${packvo.pkPrice }" id="hiddenPrice">
-					</div>
-					
-					<div class="button-div">
-						<a href="/product/reservation?pkNo=${packvo.pkNo}"><button type="button" class="option-submit-button">예약하기</button></a>
-					</div>
-					<div class="admin-product-controll">
-						<!-- 관리자만 보이게 만들기 -->
 						<div>
-							<a href="/product/modify?pkNo=${packvo.pkNo }">상품정보 수정하기</a>
+							<button type="button" class="option-submit-button">예약하기</button>
 						</div>
-						
-						<div>
-							<div class="product-remove">상품 제거</div>
-						</div>
-					</div>
+					</form>
 					<div>
 						<span>예상 포인트 적립금액</span>
 						<!-- 마일리지  -->
@@ -165,92 +138,11 @@
 			</div>
 		</div>
 	</div> <!-- all -->
-	
-	
-	<!-- 모달창 (담당자정보) -->
-	<div class="modal-background">
-		<div class="modal-container">
-			
-			<div class="modal-header">
-				<h5>담당자 정보</h5>
-				<span id="confirm-btn">X</span>
-			</div>
-			
-			<div class="modal-body">
-				<table>
-					<tr>
-						<th class="modal-table-th">담당자</th>
-						<td class="modal-table-td">이성훈</td>
-					</tr>
-					
-					<tr>
-						<th class="modal-table-th">전화번호</th>
-						<td class="modal-table-td">010-7441-5488</td>
-					</tr>
-					
-					<tr>
-						<th class="modal-table-th">부서명</th>
-						<td class="modal-table-td">이젠1팀</td>
-					</tr>
-					
-					<tr>
-						<th class="modal-table-th">상담시간</th>
-						<td class="modal-table-td">평일 09:00~18:00</td>
-					</tr>
-				</table>
-			</div>
-			
-			<div class="modal-footer">
-				<div class="modal-footer-div">
-					<div class="modal-footer-icon">
-						<p>궁금하신사항을 문의해 주시면 <br> 친절하게 알려드리겠습니다.</p>
-						<i>
-							<img src="/resources/image/list-image/free-icon-smiling-3039750.png" class="icon-image">
-						</i>		
-					</div>
-					
-					<div class="modal-footer-span">
-						<a href="#" >
-							<span class="material-symbols-outlined">edit</span>
-							<span class="aa">상품 문의하기</span>
-						</a>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</div>
-	
-	<!-- 상품제거 모달창 -->
-   <div class="join-background">
-      <div class="join-modal">
-         <span class="material-symbols-outlined" id="confirm-btn">close</span>
-         <span class="modal-text">상품을 삭제하시겠습니까?</span>
-         
-         <div class="remove-div">
-	         <div id="confirm-btn">취소</div>
-	         <div class="remove-btn-a">
-	         	<a href="/product/remove?pkNo=${packvo.pkNo }">상품삭제</a>
-	         </div>
-         </div>
-      </div>
-   </div>
-	
-	
-	
-	
-	
-	
-	
-	
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-<script type="text/javascript" src="/resources/js/product/product_detail.js"></script>
+
+<script type="text/javascript" src="/resources/js/product_detail.js"></script>
 <script type="text/javascript">
 	let country = `<c:out value="${plvo.plCountry}"/>`;
-	let pkNoVal = `<c:out value="${packvo.pkNo}"/>`;
 	console.log(country);
-	console.log(pkNoVal);
 </script>
-<script type="text/javascript" src="/resources/js/product/product_price.js"></script>
-<script type="text/javascript" src="/resources/js/product/product_modal.js"></script>
 </body>
 </html>

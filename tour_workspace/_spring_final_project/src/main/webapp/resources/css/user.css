@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.login-container{
+	height:500px;
+}
+.id-check, .pwd-check{
+	margin-top: 7px;
+}
+.success, .fail{
+	font-size: 15px;
+}
+.success{
+	color:green;
+}
+.fail{
+	color:red;
+}
+
+/* 유저 정보창 */
+.user-info{
+	position: fixed;
+	right: 30px;
+	top : 130px;
+	background-color: rgba(0,0,0,0.5);
+	border: 1px solid #A9A9A9;
+	border-radius: 5px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	color:#A9A9A9;
+}
+.user-info>div:not(:last-child){
+	margin-bottom: 7px;
+}
+.user-info>div>span{
+	margin-right: 7px; 
+}

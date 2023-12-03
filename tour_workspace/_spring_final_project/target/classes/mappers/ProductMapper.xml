@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.easyfestival.www.repository.ProductDAO"> 
+  
+  	<insert id="register" >
+  		insert into product_board(pd_title, pd_contents, pk_no)
+  		values(#{pdTitle},#{pdContents}, #{pkNo});
+  		
+  		insert into hotel(ht_name, ht_price, pk_no)
+  		values(#{htName},#{htPrice}, #{pkNo});
+  		
+  		insert into airplane(ap_price, ap_arrival, ap_departure, pk_no)
+  		values(#{apPrice},#{apArrival},#{apDeparture}, #{pkNo});
+  		
+  		insert into festival(fv_name,fv_price, pk_no)
+  		values(#{fvName},#{fvPrice},#{pkNo});
+  		
+  		insert into place(pl_country,pl_name,pk_no)
+  		values(#{plCountry},#{plName}, #{pkNo});
+  	</insert>
+  	
+  	<select id="selectPdNo" resultType="long">
+  		select max(pd_no) from product_board
+  	</select>
+  	
+  	<select id="getPlace" resultType="com.easyfestival.www.domain.PlaceVO">
+  		select * from place
+  	</select>
+  	
+  	<select id="getDetail" resultType="com.easyfestival.www.domain.ProductBoardVO">
+  		select * from product_board where pk_no = #{pkNo};
+  	</select>
+  	
+  	<select id="getPlaceDetail" resultType="com.easyfestival.www.domain.PlaceVO">
+  		select * from place where pk_no = #{pkNo};
+  	</select>
+  	
+  	<select id="getHotelDetail" resultType="com.easyfestival.www.domain.HotelVO">
+  		select * from hotel where pk_no = #{pkNo};
+  	</select>
+  	
+  	<select id="getAirplaneDetail" resultType="com.easyfestival.www.domain.AirplaneVO">
+  		select * from airplane where pk_no = #{pkNo};
+  	</select>
+  	
+  	<select id="getFestivalVoDetail" resultType="com.easyfestival.www.domain.FestivalVO">
+  		select * from festival where pk_no = #{pkNo};
+  	</select>
+
+  </mapper>
+ 

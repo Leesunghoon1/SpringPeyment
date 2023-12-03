@@ -34,11 +34,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="id" value="${uvo.id}"></td>
-				</tr>
-				<tr>
-					<th>비밀글</th>
-					<td><input type="checkbox" name="secret" value="Y"></td>
+					<td><input type="text" name="userNo"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -48,29 +44,54 @@
 			<button type="submit">등록</button>
 		</form>
 	</div>
-	<script type="text/javascript" src="/resources/js/summernote.js"></script>
+
+
 	<script type="text/javascript">
-		function uploadImage(file) {
+		$('#summernote').summernote({
+			height : 300, // 에디터 높이 설정
+			callbacks : {
+				onImageUpload : function(files, editor, welEditable) {
+					// 이미지 업로드 시 호출되는 콜백 함수
+					for (var i = files.length - 1; i >= 0; i--) {
+						uploadImage(files[0], editor, welEditable); // 파일 업로드 함수 호출
+					}
+				}
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		function uploadImage(file, editor, welEditable) {
 			var formData = new FormData();
 			formData.append('file', file);
 
 			$.ajax({
-				url : '/review/image',
+				url : '/event/uploadSummernoteImageFile', // 이미지 업로드를 처리하는 서버 URL
 				method : 'POST',
 				data : formData,
-				contentType : false,
 				processData : false,
+				contentType : false,
+				datatype : 'JSON',
 				enctype : 'multipart/form-data',
-				success : function(url) {
-					console.log('Image uploaded successfully. URL:', url);
-					var imgTag = '<img src="' + url + '" />';
-					$('#summernote').summernote('pasteHTML', imgTag);
+				success : function(resp, editor, welEditable) {
+					// 이미지 업로드 성공 시 처리
+					console.log('success!!');
+					console.log(resp);
+
+					let Rurl = resp.url;
+
+					$('#summernote').summernote('editor.insertText', '해치웠나	');
+					let imgData = $("<img>").attr('src', Rurl);
+					console.log(imgData);
+					$('#summernote').summernote("insertNode", imgData[0]);
 				},
-				error : function() {
-					console.error('Error uploading image');
+				error : function(resp) {
+					// 이미지 업로드 실패 시 처리
+					console.log(resp);
+					console.log('이미지 업로드 실패');
 				}
 			});
 		}
 	</script>
+
 </body>
 </html>
