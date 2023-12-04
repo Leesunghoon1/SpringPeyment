@@ -1,13 +1,12 @@
 @charset "UTF-8";
 .inner-container{
-	margin-top:70px;
-	margin-bottom:70px;
+	margin-top:10rem;
+	margin-bottom:15rem;
     /* background-color: azure; */
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom:200px; 
 }
 h1{
 	margin:0;
@@ -48,9 +47,9 @@ h1{
 .input-box>input:hover{
 	outline:2px solid black;
 }
-.input-box>input:focus{
+/* .input-box>input:focus{
 	outline: 2px solid black;
-}
+} */
 .id-input>input{
 	width: 80%;
 }

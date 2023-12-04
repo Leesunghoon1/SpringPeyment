@@ -6,7 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-
+import com.easyfestival.www.domain.ReviewLikeHistoryVO;
+import com.easyfestival.www.domain.pagingVO;
 import com.easyfestival.www.domain.reviewVO;
 import com.easyfestival.www.repository.ReviewDAO;
 
@@ -22,8 +23,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<reviewVO> list() {
-		return rdao.list();
+	public List<reviewVO> list(pagingVO pgvo) {
+		return rdao.list(pgvo);
 	}
 
 	@Override
@@ -44,6 +45,36 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public int readCountUp(int rvNo) {
 		return rdao.readCountUp(rvNo);
+	}
+
+	@Override
+	public int getTotalCount(pagingVO pgvo) {
+		return rdao.getTotalCount(pgvo);
+	}
+
+	@Override
+	public ReviewLikeHistoryVO LikeDistinction(ReviewLikeHistoryVO rlh) {
+		return rdao.LikeDistinction(rlh);
+	}
+
+	@Override
+	public int deleteLike(ReviewLikeHistoryVO rlhvo) {
+		return rdao.deleteLike(rlhvo);
+	}
+
+	@Override
+	public int insertLike(ReviewLikeHistoryVO rlhvo) {
+		return rdao.insertLike(rlhvo);
+	}
+
+	@Override
+	public List<reviewVO> bestList(pagingVO pgvo) {
+		return rdao.bestList(pgvo);
+	}
+
+	@Override
+	public int getbestTotalCount(pagingVO pgvo) {
+		return rdao.getbestTotalCount(pgvo);
 	}
 
 	

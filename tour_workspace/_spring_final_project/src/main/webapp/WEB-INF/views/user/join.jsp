@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +68,7 @@
 					</div>
 					<div class="button-box">
 						<span><a href="/"><button type="button">취소</button></a></span>
-						<span><button type="" class="join-btn">확인</button></span>
+						<span><button type="submit" class="join-btn">확인</button></span>
 					</div>
 				</div>
 			</form>
@@ -76,7 +76,7 @@
 			
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
-<script type="text/javascript" src="/resources/js/user.js"></script>
+<script type="text/javascript" src="/resources/js/user/user.js"></script>
 <script type="text/javascript">
 	let msg = `<c:out value = "${message}" />`;
 	if(msg == 2){

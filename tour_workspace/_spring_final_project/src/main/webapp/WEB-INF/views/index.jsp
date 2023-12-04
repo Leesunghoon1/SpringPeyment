@@ -37,7 +37,6 @@
 	</div>
 	
 	
-	
 	<c:if test="${uvo ne null}">
 		<div class="user-info">
 			<div>${uvo.id}님</div>
@@ -47,6 +46,14 @@
 		</div>
 	</c:if>
 	
+	<!-- 회원가입 완료시 모달창 오픈 -->
+	<div class="join-background">
+		<div class="join-modal">
+			<span class="material-symbols-outlined" id="confirm-btn">close</span>
+			<span class="modal-text"></span>
+			<span><button type="button" id="confirm-btn">확인</button></span>
+		</div>
+	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 		
@@ -54,9 +61,8 @@
 <script type="text/javascript" src="/resources/js/slider.js"></script>
 <script type="text/javascript">
 	let msg = `<c:out value="${message}" />`;
-	if(msg == "1"){
-		alert("LANDMARK 회원가입이 완료되었습니다.");
-	}
+	let joinID = `<c:out value="${joinID}" />`;
 	slider('slider');
 </script>
+<script type="text/javascript" src="/resources/js/user/join.js"></script>
 </html>

@@ -3,28 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.easyfestival.www.repository.ProductFileDAO">
-  	<insert id="insertFile">
-  		insert into product_file(pf_uuid, pd_no, pf_name, pf_size, pf_save_dir)
-  		values(#{pfUuid},#{pdNo},#{pfName},#{pfSize},#{pfSaveDir})
+  	<insert id="registerFile">
+  		insert into product_file(pf_uuid, pk_no, pf_name, pf_size, pf_save_dir)
+  		values(#{pfUuid},#{pkNo},#{pfName},#{pfSize},#{pfSaveDir})
   	</insert>
   	
-  	<select id="selectFile" resultType="com.easyfestival.www.domain.ProductFileVO">
-  		select * from product_file 
+  	<select id="getfileList" resultType="com.easyfestival.www.domain.ProductFileVO">
+  		select * from product_file where pk_no = #{pkNo}
   	</select>
   	
-  	<select id="getFileList" resultType="com.easyfestival.www.domain.ProductFileVO">
-  		select * from product_file
-  	</select>
+  	<update id="modifyFile">
+  		update product_file set pf_uuid=#{pfUuid}, pf_name=#{pfName}, pf_save_dir = #{pfSaveDir} where pk_no = #{pkNo}
+  	</update>
   	
-  	<select id="getFile" resultType="com.easyfestival.www.domain.ProductFileVO">
-  		select * from product_file
-  	</select>
-  	
-  	<select id="getImgList" resultType="com.easyfestival.www.domain.ProductFileVO">
-  		select * from product_file
-  	</select>
-  	
-  	<select id="getImgDetail" resultType="com.easyfestival.www.domain.ProductFileVO">
-  		select * from product_file where pd_no = #{pkNo}
-  	</select>	
+  	<delete id="removeFile">
+  		delete from product_file where pk_no = #{pkNo}
+  	</delete>
   </mapper>

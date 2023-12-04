@@ -9,6 +9,7 @@ import com.easyfestival.www.domain.FestivalVO;
 import com.easyfestival.www.domain.HotelVO;
 import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.PlaceVO;
+import com.easyfestival.www.domain.ProductBoardVO;
 import com.easyfestival.www.domain.ProductDTO;
 import com.easyfestival.www.domain.ProductFileVO;
 import com.easyfestival.www.domain.ProductListDTO;
@@ -18,29 +19,22 @@ public interface ProductService {
 
 	int register(ProductDTO productDTO);
 
-	List<PackageVO> getList();
+	List<ProductListDTO> getdto(String pkContinent);
 
-	long selectMax();
+	List<ProductListDTO> getdtoDetail(long pkNo);
 
-	List<ProductFileVO> getFileList();
+	int modify(ProductDTO productDTO);
 
-	ProductFileVO getFile();
+	int removeProduct(long pkNo);
 
-	List<ProductFileVO> getImgList();
+	int update(long totalPrice, long pkNoVal);
 
-	List<PlaceVO> getPlace();
+//	ProductListDTO productDetail(long pkNo);
 
-	ProductDTO getDetail(long pkNo);
 
-	PlaceVO getPlaceDetail(long pkNo);
 
-	HotelVO getHotelDetail(long pkNo);
 
-	AirplaneVO getAirplaneDetail(long pkNo);
 
-	FestivalVO getFestivalVoDetail(long pkNo);
-
-	PackageVO getPackageDetail(long pkNo);
 
 
 

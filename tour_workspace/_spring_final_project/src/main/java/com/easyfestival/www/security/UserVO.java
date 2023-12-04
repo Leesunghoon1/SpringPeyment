@@ -13,16 +13,17 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO {
-	
-	private String id;
-	private String pwd;
-	private String name;
-	private int age;
-	private String address;
-	private String email;
-	private String phoneNumber;
-	private String grade;
-	private long point;
-	private List<AuthVO> authList;
+public class UserVO{
+   
+   private String id;
+   private String pwd;
+   private String name;
+   private int age;
+   private String address;
+   private String email;
+   private String phoneNumber;
+   private List<AuthVO> authList;
+   private String grade;
+   private int point;
+   
 }

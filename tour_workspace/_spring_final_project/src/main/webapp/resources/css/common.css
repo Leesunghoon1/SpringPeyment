@@ -18,7 +18,7 @@ dl, dd{
     margin: 0;
 }
 .header-container{
-    position: fixed;
+    position: absolute;
     padding: 0 50px;
     top:0;
     z-index:5;
@@ -268,10 +268,114 @@ dl, dd{
 }
 
 
+/* join-modal */
+.join-background{
+	/* 로그인 실패시 백그라운드 색상 변경 */
+	position: relative;
+	position: absolute;
+	top:0;
+	width: 100%;
+	height:100%;
+	z-index:5;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+.join-modal{
+	position: relative;
+	position: fixed;
+	top:35%;
+	left:50%;
+	transform: translate(-50%, -35%);
+	width: 450px;
+	background-color: #fff;
+	height: 230px;
+	display: none;
+	flex-direction: column; 
+	align-items: center;
+	justify-content: flex-end;
+	outline:1px solid rgba(0, 0, 0, .2);
+	box-sizing:border-box;
+    box-shadow: 0 0 5px 3.5px rgba(0, 0, 0, .5);
+}
+.join-modal>span:nth-child(1){
+	/* x 버튼 */
+	font-size:2rem;
+	position: absolute;
+	right:10px;
+	top:10px;
+	cursor: pointer;
+}
+.join-modal>span:nth-child(2){
+	/* 모달창 text */
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	font-size: 1.1rem;
+	font-weight: 600px;
+}
+.join-modal>span:nth-child(2)>div:nth-child(1){
+	margin-bottom:10px;
+}
+.join-modal>span:nth-child(3){
+	/* 확인 버튼 */
+	margin-top: 4.5rem;
+	width: 100%;
+	height:50px;
+}
+.join-modal>span:nth-child(3) button{
+	width: 100%;
+	height:100%;
+	background-color: #1c1c1c;
+	border: 1px solid #1c1c1c;
+	color:#fff;
+	font-size: 1.1rem;
+	cursor: pointer;
+	padding: 0;
+}
 
 
+/* 페이지네이션 */
+.paging-container{
+	display: flex;
+	gap: 1.8rem;
+	align-items: center;
+}
+.paging-container a, .paging-container span{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2rem;
+	height: 2rem;
+	text-decoration: none;
+}
+.paging-container span{
+	border-radius: 50%;
+	background-color: #F5F5F5;
+	font-weight: 700; 
+	color :#1c1c1c;
+}
+.paging-container span:hover{
+	background-color: #A9A9A9;
+}
+.paging-container i{
+	font-size: 2rem;
+	color: #1c1c1c;
+}
 
-
+#selectNo{
+	/* 선택한 페이지 번호 */
+	background-color: #1c1c1c;
+	color: #fff;
+}
+#enable:hover{
+	/* prev, next 활성화시 */
+	color:#A9A9A9;
+}
+#disable{
+	/* prev, next 비활성화시 */
+	color: #D0D4CA;
+}
 
 
 

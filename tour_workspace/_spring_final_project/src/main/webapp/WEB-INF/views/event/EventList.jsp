@@ -30,8 +30,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-
+	<a href="/event/eventRegister"><button type="button">이벤트 추가</button></a>
 </body>
 </html>

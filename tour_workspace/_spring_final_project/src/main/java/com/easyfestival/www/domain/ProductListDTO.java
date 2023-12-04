@@ -15,9 +15,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ProductListDTO {
 	
-	private List<PackageVO> packList;
+	
+	private PackageVO packvo;
+	private AirplaneVO avo;
+	private PlaceVO plvo;
+	private HotelVO hvo;
+	private FestivalVO fvo;
 	private List<ProductFileVO> pfList;
-	//private ProductFileVO pfvo;
+	
 	
 	
 	

@@ -5,6 +5,10 @@ let checkbox = document.querySelectorAll(".all-check");
 let icon = document.getElementById("icon-check");
 let select = document.querySelectorAll(".select-check");
 
+let peplecount = document.getElementById("peple-input"); // 인원수
+let reservationPrice = document.getElementById("reservation-price"); // 변동수
+let packagePrice = document.getElementById("package-price"); // 패키지 가격
+
 
 icon.addEventListener('click',()=>{
     if(icon.classList.contains('checked')){
@@ -39,29 +43,74 @@ document.getElementById('reservation-btn').addEventListener('click',()=>{
     let checkBtn4 = document.getElementById('check-btn4');
     let checkBtn5 = document.getElementById('check-btn5');
 
+    let totalPrice = reservationPrice.value;
+
+
+
+    let data = {
+        totalPrice: totalPrice,
+        pkNoVal: pkNoVal
+    };
+``
+
     if(!checkBtn1.classList.contains('checked')|| !checkBtn2.classList.contains('checked')
     || !checkBtn3.classList.contains('checked')|| !checkBtn4.classList.contains('checked')|| !checkBtn5.classList.contains('checked')){
         alert("약관을 동의해주세요");
     }else{
-        aBtn.href = "/";
+        fetch(`/peyment/reservation?totalPrice=${totalPrice}&pkNoVal=${pkNoVal}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 서버로부터의 응답을 처리
+            console.log('Success:', data);
+        
+            // 결제 성공 후 리디렉션
+            window.location.href = '/package/detail';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
-})
 
+});
 
-let peplecount = document.getElementById("peple-input"); // 인원수
-let reservationPrice = document.getElementById("reservation-price"); // 변동수
-let packagePrice = document.getElementById("package-price"); //패키지 가격
-document.addEventListener('click',(e)=>{
+document.addEventListener('click', (e) => {
+      let pepleValue = parseInt(peplecount.value);
+      let packageValue = parseInt(packagePrice.value);
 
-    if(e.target.id == "minus-btn"){
-        if(peplecount.value == 0){
-            let minus = document.getElementById("minus-btn").style.disabled='disabled'
-        }else{
-            peplecount.value = parseInt(peplecount.value)-1;
-            reservationPrice.value = parseInt(peplecount.value)*parseInt(packagePrice.value);
+    // 값이 NaN이거나 음수인 경우 기본값 설정
+    if (isNaN(pepleValue) || pepleValue < 0) {
+        pepleValue = 0;
+    }
+
+    if (isNaN(packageValue) || packageValue < 0) {
+        packageValue = 0;
+    }
+
+    if (e.target.id == "minus-btn") {
+        // 음수가 되지 않도록 체크
+        if (pepleValue > 0) {
+            pepleValue -= 1;
+            peplecount.value = pepleValue;
         }
-    }else if(e.target.id == "plus-btn"){
-        peplecount.value = parseInt(peplecount.value)+1;
-        reservationPrice.value = parseInt(peplecount.value)*parseInt(packagePrice.value);
+    } else if (e.target.id == "plus-btn") {
+        pepleValue += 1;
+        peplecount.value = pepleValue;
     }
-})
+
+    // 최종 합계 계산
+    let totalPrice = pepleValue * packageValue;
+
+    // 결과를 출력
+    reservationPrice.value = totalPrice;
+
+    // 콘솔에 로그 찍어보기
+    console.log("pepleValue:", pepleValue);
+    console.log("packageValue:", packageValue);
+    console.log("totalPrice:", totalPrice);
+});
+

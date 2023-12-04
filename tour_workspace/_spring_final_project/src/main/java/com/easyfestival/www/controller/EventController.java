@@ -3,16 +3,23 @@ package com.easyfestival.www.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +39,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/event/*")
 public class EventController {
+	
+	private final String UPLOAD_DIR="C:\\upload_file\\event";
+	
 	private int isOk;
 
 	@Inject
@@ -52,39 +62,34 @@ public class EventController {
 		return "index";
 	}
 
-	@PostMapping(value = "/uploadSummernoteImageFile", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-		log.info("썸머노트 제발");
-		JsonObject jsonObject = new JsonObject();
+	@PostMapping("/image")
+    public ResponseEntity<String> handleImageUpload(@RequestParam("file") MultipartFile file) {
+        try {
+            // 업로드된 파일의 원래 이름
+            String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+            String baseName = FilenameUtils.getBaseName(originalFilename);
+            String extension = FilenameUtils.getExtension(originalFilename);
+            
+            // 파일 저장 경로 설정
+            Path uploadPath = Paths.get(UPLOAD_DIR);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            String uniqueFileName = UUID.randomUUID().toString() + "_" + baseName+"."+extension;
+            String urlEncodedFileName = URLEncoder.encode(uniqueFileName, StandardCharsets.UTF_8.toString());
+            // 파일 저장
+            Path filePath = uploadPath.resolve(uniqueFileName);
+            Files.copy(file.getInputStream(), filePath);
 
-		String fileRoot = "D:\\image\\event\\"; // 저장될 외부 파일 경로
-		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+            // 이미지의 상대 경로를 반환 (예: /upload/filename.jpg)
+            String relativePath = "/Eupload/" + urlEncodedFileName;
 
-		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-
-		File targetFile = new File(fileRoot + savedFileName);
-		
-		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "D:\\image\\event\\"+savedFileName);	
-			jsonObject.addProperty("responseCode", "success");
-
-		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}
-		
-		Gson gson = new Gson();
-		
-		log.info("제이슨오브젝트:"+jsonObject);
-		String jsonString = gson.toJson(jsonObject);
-		
-		return jsonString;
-	}
+            return ResponseEntity.ok(relativePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error uploading image");
+        }
+    }
 	
 	@GetMapping("/eventList")
 	public String eventList(Model m)
