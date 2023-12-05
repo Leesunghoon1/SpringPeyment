@@ -1,6 +1,7 @@
 package com.easyfestival.www.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
@@ -16,6 +17,12 @@ public interface OrderDAO {
 	PayDTO getPay(long payNum);
 
 	List<Long> myOrderCount(String saveNUM);
+
+	OrderDTO adminList(OrderDTO orderDTO);
+
+	int payMentCancle(Long orderNum);
+
+	int orderCancle(Long long1);
 
 
 }

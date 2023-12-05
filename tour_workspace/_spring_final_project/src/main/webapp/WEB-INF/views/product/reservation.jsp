@@ -242,16 +242,17 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	<script type="text/javascript"
-		src="/resources/js/product/reservation.js"></script>
 	<!-- <script type="text/javascript" src="/resources/js/product/product_price.js"></script>
 <script type="text/javascript">
 printPrice()
 </script>
  -->
+ 
 <script type="text/javascript">
-	let pkNoVal = `<c:out value="${packvo.pkNo}"/>`;
+	let pkNoVal = `<c:out value="${packvo.pkNo }"/>`;
 	console.log(pkNoVal);
 </script>
+	<script type="text/javascript"
+		src="/resources/js/product/reservation.js"></script>
 </body>
 </html>

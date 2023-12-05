@@ -18,12 +18,11 @@ public class OrderDTO {
 
 	private Long orderNum;
 	private Long productNum;
-	private Long num;
-	private String productName;
+	private String id;
+	private String pkNo;
 	private Date orderDate;
 	private Long totalPrice;
-	private String imp_uid;
-	private Long resurNum;
+	private String impUid;
 	
 	
 	

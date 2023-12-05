@@ -1,6 +1,11 @@
 /**
  * 
  */
+ 
+
+console.log("js" + pkNoVal);
+
+
 let checkbox = document.querySelectorAll(".all-check");
 let icon = document.getElementById("icon-check");
 let select = document.querySelectorAll(".select-check");
@@ -8,7 +13,6 @@ let select = document.querySelectorAll(".select-check");
 let peplecount = document.getElementById("peple-input"); // 인원수
 let reservationPrice = document.getElementById("reservation-price"); // 변동수
 let packagePrice = document.getElementById("package-price"); // 패키지 가격
-
 
 icon.addEventListener('click',()=>{
     if(icon.classList.contains('checked')){
@@ -33,8 +37,7 @@ for(let i=0; i<select.length; i++){
 }
 
 
-document.getElementById('reservation-btn').addEventListener('click',()=>{
-    
+document.getElementById('reservation-btn').addEventListener('click', () => {
     let aBtn = document.getElementById('reservation-btn-a');
 
     let checkBtn1 = document.getElementById('check-btn1');
@@ -43,40 +46,19 @@ document.getElementById('reservation-btn').addEventListener('click',()=>{
     let checkBtn4 = document.getElementById('check-btn4');
     let checkBtn5 = document.getElementById('check-btn5');
 
-    let totalPrice = reservationPrice.value;
+    aaa = parseInt(pkNoVal);
 
-
-
-    let data = {
-        totalPrice: totalPrice,
-        pkNoVal: pkNoVal
-    };
-``
-
-    if(!checkBtn1.classList.contains('checked')|| !checkBtn2.classList.contains('checked')
-    || !checkBtn3.classList.contains('checked')|| !checkBtn4.classList.contains('checked')|| !checkBtn5.classList.contains('checked')){
+    if (!checkBtn1.classList.contains('checked') || !checkBtn2.classList.contains('checked')
+        || !checkBtn3.classList.contains('checked') || !checkBtn4.classList.contains('checked') || !checkBtn5.classList.contains('checked')) {
         alert("약관을 동의해주세요");
-    }else{
-        fetch(`/peyment/reservation?totalPrice=${totalPrice}&pkNoVal=${pkNoVal}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 서버로부터의 응답을 처리
-            console.log('Success:', data);
-        
-            // 결제 성공 후 리디렉션
-            window.location.href = '/package/detail';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+    } else {
+        // 여기에서 이동할 URL을 지정하세요.
+        aBtn.href = `/peyment/detail?pkNo=${pkNoVal}`;
+        // 예시로 "/"로 지정되어 있습니다. 실제로 이동할 URL을 지정해주세요.
+        aBtn.click();  // 버튼 클릭을 프로그래밍적으로 시뮬레이션
     }
-
 });
+
 
 document.addEventListener('click', (e) => {
       let pepleValue = parseInt(peplecount.value);
@@ -112,5 +94,7 @@ document.addEventListener('click', (e) => {
     console.log("pepleValue:", pepleValue);
     console.log("packageValue:", packageValue);
     console.log("totalPrice:", totalPrice);
+
 });
+
 

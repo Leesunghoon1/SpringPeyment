@@ -39,6 +39,11 @@
 			alias="fvo" />
 		<typeAlias type="com.easyfestival.www.domain.ProductFileVO"
 			alias="pfvo" />
+
+		<typeAlias type="com.easyfestival.www.domain.OrderDTO"
+			alias="orderDTO" />
+		<typeAlias type="com.easyfestival.www.domain.PayDTO"
+			alias="payDTO" />
 	</typeAliases>
 
 

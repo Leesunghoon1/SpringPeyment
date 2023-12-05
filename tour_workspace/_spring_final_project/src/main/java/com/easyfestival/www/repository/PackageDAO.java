@@ -42,6 +42,8 @@ public interface PackageDAO {
 
 	int update(@Param("totalPrice") long totalPrice, @Param("pkNo") long pkNo);
 
+	PackageVO getDetail(int pkNo);
+
 	
 
 	//List<ProductListDTO> getDTOList(String pkContinent);

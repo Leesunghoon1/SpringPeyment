@@ -83,9 +83,7 @@
 		delete from festival where pk_no = #{pkNo};
 	</delete>
 	
-	<update id="update" >
-	update package set pk_price = #{totalPrice} where pk_No = #{pkNo}
-	</update>
+
   	
   	
   	<resultMap type="com.easyfestival.www.domain.ProductListDTO" id="packlist">

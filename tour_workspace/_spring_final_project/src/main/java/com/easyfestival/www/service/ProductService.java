@@ -28,7 +28,6 @@ public interface ProductService {
 	int removeProduct(long pkNo);
 
 	int update(long totalPrice, long pkNoVal);
-
 //	ProductListDTO productDetail(long pkNo);
 
 

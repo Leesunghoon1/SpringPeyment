@@ -1,7 +1,10 @@
 package com.easyfestival.www.service;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +47,31 @@ public class OrderService {
 		return orderDAO.myOrderCount(saveNUM);
 	}
 
+	public OrderDTO adminList(OrderDTO orderDTO) {
+		
+		return orderDAO.adminList(orderDTO);
+	}
+
+	public int payMentCancle(PayDTO payDTO) {
+		
+		return orderDAO.payMentCancle(payDTO.getOrderNum());
+	}
+
+	public int orderCancle(OrderDTO orderDTO) throws Exception {
+		System.out.println("1 : " + orderDTO);
+		System.out.println("2 : " + orderDTO.getOrderNum());
+		System.out.println("3 : " + orderDTO.getImpUid());
+		if(!orderDTO.getImpUid().equals("")) {
+			String token = payService.getToken(); 
+			Long price = orderDTO.getTotalPrice();
+			Long refundPrice = price ;
+			System.out.println("Test ss");
+			payService.payMentCancle(token, orderDTO.getImpUid(), refundPrice+"", "환불");
+			System.out.println("Test ss2222");
+		}
+		
+		return orderDAO.orderCancle((orderDTO.getOrderNum()));
+	}
+	}
 
 
-
-}
