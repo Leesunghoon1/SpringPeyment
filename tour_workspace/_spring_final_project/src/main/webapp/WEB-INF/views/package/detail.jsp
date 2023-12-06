@@ -154,7 +154,6 @@
 
 			<div class="form-group-rogin">
 				<a> "로그인 후 예약하시면" <br> "할인 쿠폰과 추가 이벤트 를 사용하실수 있습니다~!" <br>
-					<span>로그인 ></span>
 				</a>
 			</div>
 		</div>

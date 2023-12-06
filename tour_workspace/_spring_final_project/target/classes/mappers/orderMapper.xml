@@ -6,22 +6,18 @@
 <mapper namespace="com.easyfestival.www.repository.OrderDAO">
 
 	<!-- 주문 정보 생성 -->
-	<insert id="insert_pay"
-		parameterType="orderDTO">
-		insert into pay_order_user(order_num, pk_no, id, pk_no,
-		order_date, total_price, imp_uid)
-		values(#{orderNum},#{pkNo},
-		#{id},#{pkNo},#{orderDate},#{totalPrice},
-		#{impUid}
-	</insert>
+<insert id="insert_pay" parameterType="orderDTO">
+    insert into pay_order_user(order_num, pk_no, id, order_date, total_price, imp_uid)
+    values(#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid})
+</insert>
 
 
-	<insert id="insert_payinfo"
-		parameterType="payDTO">
-		insert into sc_pay(id, order_num, pay_method, pay_name, pay_date,
-		pay_amount)
-		values(#{id},#{orderNum},#{payMethod},#{payName},#{payDate},#{payAmount})
-	</insert>
+
+	<insert id="insert_payinfo" parameterType="payDTO">
+    insert into sc_pay (id, order_num, pay_method, pay_date, product_name, pay_amount, pk_no)
+    values (#{id}, #{orderNum}, #{payMethod}, #{payDate}, #{productName}, #{payAmount}, #{pkNo})
+</insert>
+
 
 	<!-- 마지막에 결제된 방금 결제된 주문정보 가져오기 -->
 	<select id="getLastPay"

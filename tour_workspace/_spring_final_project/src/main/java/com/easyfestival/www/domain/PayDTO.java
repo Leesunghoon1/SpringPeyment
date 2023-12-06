@@ -24,8 +24,9 @@ public class PayDTO {
 	// orderNum -> FK SC_ORDER_USER orderNum 받기
 	private Long orderNum;
 	private String payMethod;
-	private String payName;
+	private String productName;
 	private Date payDate; // sysdate
 	private Long payAmount;
+	private Long pkNo;
 
 }
