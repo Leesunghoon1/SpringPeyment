@@ -35,12 +35,7 @@
 	<c:set value="${pldto.plvo }" var="plvo" />
 
 	<div class="payment-container-main">
-		<div class="bg-video">
-			<video class="bg-video__content" autoplay muted loop>
-				<source src="/resources/image/pierrr.mp4" type="video/mp4">
-				<source src="img/video.webm" type="video/webm" />
-			</video>
-		</div>
+
 		<div class="payment-box-left">
 			<!-- 왼쪽 div  -->
 
@@ -57,26 +52,38 @@
 					</div>
 					<h3>저희 렌드마크에 오신걸 환영합니다.</h3>
 
-					<div class="form-group-two">
 
-						<div class="product-amout">
-							<span for="phon">아이디</span><strong>${uvo.id}</strong>
-						</div>
-						<div class="product-amout">
-							<span for="phon">전화번호</span><strong>${uvo.phoneNumber}</strong>
-						</div>
-						<div class="product-amout">
-							<span>*개인 정보 보호를 위해 개인정보는 안심번호로 landmark에 전송됩니다.</span>
-						</div>
-						<div class="product-amout">
-							<span for="adrass">주소</span><strong>${uvo.address}</strong>
-						</div>
-						<div class="product-amout">
-							<span for="email">이메일</span><strong>${uvo.email}</strong>
-						</div>
-						<div class="product-amout">
-							<span for="phon">맴버쉽</span><strong>${uvo.grade}</strong>
-						</div>
+					<div class="table-type-top">
+						<table id="tourInfoTable">
+							<tbody>
+								<tr>
+									<th>아이디</th>
+									<td><span>${uvo.id}</span></td>
+								</tr>
+								<tr>
+									<th>전화번호</th>
+									<td><span>${uvo.phoneNumber}</span></td>
+								</tr>
+								<tr>
+									<th>주소</th>
+									<td><span>${uvo.address}</span></td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+									<td><span>${uvo.email}</span></td>
+								</tr>
+								<tr>
+									<th>맴버쉽</th>
+									<td><span>${uvo.grade}</span></td>
+								</tr>
+								<tr>
+									<th>패키지 가격</th>
+									<td><span class="discounted-price-value">${packvo.pkPrice}</span>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
 					</div>
 
 
@@ -89,7 +96,7 @@
 						<h3 class="user-nmuber-top">할인 수단 선택</h3>
 					</div>
 					<div class="product-amout">
-						<span>구매 금액</span> <b>${packvo.pkPrice}</b>
+						<span>구매 금액</span> <span class="discounted-price-value">${packvo.pkPrice}</span>
 					</div>
 
 					<div class="form-group-cupon-mid">
@@ -101,7 +108,7 @@
 
 					</div>
 					<div class="product-amout">
-						<span> 일반쿠폰 </span> <span id="discounted-coupon-value"> %</span>
+						<span> 일반쿠폰 </span> <span class="discounted-coupon-value"> %</span>
 					</div>
 
 					<div class="product-amout">
@@ -114,7 +121,7 @@
 						<span> 최종할인</span> <span> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 최종금액</span> <span id="discounted-price-value">${packvo.pkPrice}</span>
+						<span> 최종금액</span> <span class="discounted-price-value">${packvo.pkPrice}</span>
 					</div>
 
 					<div class="box-left">
@@ -147,11 +154,6 @@
 			</div>
 
 
-
-
-			<div class="form-group-bottom"></div>
-			<!--  로그인 하면 안보이게 만들어주기~ -->
-
 			<div class="form-group-rogin">
 				<a> "로그인 후 예약하시면" <br> "할인 쿠폰과 추가 이벤트 를 사용하실수 있습니다~!" <br>
 				</a>
@@ -160,90 +162,77 @@
 		<div class="payment-box-right">
 
 			<div class="payment-box-right-main">
-				<!-- 버튼그룹 -->
-
-				<!-- 상품가격 -->
-				<div class="price-box">
-					<table class="product-table">
-						<tr class="product-table-tr1">
-							<th>여행장소</th>
-							<th>패키지 가격</th>
-							<th>호텔</th>
-							<th>한국출발</th>
-							<th>${packvo.pkName}도착</th>
-						</tr>
-						<tr>
-							<td><span>${packvo.pkName}</span></td>
-							<td><span>${packvo.pkPrice} 원</span></td>
-							<td><span>${hvo.htName}</span></td>
-							<td><span>${avo.apDeparture }</span>
-							</td><td><span>${avo.apArrival }</span><br></td>
-						</tr>
-
-					</table>
-					<br> <br>
+				<div class="product-point">
+					<strong>예약 정보</strong>
 				</div>
-
-				<div class="button-grop">
-					<button id="evtBtn1" class="evtBtn">상품핵심포인트</button>
-					<button id="evtBtn2" class="evtBtn">수하물안내</button>
-					<button id="evtBtn3" class="evtBtn">예약안내사항</button>
-					<button id="evtBtn4" class="evtBtn">약관정보</button>
-					<button id="evtBtn5" class="evtBtn">해외안전정보</button>
-				</div>
-				<br> <br>
 				<!-- 밑에 바뀌는 div -->
 				<div id="product-eventTap" class="product-eventTap">
+					<div class="table-type-mid">
+						<table id="tourInfoTable">
+							<tbody>
+								<tr>
+									<th>상품내용</th>
+									<td>${packvo.pkContent }</td>
+								</tr>
+								<tr>
+									<th>이용항공</th>
+									<td>대한항공</td>
+								</tr>
+								<tr>
+									<th>이용호텔</th>
+									<td>${hvo.htName }</td>
+								</tr>
+								<tr>
+									<th>여행기간</th>
+									<td>${avo.apDeparture }~${avo.apArrival }</td>
+								</tr>
+								<tr>
+									<th>인원 수</th>
+									<td>${userCount }명</td>
+								</tr>
+								<tr>
+									<th>패키지 가격</th>
+									<td><span class="discounted-price-value">${packvo.pkPrice}</span>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
 					<div class="product-point">
-						<strong>상품 핵심포인트</strong> <br>
+						<strong>취소위약금 및 동의사항</strong> <br>
+					</div>
+					<div class="table-type-mid-2">
+						<ul class="table-type-mid-2">
+							<li>결제완료 후 예약확정 시 취소 시점에 따라 위약금이 발생할 수 있습니다.</li>
+							<li>취소료 규정은 각 상품 상세 페이지 확인 및 고객센터로 연락 부탁드립니다.</li>
+							<li>예약이 완료되면 담당자가 전화로 추가 안내 및 확인 절차를 진행합니다.</li>
+							<li>여행상품의 특성 상 경우에 따라 예약이 완료된 후에도 처리가 불가능할 수 있습니다.</li>
+							<li>본 여행상품의 세부 약관 규정은 재경부 고시 소비자 피해보상 규정을 바탕으로 합니다.</li>
+						</ul>
+					</div>
+					<div class="bg-box">
+						<ul class="table-type-bottom">
+							<li><strong>예약하기</strong><span>:</span>담당자가 예약확인 후 상품 결제를
+								진행합니다.(홈페이지 예약 취소 가능)</li>
+						</ul>
+						<ul class="table-type-bottom">
+							<li><strong>즉시결제 예약하기</strong><span>:</span>상품 예약과 결제를 동시에
+								진행합니다.(담당자에게 요청하시기 바랍니다.)</li>
+						</ul>
 					</div>
 					<div class="item-div">
-						<div class="icon-div">
-							<span class="material-symbols-outlined">more_horiz</span> <span
-								class="icon-text">기타</span>
+						<div class="bg-video">
+							<video class="bg-video__content" autoplay muted loop>
+								<source src="/resources/image/pierrr.mp4" type="video/mp4">
+								<source src="img/video.webm" type="video/webm" />
+							</video>
 						</div>
-						<div class="item-info">
-							<p>공항픽업서비스 : 전용차량 픽업 서비스</p>
-							<p>전문가이드투어 : 한국인 전문 가이드투어</p>
-							<p>참고사항 : 실시간 항공, 호텔 예약상품으로 상품에 포함된 기본 운임 마감시, 상품가 변동될 수
-								있습니다.</p>
-						</div>
-					</div>
-					<div class="item-div">
-						<div class="icon-div">
-							<span class="material-symbols-outlined">verified_user</span> <span
-								class="icon-text">여행자보험</span>
-						</div>
-						<div class="item-info">
-							<p>해외 여행자보험(최대1억원/DB손해보험)</p>
-							<a href="#">보장내용 및 금액 상세보기</a>
-						</div>
-						<br>
-						<div>
-							<div id="product-eventTap" class="product-eventTap">
-								<div class="product-point">
-									<strong>참고사항</strong>
-								</div>
-								<div class="item-div">
-									<div class="item-info">
-										<p>주)LandMark 010-7441-5488 (담당자: 이성훈)</p>
-										<p>- 문의사항은 담당자를 통해 확인하시기 바랍니다.</p>
-										<p>- 취소규정은 주말, 공휴일을 제외한 영업일수로 계산됩니다.</p>
-										<p>- 취소는 정규업무 시간내에만 가능합니다. (정규업무 시간외 취소시 익일 규정 적용됩니다.)</p>
-										<p>- 업무시간 월~금 09:00~18:00 (법정공휴일 제외)</p>
-										<p>- 예약시점에 따라 원가인상(항공, 호텔)으로 인해 상품가격이 변경될 수 있으며, 예약시 상품가격이
-											적용됩니다.</p>
-										<p>- 유류할증료는 유가와 환율에 따라 수시로 요금이 변동될 수 있습니다.</p>
-
-									</div>
-
-
-
-								</div>
-							</div>
-						</div>
+						<div></div>
 
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -254,9 +243,14 @@
 <script type="text/javascript">
 	let pldto = `<c:out value="${packvo}" />`;
 	let userA = `<c:out value="${uvo}" />`;
+	let userC = `<c:out value="${userCount}" />`;
 </script>
 
 <script type="text/javascript"
-	src="/resources/js/peyment/userPayment.js"></script>
-
+	src="/resources/js/peyment/userPayment.js">
+	
+</script>
+<script type="text/javascript">
+	applyCount()
+</script>
 </html>

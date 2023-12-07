@@ -67,13 +67,14 @@ public class PeymentController {
 
 
 		@GetMapping("/detail")
-    public String getDetail(@RequestParam("pkNo") long pkNo, Model model) {
+    public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount, Model model) {
 		System.out.println("/detail >>>>>");
 		System.out.println("pkNo >>>>>" + pkNo);
 		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);
 		System.out.println("pldto >>>>>" + pldto.get(0));
+		System.out.println("userCount>>>" + userCount);
 		model.addAttribute("pldto", pldto.get(0));
-        
+		model.addAttribute("userCount", userCount);
         return "/package/detail";
     }
 	

@@ -1,5 +1,6 @@
 console.log(pldto);
 console.log(userA);
+console.log(userC);
 
 const userS = userA.match(/id=([a-zA-Z0-9]+),\s*pwd=([^,]+),\s*name=([^,]+),\s*age=(\d+),\s*address=([^,]+),\s*email=([^,]+),\s*phoneNumber=([^,]+),\s*authList=([^,]+),\s*grade=([^,]+),\s*point=(\d+)/);
 
@@ -11,6 +12,14 @@ const pkName = packageA[2];
 const pkPrice = parseInt(packageA[3]);
 const pkContinent = packageA[4];
 const pkContent = packageA[5];
+let pkPriceValue;
+const discountedPriceElement = document.querySelectorAll('.discounted-price-value');
+
+const userCount = userC;
+
+
+
+let totalPrice = 0;
 
     // matches 배열에서 필요한 정보 추출
     const id = userS[1];
@@ -29,12 +38,21 @@ var selectedValue;
 
 console.log(id);
 
-let pkPriceValue;
+
+
+function applyCount() {
+    pkPriceValue = pkPrice * userCount;
+  discountedPriceElement.forEach(e =>{
+    e.innerHTML = `${pkPriceValue}`;
+  })
+  
+  console.log(pkPriceValue)
+}
+
 
 function applyCoupon() {
   const couponInput = document.getElementById('coupon-input');
   const pkPriceElement = pkPrice; // pkPriceElement 정의
-	const discountedPriceElement = document.getElementById('discounted-price-value'); 
   const discountedPriceElement2 = document.getElementById('discounted-price-value2'); 
   
     // pkPriceElement이 null이면 함수 종료
@@ -61,7 +79,7 @@ function applyCoupon() {
             return; // 함수 종료
     }
 	
-    const discountedPrice = pkPrice - (pkPrice * (discount / 100));
+    const discountedPrice = totalPrice - (totalPrice * (discount / 100));
 	  pkPriceValue = discountedPrice;
     // discountedPrice를 pkPriceElement의 innerText로 설정
     
@@ -95,7 +113,7 @@ function applyCoupon() {
     IMP.init("imp76450478");
 
     if(pkPriceValue == null) {
-      pkPriceValue = pkPrice;
+      pkPriceValue = totalPrice;
     }
 
     IMP.request_pay({ // param
@@ -121,7 +139,7 @@ function applyCoupon() {
             }).done(function(data) {
                 // 결제를 요청했던 금액과 실제 결제된 금액이 같으면 해당 주문건의 결제가 정상적으로 완료된 것으로 간주한다.
                 console.log(data);
-                if (pkPrice == data.response.amount) {
+                if (pkPriceValue == data.response.amount) {
                     // jQuery로 HTTP 요청
                     // 주문정보 생성 및 테이블에 저장 
                     // @@ 주문정보는 상품 개수만큼 생성되어야 해서 상품 개수만큼 반복문을 돌린다
@@ -203,7 +221,7 @@ function createPayInfo(uid) {
             var message = '결제 성공!\n결제완료 페이지로 이동합니다.';
 
         // 사용자에게 간단한 경고창 표시
-        alert(message);
+            alert(message);
 
 
         window.location.replace('/peyment/complete?payNum=' + data);

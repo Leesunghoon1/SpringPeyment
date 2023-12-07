@@ -11,6 +11,7 @@ body {
 	padding: 0;
 	font-family: Pretendard, "Pretendard_Alt", "Apple SD Gothic Neo",
 		"맑은 고딕", "Malgun Gothic", sans-serif !important;
+		background: url("/resources/image/polynesia-3021072_1920.jpg");
 }
 
 @media screen and (max-width: 767px) {
@@ -35,13 +36,13 @@ body {
 
 .form-group-two {
 	width: 100%;
-	
 }
 
 .payment-container-main {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	height: 100%;
 	z-index: -2;
 }
 
@@ -50,7 +51,7 @@ body {
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	width: 40%; /* 수정: 전체 폭으로 설정 */
+	width: 47%; /* 수정: 전체 폭으로 설정 */
 	margin-top: 60px;
 	margin-bottom: 20px; /* 수정: 아래 여백 추가 */
 	margin-left: 40px;
@@ -64,7 +65,7 @@ body {
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	width: 40%; /* 수정: 전체 폭으로 설정 */
+	width: 47%; /* 수정: 전체 폭으로 설정 */
 	margin-top: 60px; /* 수정: 위 여백 추가 */
 	margin-bottom: 20px; /* 수정: 아래 여백 추가 */
 	text-align: center;
@@ -78,28 +79,24 @@ body {
 	border-collapse: collapse; /* 테이블 간격을 없애기 위해 사용 */
 }
 
-
 h2 {
 	text-align: center;
 }
 
-.tita{
+.tita {
 	font-size: 30px;
-    line-height: 40px;
-    letter-spacing: -1.5px;
-    font-weight: 100;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
+	line-height: 40px;
+	letter-spacing: -1.5px;
+	font-weight: 100;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
 }
 
-.titb{
+.titb {
 	font-size: 30px;
-    line-height: 40px;
-    font-weight: 100;
+	line-height: 40px;
+	font-weight: 100;
 }
-
-
-
 
 span {
 	margin: 0;
@@ -141,8 +138,8 @@ button:hover {
 }
 
 .user-number-box {
-		width: 100%;
-		text-align: center;
+	width: 100%;
+	text-align: center;
 }
 
 .product-amout {
@@ -223,12 +220,11 @@ button:hover {
 }
 
 .form-group-rogin {
-	margin-top: 20px;
-	padding: 22px 0;
+	margin-top: 80px;
 	font-size: 15px;
 	line-height: 22px;
 	text-align: center;
-	background: #ff0055
+	background: #00ff80
 		url(//image.goodchoice.kr/images/web_v3/bg_login_m.png);
 	background-size: cover;
 	padding: 22px 0;
@@ -241,6 +237,7 @@ form-group-rogin span {
 		50% no-repeat;
 	background-size: 12px auto;
 	font-size: 16px;
+	height: 100%;
 }
 
 .cupon-button {
@@ -394,11 +391,10 @@ form-group-rogin span {
 }
 
 .bg-video {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
+	margin-top: 40px;
 	width: 100%;
+	height: 190px;
+	border-radius: 7px;
 }
 
 .bg-video__content {
@@ -424,4 +420,107 @@ form-group-rogin span {
 
 .btn-gradient .optionList::-webkit-scrollbar-track {
 	background: #303030;
+}
+
+.product-point {
+	margin-top: 20px;
+	text-align: left;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.table-type-top {
+	border-top: solid 1px #000;
+}
+
+.table-type-top tbody th {
+	text-align: left;
+	font-size: 16px;
+	border-right: solid 1px #e5e5e5;
+	border-bottom: solid 1px #e5e5e5;
+	font-weight: 700;
+	width: 18%;
+}
+
+.table-type-top tbody td {
+	padding: 10px 250px;
+	text-align: center;
+	border-bottom: solid 1px #e5e5e5;
+	color: #1c1c1c;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: center;
+	border-bottom: solid 1px #e5e5e5;
+}
+
+.table-type-mid {
+	border-top: solid 1px #000;
+}
+
+.table-type-mid tbody th {
+	text-align: left;
+	font-size: 16px;
+	border-right: solid 1px #e5e5e5;
+	border-bottom: solid 1px #e5e5e5;
+	font-weight: 700;
+	width: 15%;
+}
+
+.table-type-mid tbody td {
+	padding: 10px 20px;
+	border-bottom: solid 1px #e5e5e5;
+	color: #1c1c1c;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: center;
+}
+
+.table-type-mid>li {
+	margin-left: 0;
+	position: relative;
+	line-height: 1.4;
+	font-weight: 300;
+	text-align: left;
+}
+
+.table-type-mid-2>li {
+	margin-left: 0;
+	position: relative;
+	line-height: 1.4;
+	font-weight: 300;
+	text-align: left;
+}
+
+.table-type-mid {
+	margin-bottom: 80px;
+}
+
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.bg-box {
+	background-color: #e3e0df;
+	padding: 18px 0px;
+	border-radius: 2px;
+	text-align: left;
+}
+
+.table-type-bottom-2 li {
+	margin-left: 0;
+	position: relative;
+	font-weight: 300;
+	text-align: left;
+	line-height: 1.5;
+	color: #666;
+	margin-bottom: 20px;
 }

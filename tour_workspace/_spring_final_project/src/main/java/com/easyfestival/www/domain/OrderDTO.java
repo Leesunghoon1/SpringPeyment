@@ -23,6 +23,7 @@ public class OrderDTO {
 	private Date orderDate;
 	private Long totalPrice;
 	private String impUid;
+	private Long userCount;
 	
 	
 	

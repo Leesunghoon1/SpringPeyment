@@ -6,46 +6,53 @@
 <mapper namespace="com.easyfestival.www.repository.OrderDAO">
 
 	<!-- 주문 정보 생성 -->
-<insert id="insert_pay" parameterType="orderDTO">
-    insert into pay_order_user(order_num, pk_no, id, order_date, total_price, imp_uid)
-    values(#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid})
-</insert>
+	<insert id="insert_pay" parameterType="orderDTO">
+		insert into pay_order_user(order_num, pk_no, id, order_date, total_price,
+		imp_uid)
+		values(#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid})
+	</insert>
 
 
 
 	<insert id="insert_payinfo" parameterType="payDTO">
-    insert into sc_pay (id, order_num, pay_method, pay_date, product_name, pay_amount, pk_no)
-    values (#{id}, #{orderNum}, #{payMethod}, #{payDate}, #{productName}, #{payAmount}, #{pkNo})
-</insert>
+		insert into sc_pay (id, order_num, pay_method, pay_date, product_name,
+		pay_amount, pk_no)
+		values (#{id}, #{orderNum}, #{payMethod}, #{payDate}, #{productName},
+		#{payAmount}, #{pkNo})
+	</insert>
 
 
 	<!-- 마지막에 결제된 방금 결제된 주문정보 가져오기 -->
-	<select id="getLastPay"
-		parameterType="payDTO"
+	<select id="getLastPay" parameterType="payDTO"
 		resultType="payDTO">
-		SELECT * FROM sc_pay WHERE pay_num = (SELECT MAX(pay_num) FROM sc_pay)
+		SELECT * FROM sc_pay WHERE pay_num = (SELECT MAX(pay_num)
+		FROM sc_pay)
 	</select>
 
 	<!-- 결제 정보 가져오기 -->
-	<select id="getPay"
-		resultType="payDTO">
+	<select id="getPay" resultType="payDTO">
 		SELECT * FROM
-		sc_pay WHERE pay_num = #{payNum}
+		sc_pay WHERE pay_num
+		= #{payNum}
 	</select>
-	
-	 <delete id="orderCancle" parameterType="orderDTO">
-		delete from pay_order_user WHERE order_num=#{orderNum}
+
+	<delete id="orderCancle" parameterType="orderDTO">
+		delete from
+		pay_order_user WHERE order_num=#{orderNum}
 	</delete>
-	
+
 	<delete id="payMentCancle" parameterType="payDTO">
-		delete from sc_pay WHERE order_num=#{orderNum}
+		delete from sc_pay
+		WHERE order_num=#{orderNum}
 	</delete>
-	
-	<select id="adminList" parameterType="orderDTO" resultType="orderDTO">
+
+	<select id="adminList" parameterType="orderDTO"
+		resultType="orderDTO">
 		SELECT *
 		from pay_order_user
 		WHERE order_num=#{orderNum}
 	</select>
+
 
 
 
