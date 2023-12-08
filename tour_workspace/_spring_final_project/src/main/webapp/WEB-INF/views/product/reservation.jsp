@@ -203,7 +203,7 @@
 								<td class="reservation-peple-price-td">
 									<div>
 										<input type="text" value="${0}"
-											readonly="readonly" id="reservation-price"> 원 <input
+											readonly="readonly" id="reservation-price"><input
 											type="hidden" value="${packvo.pkPrice}" id="package-price">
 									</div>
 								</td>

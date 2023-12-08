@@ -52,7 +52,7 @@ function applyCount() {
 
 function applyCoupon() {
   const couponInput = document.getElementById('coupon-input');
-  const pkPriceElement = pkPrice; // pkPriceElement 정의
+  const pkPriceElement = pkPriceValue; // pkPriceElement 정의
   const discountedPriceElement2 = document.getElementById('discounted-price-value2'); 
   
     // pkPriceElement이 null이면 함수 종료
@@ -79,7 +79,7 @@ function applyCoupon() {
             return; // 함수 종료
     }
 	
-    const discountedPrice = totalPrice - (totalPrice * (discount / 100));
+    const discountedPrice = pkPriceValue - (pkPriceValue * (discount / 100));
 	  pkPriceValue = discountedPrice;
     // discountedPrice를 pkPriceElement의 innerText로 설정
     
@@ -126,7 +126,8 @@ function applyCoupon() {
 	    	buyer_email : email,
     		buyer_name : Username,
 	    	buyer_tel : phoneNumber,
-    		buyer_postcode : '상세주소'
+    		buyer_postcode : '상세주소',
+        user_count : userCount
     }, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
             uid = rsp.imp_uid;

@@ -78,7 +78,7 @@
 								</tr>
 								<tr>
 									<th>패키지 가격</th>
-									<td><span class="discounted-price-value">${packvo.pkPrice}</span>
+									<td><span class="discounted-price-value">${packvo.pkPrice}</span><span>원</span>
 									</td>
 								</tr>
 
@@ -96,7 +96,8 @@
 						<h3 class="user-nmuber-top">할인 수단 선택</h3>
 					</div>
 					<div class="product-amout">
-						<span>구매 금액</span> <span class="discounted-price-value">${packvo.pkPrice}</span>
+						<span>구매 금액</span>
+						<span class="discounted-price-value">${packvo.pkPrice}</span>
 					</div>
 
 					<div class="form-group-cupon-mid">
@@ -104,7 +105,6 @@
 							placeholder="Enter Coupon Code"> <br>
 						<button type="button" class="cupon-button" onclick="applyCoupon()">사용
 							가능 쿠폰</button>
-
 
 					</div>
 					<div class="product-amout">
@@ -121,7 +121,7 @@
 						<span> 최종할인</span> <span> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 최종금액</span> <span class="discounted-price-value">${packvo.pkPrice}</span>
+						<span> 최종금액</span><span class="discounted-price-value">${packvo.pkPrice}</span>
 					</div>
 
 					<div class="box-left">
@@ -192,7 +192,7 @@
 								</tr>
 								<tr>
 									<th>패키지 가격</th>
-									<td><span class="discounted-price-value">${packvo.pkPrice}</span>
+									<td><span class="discounted-price-value">${packvo.pkPrice}</span><span>원</span>
 									</td>
 								</tr>
 

@@ -100,7 +100,6 @@ button:hover {
 	margin-bottom: 20px;
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 20px;
 }
 
 .event-box {
@@ -224,7 +223,9 @@ form-group-rogin span {
 	width: 600px;
 	display: inline-block;
 	padding: 0 0;
-	F
+}
+
+.price-box {
 }
 
 .form-select {
