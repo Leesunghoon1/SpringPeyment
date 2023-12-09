@@ -7,15 +7,20 @@
 
 	<!-- 주문 정보 생성 -->
 	<insert id="insert_pay" parameterType="orderDTO">
-		insert into pay_order_user(order_num, pk_no, id, order_date, total_price,
-		imp_uid)
-		values(#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid})
+		insert into
+		pay_order_user(order_num, pk_no, id, order_date, total_price,
+		imp_uid,
+		user_count)
+		values(#{orderNum}, #{pkNo}, #{id}, #{orderDate},
+		#{totalPrice}, #{impUid}, #{userCount})
+		
 	</insert>
 
 
 
 	<insert id="insert_payinfo" parameterType="payDTO">
-		insert into sc_pay (id, order_num, pay_method, pay_date, product_name,
+		insert into sc_pay
+		(id, order_num, pay_method, pay_date, product_name,
 		pay_amount, pk_no)
 		values (#{id}, #{orderNum}, #{payMethod}, #{payDate}, #{productName},
 		#{payAmount}, #{pkNo})

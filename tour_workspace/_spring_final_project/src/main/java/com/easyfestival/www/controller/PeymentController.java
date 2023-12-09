@@ -27,6 +27,7 @@ import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.security.UserVO;
+import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.OrderService;
 import com.easyfestival.www.service.PayService;
 import com.easyfestival.www.service.ProductService;
@@ -58,6 +59,10 @@ public class PeymentController {
 		
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private MemberShipService memberShipService;
+
 
 	public PeymentController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -139,7 +144,7 @@ public class PeymentController {
 
 		// 결제 완료된 금액
 		String amount = payService.paymentInfo(orderDTO.getImpUid(), token);
-		log.info(" amount >>>> {}", amount);
+		log.info("amount >>>> {}", amount);
 
 		int res = 1;
 
@@ -152,6 +157,12 @@ public class PeymentController {
 		}
 
 		orderService.insert_pay(orderDTO);
+		
+		
+		
+		 memberShipService.insert_point(orderDTO);
+		 
+		
 		return res;
 
 	}
@@ -167,6 +178,7 @@ public class PeymentController {
 		System.out.println("들어오나????" + payDTO.getPkNo());
 		System.out.println("pldto >>>>>" + pldto.get(0));
 		model.addAttribute("pldto", pldto.get(0));
+		
 		
 		return "/package/complete";
 	}

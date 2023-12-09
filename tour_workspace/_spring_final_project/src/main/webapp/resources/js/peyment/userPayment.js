@@ -155,6 +155,7 @@ function applyCoupon() {
                             "orderDate" : new Date().getTime(),
                             "totalPrice" : rsp.paid_amount,
                             "impUid" : rsp.imp_uid,
+                            "userCount" : userCount,
                         });
                         console.log(data);
 					
