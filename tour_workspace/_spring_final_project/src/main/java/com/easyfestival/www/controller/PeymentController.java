@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
@@ -71,15 +72,21 @@ public class PeymentController {
 	}
 
 
-		@GetMapping("/detail")
-    public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount, Model model) {
+	@GetMapping("/detail")
+    public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount, HttpSession session, Model model) {
 		System.out.println("/detail >>>>>");
 		System.out.println("pkNo >>>>>" + pkNo);
-		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);
+		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);        
 		System.out.println("pldto >>>>>" + pldto.get(0));
 		System.out.println("userCount>>>" + userCount);
 		model.addAttribute("pldto", pldto.get(0));
 		model.addAttribute("userCount", userCount);
+		
+		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
+		
+		model.addAttribute("memShp", msVo);
+		
+		
         return "/package/detail";
     }
 	
@@ -155,6 +162,8 @@ public class PeymentController {
 			payService.payMentCancle(token, orderDTO.getImpUid(), amount, "결제 금액 오류");
 			return res;
 		}
+		
+	
 
 		orderService.insert_pay(orderDTO);
 		
@@ -168,7 +177,7 @@ public class PeymentController {
 	}
 	
 	@GetMapping("/complete")
-	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, Model model) throws Exception {
+	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, HttpSession session, Model model) throws Exception {
 		System.out.println("404에러 ");
 		PayDTO payDTO = orderService.getPay(payNum);
 		
@@ -177,8 +186,7 @@ public class PeymentController {
 		List<ProductListDTO> pldto = productService.getdtoDetail(payDTO.getPkNo());
 		System.out.println("들어오나????" + payDTO.getPkNo());
 		System.out.println("pldto >>>>>" + pldto.get(0));
-		model.addAttribute("pldto", pldto.get(0));
-		
+	
 		
 		return "/package/complete";
 	}
@@ -187,7 +195,7 @@ public class PeymentController {
 	@RequestMapping(value = "pay_info", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Long> payInfoPOST(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String imp_uid, HttpSession session, @RequestParam long pkNo) throws Exception {
+			@RequestParam String imp_uid, HttpSession session, @RequestParam long pkNo, @RequestParam String enteredPoints) throws Exception {
 		IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
 		PayDTO payDTO = new PayDTO();
 		
@@ -200,11 +208,12 @@ public class PeymentController {
 		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
 		payDTO.setPkNo(pkNo);
 		orderService.insert_payinfo(payDTO);
-
+		
 		payDTO = orderService.getLastPay(payDTO);
 		System.out.println("이건" + payDTO);
-		/* model.addAttribute("payDTO", payDTO); */
 		
+		/* model.addAttribute("payDTO", payDTO); */
+		System.out.println("aaa이거모임 ?" + enteredPoints);
 		
 		return new ResponseEntity<Long>(payDTO.getPayNum(), HttpStatus.OK);
 	}

@@ -3,6 +3,7 @@ package com.easyfestival.www.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.repository.MemberShipDAO;
 
@@ -48,6 +49,12 @@ public class MemberShipServiceImple implements MemberShipService {
 	    } else {
 	        return "브론즈";
 	    }
+	}
+
+	@Override
+	public MemberShipVO getmemberShip(String id) {
+		
+		return mdao.getmemberShip(id);
 	}
 
 }

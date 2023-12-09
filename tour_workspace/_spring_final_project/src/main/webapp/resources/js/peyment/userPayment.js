@@ -1,11 +1,16 @@
 console.log(pldto);
 console.log(userA);
 console.log(userC);
+console.log(pppp);
 
-const userS = userA.match(/id=([a-zA-Z0-9]+),\s*pwd=([^,]+),\s*name=([^,]+),\s*age=(\d+),\s*address=([^,]+),\s*email=([^,]+),\s*phoneNumber=([^,]+),\s*authList=([^,]+),\s*grade=([^,]+),\s*point=(\d+)/);
+const userS = userA.match(/id=([a-zA-Z0-9]+),\s*pwd=([^,]+),\s*name=([^,]+),\s*age=(\d+),\s*address=([^,]+),\s*email=([^,]+),\s*phoneNumber=([^,]+),\s*authList=([^,]+)+/);
 
 const packageA = pldto.match(/pkNo=(\d+), pkName=([^,]+), pkPrice=(\d+), pkContinent=([^,]+), pkContent=([^)]+)/);
 
+const regex = pppp.match(/point=(\d+), grade=([^}]+)/);
+
+const point = parseInt(regex[1]);
+const grade = regex[2];
 
 const pkNo = parseInt(packageA[1]);
 const pkName = packageA[2];
@@ -13,13 +18,24 @@ const pkPrice = parseInt(packageA[3]);
 const pkContinent = packageA[4];
 const pkContent = packageA[5];
 let pkPriceValue;
+
 const discountedPriceElement = document.querySelectorAll('.discounted-price-value');
+
+const discountedPointElement = document.querySelector('.discounted-point-value');
+
+const discountedPoint2Element = document.querySelector('.discounted-point2-value');
 
 const userCount = userC;
 
+//포인트 쓰는 값
+var enteredPoints = 0;
 
+console.log("aaa" + enteredPoints);
 
 let totalPrice = 0;
+
+let discountedPrice = 0; // 초기값을 0으로 할당
+
 
     // matches 배열에서 필요한 정보 추출
     const id = userS[1];
@@ -29,9 +45,6 @@ let totalPrice = 0;
     const address = userS[5];
     const email = userS[6];
     const phoneNumber = userS[7];
-    const grade = userS[8];
-    const point = parseInt(userS[9]);
-    const authList = userS[10];
 
 var selectedValue;
 // matches 배열에서 필요한 정보 추출
@@ -215,7 +228,8 @@ function createPayInfo(uid) {
         contentType: 'application/json',
         data: {
             'imp_uid': uid,
-            'pkNo':pkNo
+            'pkNo':pkNo,
+            'enteredPoints' : enteredPoints
         },
 
         success: function(data) {
@@ -237,14 +251,6 @@ function createPayInfo(uid) {
 
 
 
-
-
-
-
-
-
-
-
 //셀렉트
 const label = document.querySelector('.label');
 const options = document.querySelectorAll('.optionItem');
@@ -263,3 +269,34 @@ label.addEventListener('click', function(){
     label.parentNode.classList.add('active');
   }
 });
+
+function applyPoint() {
+    // 입력된 포인트 가져오기
+    var couponInput = document.getElementById('point-input');
+     enteredPoints = parseInt(couponInput.value);
+
+    // 최종 가격 가져오기 (예시로 100,000으로 설정)
+    var PointPrice = pkPriceValue; // 실제 로직에 맞게 수정하세요
+
+    // 포인트 할인 로직 적용
+    if (!isNaN(enteredPoints) && enteredPoints > 0 && enteredPoints < point) {
+        // 최종 가격에서 포인트 할인 적용
+        discountedPrice = Math.max(0, PointPrice - enteredPoints);
+
+        // 결과 출력 (예시로 콘솔에 출력)
+        console.log("포인트 할인 적용 전 가격: " + PointPrice);
+        console.log("포인트 할인 후 가격: " + discountedPrice);
+
+        discountedPointElement.innerText = discountedPrice;
+
+        discountedPoint2Element.innerText = enteredPoints;
+
+
+        // 여기에서 할인된 가격을 사용하거나, 화면에 표시하거나, 서버로 전송하는 등의 로직을 추가할 수 있습니다.
+    } else {
+        alert("올바른 포인트를 입력하세요.");
+    }
+}
+
+// 함수 밖에서 discountedPrice 사용 가능
+console.log("함수 밖에서 discountedPrice 사용: " + discountedPrice);

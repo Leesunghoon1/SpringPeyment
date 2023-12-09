@@ -1,19 +1,20 @@
-const matches = pkVo.match(/payNum=(\d+), num=([^,]+), orderNum=(\d+), payMethod=([^,]+), payName=([^,]+), payDate=([^,]+), payAmount=(\d+)/);
+const matches = pkVo.match(/payNum=(\d+), id=([a-zA-Z0-9]+), orderNum=(\d+), payMethod=([a-zA-Z]+), productName=([가-힣]+), payDate=([a-zA-Z0-9]+), payAmount=(\d+), pkNo=(\d+)/);
 
 // matches 배열에서 필요한 정보 추출
 const payNum = matches[1];
-const num = matches[2];
+const id = matches[2];
 const orderNum = matches[3];
 const payMethod = matches[4];
-const payName = matches[5];
+const productName = matches[5];
 const payDate = matches[6];
 const payAmount = matches[7];
+const pkNo = matches[8];
 
 console.log("payNum:", payNum);
-console.log("num:", num);
+console.log("id:", id);
 console.log("orderNum:", orderNum);
 console.log("payMethod:", payMethod);
-console.log("payName:", payName);
+console.log("productName:", productName);
 console.log("payDate:", payDate);
 console.log("payAmount:", payAmount);
 

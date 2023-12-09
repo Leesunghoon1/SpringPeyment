@@ -74,7 +74,7 @@
 								</tr>
 								<tr>
 									<th>맴버쉽</th>
-									<td><span>${uvo.grade}</span></td>
+									<td><span>${memShp.grade}</span></td>
 								</tr>
 								<tr>
 									<th>패키지 가격</th>
@@ -96,32 +96,39 @@
 						<h3 class="user-nmuber-top">할인 수단 선택</h3>
 					</div>
 					<div class="product-amout">
-						<span>구매 금액</span>
-						<span class="discounted-price-value">${packvo.pkPrice}</span>
+						<span>구매 금액</span> <span class="discounted-price-value">${packvo.pkPrice}</span>
 					</div>
 
 					<div class="form-group-cupon-mid">
 						<input type="text" id="coupon-input"
-							placeholder="Enter Coupon Code"> <br>
+							placeholder="이벤트로 발급받은 쿠폰을 적어주세요"> <br>
 						<button type="button" class="cupon-button" onclick="applyCoupon()">사용
 							가능 쿠폰</button>
 
 					</div>
 					<div class="product-amout">
-						<span> 일반쿠폰 </span> <span class="discounted-coupon-value"> %</span>
+						<span> 일반쿠폰 </span> <span class="discounted-coupon-value">
+							%</span>
 					</div>
 
 					<div class="product-amout">
 						<span> 추가쿠폰 </span> <span> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 맴버쉽 할인</span> <span> - </span>
+						<span> 사용 포인트 </span> <span> ${memShp.point} </span>
+					</div>
+					<input type="text" id="point-input"
+						placeholder="사용하실 포인트를 적어주세요"> <br>
+					<button type="button" class="cupon-button" onclick="applyPoint()">포인트 할인</button>
+
+					<div class="product-amout">
+						<span> 맴버쉽 할인</span> <span> ${memShp.grade} </span>
 					</div>
 					<div class="product-amout">
-						<span> 최종할인</span> <span> - </span>
+						<span> 포인트 할인</span><span class="discounted-point2-value"> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 최종금액</span><span class="discounted-price-value">${packvo.pkPrice}</span>
+						<span> 최종금액</span><span class="discounted-point-value"> - </span>
 					</div>
 
 					<div class="box-left">
@@ -244,6 +251,7 @@
 	let pldto = `<c:out value="${packvo}" />`;
 	let userA = `<c:out value="${uvo}" />`;
 	let userC = `<c:out value="${userCount}" />`;
+	let pppp = `<c:out value="${memShp}"/>}`
 </script>
 
 <script type="text/javascript"

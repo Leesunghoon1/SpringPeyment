@@ -21,6 +21,10 @@
 		VALUES (#{id}, #{point},#{totalPrice})
 		ON DUPLICATE KEY UPDATE point = point + #{point}, total_price = total_price + #{totalPrice} 
 	</insert>
+	
+	<select id="getmemberShip" resultType="com.easyfestival.www.domain.MemberShipVO">
+		select * from membership where id = #{id}
+	</select>
 
 
 

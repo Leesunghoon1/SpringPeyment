@@ -94,8 +94,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 							</dl>
 						</div>
 						<div>
-							<button type="button" order-num="${payDTO.orderNum}"
-								class="btn-gradient cyan" class="btn-gradient cyan">
+							<button type="button" order-num="${payDTO.orderNum}" class="payMentCancel site-btn">
 								<span>예약 취소</span>
 							</button>
 						</div>
@@ -132,10 +131,11 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 		</div>
 		</div>
 		<script type="text/javascript">
-			let pkVo = `<c:out value="${packvo}" />`;
+			let pkVo = `<c:out value="${payDTO}" />`;
+			console.log(pkVo);
 		</script>
 
-		<script src="/resources/js/myOrder.js">
+		<script src="/resources/js/peyment/myOrder.js">
 			
 		</script>
 </body>
