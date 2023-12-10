@@ -55,6 +55,9 @@ console.log(id);
 
 function applyCount() {
     pkPriceValue = pkPrice * userCount;
+
+    
+
   discountedPriceElement.forEach(e =>{
     e.innerHTML = `${pkPriceValue}`;
   })
@@ -274,6 +277,7 @@ function applyPoint() {
     // 입력된 포인트 가져오기
     var couponInput = document.getElementById('point-input');
      enteredPoints = parseInt(couponInput.value);
+    var memberDiscountPrice = document.getElementById('memberDiscountPrice').innerText;
 
     // 최종 가격 가져오기 (예시로 100,000으로 설정)
     var PointPrice = pkPriceValue; // 실제 로직에 맞게 수정하세요
@@ -282,9 +286,10 @@ function applyPoint() {
     if (!isNaN(enteredPoints) && enteredPoints > 0 && enteredPoints < point) {
         // 최종 가격에서 포인트 할인 적용
         discountedPrice = Math.max(0, PointPrice - enteredPoints);
-
+        discountedPrice = discountedPrice - memberDiscountPrice;
         // 결과 출력 (예시로 콘솔에 출력)
         console.log("포인트 할인 적용 전 가격: " + PointPrice);
+        console.log("member discount 가격: " + memberDiscountPrice);
         console.log("포인트 할인 후 가격: " + discountedPrice);
 
         discountedPointElement.innerText = discountedPrice;

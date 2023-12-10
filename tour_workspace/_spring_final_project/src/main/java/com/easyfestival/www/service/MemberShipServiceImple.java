@@ -54,7 +54,36 @@ public class MemberShipServiceImple implements MemberShipService {
 	@Override
 	public MemberShipVO getmemberShip(String id) {
 		
-		return mdao.getmemberShip(id);
+		MemberShipVO memberShipVO = mdao.getmemberShip(id);
+		float memberDiscountRate=0.0f;
+		switch(memberShipVO.getGrade()) {
+			case "브론즈":
+				memberDiscountRate = 0.1f;
+				break;
+			case "실버":
+				memberDiscountRate = 0.15f;
+				break;
+			case "골드":
+				memberDiscountRate = 0.2f;
+				break;
+		}
+		memberShipVO.setMemberDiscountRate(memberDiscountRate);
+		return memberShipVO;
 	}
+
+	
+	@Override
+	public int updateMemberShip(String id, Long point) {
+	    // TODO Auto-generated method stub
+	    if (point != null && point > 0) {
+	        mdao.UpdateMemberShip(id, point);
+	    }
+	    // 이후 추가적인 로직이 있다면 처리할 수 있습니다.
+
+	    // 업데이트 이후의 멤버십 정보를 조회하거나 반환하는 로직 추가 가능
+
+	    return 1;
+	}
+
 
 }

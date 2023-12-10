@@ -10,4 +10,7 @@ public interface MemberShipService {
 	MemberShipVO getmemberShip(String id);
 
 
+	int updateMemberShip(String id, Long point);
+
+
 }

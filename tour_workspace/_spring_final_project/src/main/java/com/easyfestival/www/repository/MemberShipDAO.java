@@ -14,5 +14,7 @@ public interface MemberShipDAO {
 
 	MemberShipVO getmemberShip(String id);
 
+	int UpdateMemberShip(@Param("id") String id, @Param("point") long point);
+
 
 }

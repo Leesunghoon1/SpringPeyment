@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,7 @@
 	<c:set value="${pldto.hvo }" var="hvo" />
 	<c:set value="${pldto.fvo }" var="fvo" />
 	<c:set value="${pldto.plvo }" var="plvo" />
+
 
 	<div class="payment-container-main">
 
@@ -122,7 +124,9 @@
 					<button type="button" class="cupon-button" onclick="applyPoint()">포인트 할인</button>
 
 					<div class="product-amout">
-						<span> 맴버쉽 할인</span> <span> ${memShp.grade} </span>
+						<span> 맴버쉽 할인</span> 
+						<%-- <span> ${memShp.memberDiscountRate * packvo.pkPrice} </span> --%>
+						<span id="memberDiscountPrice"> ${memberDiscountPrice} </span>
 					</div>
 					<div class="product-amout">
 						<span> 포인트 할인</span><span class="discounted-point2-value"> - </span>

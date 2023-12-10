@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OrderDTO;
+import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.security.UserVO;
@@ -83,13 +84,14 @@ public class PeymentController {
 		model.addAttribute("userCount", userCount);
 		
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
-		
+		PackageVO packVO = pldto.get(0).getPackvo();
+		long pkPrice = packVO.getPkPrice();
+		long memberDiscountPrice = Math.round(msVo.getMemberDiscountRate() * pkPrice);
 		model.addAttribute("memShp", msVo);
-		
-		
+		model.addAttribute("memberDiscountPrice", memberDiscountPrice);
+
         return "/package/detail";
     }
-	
 
 	@RequestMapping(value = "/peverifyIamport/{imp_uid}")
 	@ResponseBody
@@ -180,13 +182,13 @@ public class PeymentController {
 	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, HttpSession session, Model model) throws Exception {
 		System.out.println("404에러 ");
 		PayDTO payDTO = orderService.getPay(payNum);
-		
 		model.addAttribute("payDTO", payDTO);
+	
 		
 		List<ProductListDTO> pldto = productService.getdtoDetail(payDTO.getPkNo());
 		System.out.println("들어오나????" + payDTO.getPkNo());
 		System.out.println("pldto >>>>>" + pldto.get(0));
-	
+		model.addAttribute("pldto", pldto.get(0));
 		
 		return "/package/complete";
 	}
@@ -195,29 +197,42 @@ public class PeymentController {
 	@RequestMapping(value = "pay_info", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Long> payInfoPOST(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String imp_uid, HttpSession session, @RequestParam long pkNo, @RequestParam String enteredPoints) throws Exception {
-		IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
-		PayDTO payDTO = new PayDTO();
-		
-		
-		System.out.println(((UserVO) session.getAttribute("uvo")).getId());
-		payDTO.setId(((UserVO) session.getAttribute("uvo")).getId());
-		payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
-		payDTO.setPayMethod(result.getResponse().getPayMethod());
-		payDTO.setProductName(result.getResponse().getName());
-		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
-		payDTO.setPkNo(pkNo);
-		orderService.insert_payinfo(payDTO);
-		
-		payDTO = orderService.getLastPay(payDTO);
-		System.out.println("이건" + payDTO);
-		
-		/* model.addAttribute("payDTO", payDTO); */
-		System.out.println("aaa이거모임 ?" + enteredPoints);
-		
-		return new ResponseEntity<Long>(payDTO.getPayNum(), HttpStatus.OK);
+	        @RequestParam String imp_uid, HttpSession session, @RequestParam long pkNo, @RequestParam String enteredPoints) throws Exception {
+	    IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
+	    PayDTO payDTO = new PayDTO();
+
+	    System.out.println(((UserVO) session.getAttribute("uvo")).getId());
+	    payDTO.setId(((UserVO) session.getAttribute("uvo")).getId());
+	    payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
+	    payDTO.setPayMethod(result.getResponse().getPayMethod());
+	    payDTO.setProductName(result.getResponse().getName());
+	    payDTO.setPayAmount(result.getResponse().getAmount().longValue());
+	    payDTO.setPkNo(pkNo);
+	    orderService.insert_payinfo(payDTO);
+
+	    payDTO = orderService.getLastPay(payDTO);
+	    System.out.println("이건" + payDTO);
+
+	    // 유효성 검사 후 String을 long으로 변환
+	    long point = 0; // 기본값 설정
+	    if (enteredPoints != null && !enteredPoints.isEmpty()) {
+	        try {
+	            point = Long.parseLong(enteredPoints);
+	            System.out.println("포인트 제대로 들어옴 ? +" + point);
+	        } catch (NumberFormatException e) {
+	            // 예외 처리: 숫자로 변환할 수 없는 경우 기본값이 유지됨
+	            e.printStackTrace(); // 또는 로깅 등을 통해 예외를 기록할 수 있음
+	        }
+	    }
+
+	    int isOK = memberShipService.updateMemberShip(((UserVO) session.getAttribute("uvo")).getId(), point);
+
+	    /* model.addAttribute("payDTO", payDTO); */
+	    System.out.println("aaa이거모임 ?" + point);
+
+	    return new ResponseEntity<Long>(payDTO.getPayNum(), HttpStatus.OK);
 	}
-	
+
 	
 	
 	@PostMapping("payMentCancel")

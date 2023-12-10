@@ -17,6 +17,7 @@ public class MemberShipVO {
 	private long totalPrice;
 	private long point;
 	private String grade;
+	private float memberDiscountRate;
 	
 	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
