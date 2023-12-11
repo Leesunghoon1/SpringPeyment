@@ -3,6 +3,7 @@ package com.easyfestival.www.repository;
 import org.apache.ibatis.annotations.Param;
 
 import com.easyfestival.www.domain.MemberShipVO;
+import com.easyfestival.www.security.UserVO;
 
 public interface MemberShipDAO {
 
@@ -19,5 +20,7 @@ public interface MemberShipDAO {
 	void updateTotalPurchase(@Param("id") String id, @Param("totalPrice") long totalPrice);
 
 	long getTotalPrice(String id);
+
+	void insertId(String id);
 
 }

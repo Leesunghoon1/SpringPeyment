@@ -53,6 +53,13 @@
     <select id="getTotalPrice" resultType="long">
     	 SELECT total_price FROM membership where id = #{id}
     </select>
+    
+    
+	<insert id="insertId">
+		INSERT INTO membership (id)
+		VALUES
+		(#{id})
+	</insert>
 	
 
 

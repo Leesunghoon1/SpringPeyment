@@ -2,10 +2,12 @@ package com.easyfestival.www.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.repository.MemberShipDAO;
+import com.easyfestival.www.security.UserVO;
 
 @Service
 public class MemberShipServiceImple implements MemberShipService {
@@ -16,6 +18,7 @@ public class MemberShipServiceImple implements MemberShipService {
 	// MemberShipServiceImple.java
 
 	@Override
+	@Transactional
 	public void insert_point(OrderDTO orderDTO) {
 	    // 1. 결제 금액에 따라 포인트 계산
 	    long point = calculatePoints(orderDTO.getTotalPrice());
@@ -38,7 +41,6 @@ public class MemberShipServiceImple implements MemberShipService {
 	    // 예: 1%의 적립 비율로 계산
 	    double pointRate = 0.01;
 	    return (long) (totalPrice * pointRate);
-
 	}
 
 	private String determineGrade(Long totalPrice) {
@@ -56,6 +58,7 @@ public class MemberShipServiceImple implements MemberShipService {
 	}
 
 	@Override
+	@Transactional
 	public MemberShipVO getmemberShip(String id) {
 		
 		MemberShipVO memberShipVO = mdao.getmemberShip(id);
@@ -77,6 +80,7 @@ public class MemberShipServiceImple implements MemberShipService {
 
 	
 	@Override
+	@Transactional
 	public int updateMemberShip(String id, Long point) {
 	    // TODO Auto-generated method stub
 	    if (point != null && point > 0) {
@@ -118,6 +122,12 @@ public class MemberShipServiceImple implements MemberShipService {
 	    // 예: 총 구매 금액에서 할인율을 적용하여 환불할 포인트 계산
 	    double pointRate = 0.01; // 예시: 1%의 적립 비율
 	    return (long) ((totalPrice * (1 - discountRate)) * pointRate);
+	}
+
+	@Override
+	public void insertId(String id) {
+		mdao.insertId(id);
+		
 	}
 
 }

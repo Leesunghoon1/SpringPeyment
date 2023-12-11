@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.AuthVO;
 import com.easyfestival.www.security.UserVO;
+import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +40,9 @@ public class UserController {
 	
 	private final UserService usv;
 	private final BCryptPasswordEncoder bcEncoder; // password 암호화 객체
+	
+	@Autowired
+	private MemberShipService memberShipService;
 	
 	@GetMapping("index")
 	public String index() {
@@ -58,6 +63,8 @@ public class UserController {
 		avo.setId(uvo.getId());
 		avo.setAuth("ROLE_USER");
 		isOk *= usv.authUser(avo);
+		
+		memberShipService.insertId(uvo.getId());
 		
 		log.info("user join >>>>> " + (isOk > 0 ? "Success" : "Fail"));
 		if(isOk > 0) {

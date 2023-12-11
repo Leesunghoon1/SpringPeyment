@@ -5,6 +5,7 @@
 
 <mapper namespace="com.easyfestival.www.repository.OrderDAO">
 
+
 	<!-- 주문 정보 생성 -->
 	<insert id="insert_pay" parameterType="orderDTO">
 		insert into

@@ -45,9 +45,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/peyment/*")
 public class PeymentController {
 
-
-	private IamportClient api = new IamportClient(apiKey, secretKey);
-
 	@Autowired
 	private PayService payService;
 
@@ -78,6 +75,7 @@ public class PeymentController {
 		
 		model.addAttribute("memberPrice", memberPrice);
 		
+	
 		
 		model.addAttribute("userCount", userCount);
 		

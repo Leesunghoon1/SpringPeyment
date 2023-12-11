@@ -77,7 +77,7 @@ let enteredPoints = 0;// 초기값을 0으로 할당
 
 function applyPoint() {
     // 입력된 포인트 가져오기
-    let enteredPoints = parseInt(document.getElementById('point-input').value);
+    enteredPoints = parseInt(document.getElementById('point-input').value);
   
     // 최종 가격 가져오기 endPrice
     PointPrice = parseInt(totalPrice); 
@@ -96,11 +96,14 @@ function applyPoint() {
         discountedPrice = discountedPrice - memberDiscountPrice;
 
         totalPoint += enteredPoints;
-        totalPrice = totalPrice - enteredPoints;
+        totalPrice = pkPrice - enteredPoints;
+
 
         // pkPriceValue 초기화pkPriceValue
         totalPrice = PointPrice - enteredPoints;
 
+
+        pkPriceValue = discountedPrice
         //endpoint
         pointSpan.innerText = PointValue;
 
@@ -125,10 +128,19 @@ function applyPoint() {
     IMP.init("imp76450478");
 
 
-    if(enteredPoints == 0 && enteredPoints == null) {
-        totalPrice = totalPrice - memberDiscountPrice;
-        console.log("totalPrice!!!!" + totalPrice);
+    // if(enteredPoints == 0 && enteredPoints == null) {
+    //     totalPrice = totalPrice - memberDiscountPrice;
+    //     console.log("totalPrice!!!!" + totalPrice);
+    // }
+    if(enteredPoints == 0 || isNaN(enteredPoints)) {
+        totalPrice = pkPrice - memberDiscountPrice;
+    }else{
+        totalPrice = pkPriceValue;
     }
+   
+    
+
+    console.log("totalPrice----" + totalPrice);
 
     IMP.request_pay({ // param
         pg: selectedValue,
@@ -167,7 +179,7 @@ function applyPoint() {
                             "orderDate" : new Date().getTime(),
                             "totalPrice" : rsp.paid_amount,
                             "impUid" : rsp.imp_uid,
-                            "userCount" : userCount,
+                            "userCount" : userC,
                         });
                         console.log(data);
 					

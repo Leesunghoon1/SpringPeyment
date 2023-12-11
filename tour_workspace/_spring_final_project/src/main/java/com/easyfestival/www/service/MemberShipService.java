@@ -2,6 +2,7 @@ package com.easyfestival.www.service;
 
 import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OrderDTO;
+import com.easyfestival.www.security.UserVO;
 
 public interface MemberShipService {
 
@@ -13,6 +14,9 @@ public interface MemberShipService {
 	int updateMemberShip(String id, Long point);
 
 	int pointCancle(String id, Long totalPrice);
+
+
+	void insertId(String id);
 
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -18,6 +19,7 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
+import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.UserService;
 
 import lombok.Getter;
@@ -42,6 +44,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Inject	
 	private UserService usv;
 	
+	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -51,6 +54,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 //		boolean isOk = usv.updateLastLogin(getAuthId()); // getAuthEmail => getAuthUser
 		UserVO uvo = usv.getId(authId);
+
+		
 		// 내부에서 로그인 세션 저장됨.
 		
 		HttpSession ses = request.getSession();

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
@@ -56,7 +57,8 @@ public class OrderService {
 		
 		return orderDAO.payMentCancle(payDTO.getOrderNum());
 	}
-
+	
+	@Transactional
 	public int orderCancle(OrderDTO orderDTO) throws Exception {
 		System.out.println("1 : " + orderDTO);
 		System.out.println("2 : " + orderDTO.getOrderNum());
