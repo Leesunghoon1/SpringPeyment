@@ -12,5 +12,7 @@ public interface MemberShipService {
 
 	int updateMemberShip(String id, Long point);
 
+	int pointCancle(String id, Long totalPrice);
+
 
 }

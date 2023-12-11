@@ -22,5 +22,15 @@ public class MemberShipVO {
 	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public long getAccumulatedPoint() {
+		// TODO Auto-generated method stub
+		return point;
+	}
+
+	public Long getTotalPurchase() {
+		// TODO Auto-generated method stub
+		return totalPrice;
+	}
 	
 }

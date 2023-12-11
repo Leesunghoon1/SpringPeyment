@@ -45,11 +45,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/peyment/*")
 public class PeymentController {
 
-	@Value("7820725586500628")
-	private String apiKey;
-
-	@Value("8kJzA2A8JvcuCEVuWlXENjqli35CyLVev2gY4grQLmxfnj2DZvvqPZu4sDlrLLjjdmDpKaUiEkDEyCJM")
-	private String secretKey;
 
 	private IamportClient api = new IamportClient(apiKey, secretKey);
 
@@ -66,11 +61,6 @@ public class PeymentController {
 	private MemberShipService memberShipService;
 
 
-	public PeymentController() {
-		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
-		this.api = new IamportClient("7820725586500628",
-				"8kJzA2A8JvcuCEVuWlXENjqli35CyLVev2gY4grQLmxfnj2DZvvqPZu4sDlrLLjjdmDpKaUiEkDEyCJM");
-	}
 
 
 	@GetMapping("/detail")
@@ -80,14 +70,33 @@ public class PeymentController {
 		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);        
 		System.out.println("pldto >>>>>" + pldto.get(0));
 		System.out.println("userCount>>>" + userCount);
+		
+		
 		model.addAttribute("pldto", pldto.get(0));
+		
+		long memberPrice = pldto.get(0).getPackvo().getPkPrice() * userCount;
+		
+		model.addAttribute("memberPrice", memberPrice);
+		
+		
 		model.addAttribute("userCount", userCount);
 		
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
+		
+		
+		
 		PackageVO packVO = pldto.get(0).getPackvo();
+		
+		
 		long pkPrice = packVO.getPkPrice();
+		
+		
 		long memberDiscountPrice = Math.round(msVo.getMemberDiscountRate() * pkPrice);
+		
+		
 		model.addAttribute("memShp", msVo);
+		
+		
 		model.addAttribute("memberDiscountPrice", memberDiscountPrice);
 
         return "/package/detail";
@@ -126,12 +135,16 @@ public class PeymentController {
 		System.out.println("rrr");
 		
 		int result = orderService.orderCancle(orderDTO);
-
+		
+		int result2 = memberShipService.pointCancle(orderDTO.getId(), orderDTO.getTotalPrice()); //일단 보류
+		System.out.println("orderDTO.getTotalPrice()" + orderDTO.getTotalPrice());
 		if(result>0) {
 			System.out.println("DB 삭제성공");
 		}
 		if(result1>0) {
 			System.out.println("Pay DB 삭제성공");
+		}if(result2>0) {
+			System.out.println("point DB 삭제 완료");
 		}
 
 		

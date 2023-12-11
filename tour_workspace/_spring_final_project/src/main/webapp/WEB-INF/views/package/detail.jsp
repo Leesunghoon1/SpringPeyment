@@ -80,7 +80,7 @@
 								</tr>
 								<tr>
 									<th>패키지 가격</th>
-									<td><span class="discounted-price-value">${packvo.pkPrice}</span><span>원</span>
+									<td><span>${memberPrice }원</span>
 									</td>
 								</tr>
 
@@ -117,7 +117,7 @@
 						<span> 추가쿠폰 </span> <span> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 사용 포인트 </span> <span> ${memShp.point} </span>
+						<span> 사용 포인트 </span> <span id="PointValue"> ${memShp.point}</span>
 					</div>
 					<input type="text" id="point-input"
 						placeholder="사용하실 포인트를 적어주세요"> <br>
@@ -125,14 +125,13 @@
 
 					<div class="product-amout">
 						<span> 맴버쉽 할인</span> 
-						<%-- <span> ${memShp.memberDiscountRate * packvo.pkPrice} </span> --%>
 						<span id="memberDiscountPrice"> ${memberDiscountPrice} </span>
 					</div>
 					<div class="product-amout">
-						<span> 포인트 할인</span><span class="discounted-point2-value"> - </span>
+						<span> 포인트 할인</span><span id="endPoint"> - </span>
 					</div>
 					<div class="product-amout">
-						<span> 최종금액</span><span class="discounted-point-value"> - </span>
+						<span> 최종금액</span><span id="endPrice">${memberPrice} </span>
 					</div>
 
 					<div class="box-left">
@@ -203,10 +202,9 @@
 								</tr>
 								<tr>
 									<th>패키지 가격</th>
-									<td><span class="discounted-price-value">${packvo.pkPrice}</span><span>원</span>
+									<td><span>${memberPrice }원</span>
 									</td>
 								</tr>
-
 							</tbody>
 						</table>
 
@@ -247,22 +245,20 @@
 				</div>
 			</div>
 		</div>
+		</div>
 		<!-- 예약자 정보 -->
 
-	</div>
 </body>
 <script type="text/javascript">
 	let pldto = `<c:out value="${packvo}" />`;
 	let userA = `<c:out value="${uvo}" />`;
 	let userC = `<c:out value="${userCount}" />`;
 	let pppp = `<c:out value="${memShp}"/>}`
+	let totalPrice = `<c:out value="${memberPrice}"/>}`
 </script>
 
 <script type="text/javascript"
 	src="/resources/js/peyment/userPayment.js">
 	
-</script>
-<script type="text/javascript">
-	applyCount()
 </script>
 </html>

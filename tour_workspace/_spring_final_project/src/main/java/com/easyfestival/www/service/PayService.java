@@ -29,7 +29,7 @@ public class PayService {
 	@Value("7820725586500628")
 	private String apiKey;
 
-	@Value("8kJzA2A8JvcuCEVuWlXENjqli35CyLVev2gY4grQLmxfnj2DZvvqPZu4sDlrLLjjdmDpKaUiEkDEyCJM")
+	@Value("P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr")
 	private String secretKey;
 	
 	
