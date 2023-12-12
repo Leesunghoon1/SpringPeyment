@@ -36,13 +36,6 @@ public class MemberShipServiceImple implements MemberShipService {
 	    mdao.saveGrade(orderDTO.getId(), grade);
 	}
 
-	private long calculatePoints(Long totalPrice) {
-	    // 포인트 계산 로직
-	    // 예: 1%의 적립 비율로 계산
-	    double pointRate = 0.01;
-	    return (long) (totalPrice * pointRate);
-	}
-
 	private String determineGrade(Long totalPrice) {
 	    // 등급 결정 로직
 	    // 예: 각 등급에 필요한 최소 누적금액 기준을 설정하고 이에 따라 등급을 반환
@@ -96,6 +89,7 @@ public class MemberShipServiceImple implements MemberShipService {
 
 
 	@Override
+	@Transactional
 	public int pointCancle(String id, Long totalPrice) {
 		MemberShipVO memberShipVO = mdao.getmemberShip(id);
 	    if (memberShipVO == null) {
@@ -104,9 +98,10 @@ public class MemberShipServiceImple implements MemberShipService {
 	    }
 
 	    // 2. 환불할 포인트 및 금액 계산
-	    long canceledPoints = calculateCanceledPoints(totalPrice, memberShipVO.getMemberDiscountRate());
+	    long canceledPoints = calculatePoints(totalPrice);
+	    
 	    long point = memberShipVO.getAccumulatedPoint() - canceledPoints;
-	    long totalPirce = memberShipVO.getTotalPurchase() - totalPrice;
+	    long totalPirce = Math.max(0,memberShipVO.getTotalPurchase() - totalPrice);
 
 	    // 3. 데이터베이스에서 포인트 및 금액 환불
 	    mdao.cancelPoints(id, point);
@@ -116,13 +111,15 @@ public class MemberShipServiceImple implements MemberShipService {
 
 	    return 1;
 	}
+	
 
-	private long calculateCanceledPoints(Long totalPrice, float discountRate) {
-	    // 환불할 포인트 계산 로직
-	    // 예: 총 구매 금액에서 할인율을 적용하여 환불할 포인트 계산
-	    double pointRate = 0.01; // 예시: 1%의 적립 비율
-	    return (long) ((totalPrice * (1 - discountRate)) * pointRate);
+	private long calculatePoints(Long totalPrice) {
+	    // 포인트 계산 로직
+	    // 예: 1%의 적립 비율로 계산
+	    double pointRate = 0.01;
+	    return (long) (totalPrice * pointRate);
 	}
+
 
 	@Override
 	public void insertId(String id) {

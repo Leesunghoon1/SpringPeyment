@@ -185,13 +185,6 @@ body {
     padding: 10px 0;
 }
 
-.paging a.btn-prev {
-    background-image: url(https://www.kyowontour.com/resources/images/icon_arrow_left.svg);
-}
-
-.paging a.btn-next {
-    background-image: url(https://www.kyowontour.com/resources/images/icon_arrow_right.svg);
-}
 
 .paging a.selected, .paging button.selected {
     background: #1c1c1c;
@@ -235,3 +228,38 @@ body {
 	border: solid #666;
 	margin-left: 130px;
 }
+
+.paging {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.paging a {
+    display: block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.paging a.selected {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.paging a.btn-prev,
+.paging a.btn-next {
+    font-weight: bold;
+}
+
+.paging a.btn-prev::before {
+    content: '◀';
+}
+
+.paging a.btn-next::before {
+    content: '▶';
+}
+

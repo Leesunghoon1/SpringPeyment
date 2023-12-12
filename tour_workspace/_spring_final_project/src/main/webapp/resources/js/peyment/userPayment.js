@@ -70,8 +70,7 @@ let pkPriceValue;
 //포인트 쓰는 값s
 let enteredPoints = 0;// 초기값을 0으로 할당
 
-
-
+let priceP = totalPrice;
 
 
 
@@ -127,16 +126,18 @@ function applyPoint() {
     var uid = '';
     IMP.init("imp76450478");
 
+    if (enteredPoints == 0 || isNaN(enteredPoints)) {
+        // 결제 취소 시, 이전 totalPrice로 초기화
+        totalPrice = parseInt(priceP);
+        totalPrice = totalPrice - parseInt(memberDiscountPrice);
 
-    // if(enteredPoints == 0 && enteredPoints == null) {
-    //     totalPrice = totalPrice - memberDiscountPrice;
-    //     console.log("totalPrice!!!!" + totalPrice);
-    // }
-    if(enteredPoints == 0 || isNaN(enteredPoints)) {
-        totalPrice = pkPrice - memberDiscountPrice;
-    }else{
-        totalPrice = pkPriceValue;
+
+        console.log("1111" + totalPrice);
+    } else {
+        totalPrice = discountedPrice;
+        console.log("2222" + totalPrice);
     }
+    
    
     
 

@@ -75,7 +75,12 @@ public class OrderService {
 		return orderDAO.orderCancle((orderDTO.getOrderNum()));
 	}
 
+	// 내 주문 목록
+		public Map<Long, List> getMyOrderList(String num, List limitList) throws Exception {
+			
+			return orderDAO.getMyOrderList(num, limitList);
+		}
+		
+	
 
-	}
-
-
+}

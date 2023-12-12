@@ -24,5 +24,7 @@ public interface OrderDAO {
 
 	int orderCancle(Long long1);
 
+	Map<Long, List> getMyOrderList(String num, List limitList);
+
 
 }

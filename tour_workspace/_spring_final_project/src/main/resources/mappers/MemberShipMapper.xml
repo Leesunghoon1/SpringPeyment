@@ -39,7 +39,7 @@
 	    <!-- 적립 포인트 취소 -->
     <update id="cancelPoints" >
         UPDATE membership
-        SET point = point - #{point}
+        SET point = #{point}
         WHERE id = #{id}
     </update>
 

@@ -40,7 +40,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 				<span class="titb">님, 안녕하세요.</span>
 				<div class="text-head">
 					<p>
-						포인트는<span>1000P가 있어요 </span> 등급은 <span>gold입니다!!</span>
+						포인트는<span>${msVo.point }P가 있어요 </span> 등급은 <span>${msVo.grade }입니다!!</span>
 					</p>
 					<p>
 						<span>${uvo.name }</span>님이 좋아하는 여행 스타일은 어떤걸까요 ?
@@ -94,7 +94,8 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 							</dl>
 						</div>
 						<div>
-							<button type="button" order-num="${payDTO.orderNum}" class="payMentCancel site-btn">
+							<button type="button" order-num="${payDTO.orderNum}"
+								class="payMentCancel site-btn">
 								<span>예약 취소</span>
 							</button>
 						</div>
@@ -104,11 +105,12 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 						<div class="item-info-pey">
 							<strong>${payDTO.payAmount }</strong><span>원</span>
 						</div>
-						<div class="paging">
-							<a href="#" class="btn-prev"></a> <a href="#" class="selected">1</a>
-							<a href="#" class="btn-next"></a>
-						</div>
+
 					</div>
+				</div>
+				<div class="paging">
+					<a href="#" class="btn-prev"></a> <a href="#" class="selected">1</a>
+					<a href="#" class="btn-next"></a>
 				</div>
 			</div>
 		</div>
@@ -120,8 +122,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 				<div class="text-head">
 					온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
 						src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
-						alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다. 
-						<a><button
+						alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다. <a><button
 							type="button" class="btn-gradient-bottom">
 							<span>나의 항공권</span>
 						</button></a>
@@ -129,14 +130,14 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 				</div>
 			</div>
 		</div>
-		</div>
-		<script type="text/javascript">
-			let pkVo = `<c:out value="${payDTO}" />`;
-			console.log(pkVo);
-		</script>
+	</div>
+	<script type="text/javascript">
+		let pkVo = `<c:out value="${payDTO}" />`;
+		console.log(pkVo);
+	</script>
 
-		<script src="/resources/js/peyment/myOrder.js">
-			
-		</script>
+	<script src="/resources/js/peyment/myOrder.js">
+		
+	</script>
 </body>
 </html>
