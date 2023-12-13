@@ -25,7 +25,13 @@ import okhttp3.Response;
 @Service
 public class PayService {
 	
+	
+	@Value("7820725586500628")
+	private String apiKey;
 
+	@Value("P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr")
+	private String secretKey;
+	
 	
 	public String getToken() throws Exception {
 

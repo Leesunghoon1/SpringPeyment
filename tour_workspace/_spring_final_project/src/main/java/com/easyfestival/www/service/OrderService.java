@@ -1,6 +1,7 @@
 package com.easyfestival.www.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
+import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.repository.OrderDAO;
+import com.easyfestival.www.security.UserVO;
 
 @Service
 public class OrderService {
@@ -43,10 +46,6 @@ public class OrderService {
 		return orderDAO.getPay(payNum);
 	}
 
-	public List<Long> MyOrderCount(String saveNUM) {
-		// TODO Auto-generated method stub
-		return orderDAO.myOrderCount(saveNUM);
-	}
 
 	public OrderDTO adminList(OrderDTO orderDTO) {
 		
@@ -75,12 +74,24 @@ public class OrderService {
 		return orderDAO.orderCancle((orderDTO.getOrderNum()));
 	}
 
-	// 내 주문 목록
-		public Map<Long, List> getMyOrderList(String num, List limitList) throws Exception {
-			
-			return orderDAO.getMyOrderList(num, limitList);
-		}
-		
+	public int OrderCount(String svNum) {
+		// TODO Auto-generated method stub
+		return orderDAO.OrderCount(svNum);
+	}
+
+
 	
+	/*
+	 * //회원의 주문 목록 // OrderService.java public Map<String, List<Long>>
+	 * getMyOrderList(String id, List<Long> limitList) throws Exception {
+	 * Map<String, List<Long>> orderMap = new HashMap<>();
+	 * 
+	 * for (Long code : limitList) { List<Long> orderList =
+	 * orderDAO.getMyOrderList(id, code); orderMap.put(String.valueOf(code),
+	 * orderList); }
+	 * 
+	 * return orderMap; }
+	 */
+
 
 }

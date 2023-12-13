@@ -14,7 +14,7 @@
 		user_count)
 		values(#{orderNum}, #{pkNo}, #{id}, #{orderDate},
 		#{totalPrice}, #{impUid}, #{userCount})
-		
+
 	</insert>
 
 
@@ -59,12 +59,16 @@
 		WHERE order_num=#{orderNum}
 	</select>
 
+	<select id="OrderCount" resultType="int">
+	select count(id) from pay_order_user;
+	</select>
 
+<!-- <select id="getMyOrderList" parameterType="map" resultType="OrderDTO">
+    SELECT *
+    FROM pay_order_user o
+    JOIN package PK ON o.pkNo = PK.pkNo
+    WHERE o.orderNum = #{orderNum}
+</select>
 
-
-	<select id="myOrderCount" parameterType="String" resultType="String"> 
-		SELECT order_num FROM sc_pay WHERE id = #{id}
-		
-		</select>
-
+ -->
 </mapper>

@@ -8,11 +8,12 @@ body {
 
 .main-container {
 	margin: 0 auto;
-	padding: 70px 0 110px;
+	padding: 110px ;
 	min-height: 400px;
 	box-sizing: border-box;
 	min-width: 1200px;
 	width: 1200px;
+	margin-top: 120px;
 }
 
 .tita {
@@ -39,7 +40,8 @@ body {
 }
 
 .main-body{
-	margin-bottom: 200px; 
+	margin-bottom: 200px;
+	
 }
 
 .item-reserve {
@@ -58,7 +60,7 @@ body {
 	margin-top: 20px;
 	width: 100%;
 	font-size: 20px;
-	
+	margin-bottom: 30px;	
 }
 
 
@@ -135,7 +137,6 @@ body {
 	justify-content: space-between;
 	position: relative;
 	display: flex;
-	display: flex;
 }
 
 
@@ -153,8 +154,8 @@ body {
 
 .item-info-pey{
 	font-size: 30px;
-	margin-top: 30px;
-	margin-left: 630px;
+	margin-top: 70px;
+	margin-left: 820px;
 }
 
 
@@ -166,7 +167,7 @@ body {
 	font-size: 14px;
 	border-radius: 10px;
 	border: solid red;
-	
+	margin-bottom: 30px;
 }
 
 .payMentCancel .optionList::-webkit-scrollbar-track {
@@ -229,37 +230,48 @@ body {
 	margin-left: 130px;
 }
 
-.paging {
-    display: flex;
-    list-style: none;
-    padding: 0;
+.paging-container{
+	display: flex;
+	gap: 1.8rem;
+	align-items: center;
+	justify-content: center;
+}
+.paging-container a, .paging-container span{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2rem;
+	height: 2rem;
+	text-decoration: none;
+}
+.paging-container span{
+	border-radius: 50%;
+	background-color: #F5F5F5;
+	font-weight: 700; 
+	color :#1c1c1c;
+}
+.paging-container span:hover{
+	background-color: #A9A9A9;
+}
+.paging-container i{
+	font-size: 2rem;
+	color: #1c1c1c;
 }
 
-.paging a {
-    display: block;
-    padding: 5px 10px;
-    margin: 0 5px;
-    text-decoration: none;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+#selectNo{
+	/* 선택한 페이지 번호 */
+	background-color: #1c1c1c;
+	color: #fff;
+}
+#enable:hover{
+	/* prev, next 활성화시 */
+	color:#A9A9A9;
+}
+#disable{
+	/* prev, next 비활성화시 */
+	color: #D0D4CA;
 }
 
-.paging a.selected {
-    background-color: #007BFF;
-    color: #fff;
-}
 
-.paging a.btn-prev,
-.paging a.btn-next {
-    font-weight: bold;
-}
 
-.paging a.btn-prev::before {
-    content: '◀';
-}
-
-.paging a.btn-next::before {
-    content: '▶';
-}
 

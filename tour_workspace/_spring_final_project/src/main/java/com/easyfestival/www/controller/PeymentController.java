@@ -31,6 +31,7 @@ import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.domain.pagingVO;
+import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.UserVO;
 import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.OrderService;
@@ -48,7 +49,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/peyment/*")
 public class PeymentController {
 
+	@Value("7820725586500628")
+	private String apiKey;
 
+	@Value("P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr")
+	private String secretKey;
+
+	private IamportClient api = new IamportClient(apiKey, secretKey);
+
+	@Autowired
 	private PayService payService;
 
 	@Autowired
@@ -60,6 +69,11 @@ public class PeymentController {
 	@Autowired
 	private MemberShipService memberShipService;
 
+	public PeymentController() {
+		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
+		this.api = new IamportClient("7820725586500628",
+				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
+	}
 
 	@GetMapping("/detail")
 	public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount,
@@ -137,7 +151,6 @@ public class PeymentController {
 	}
 
 	// 마이페이지 - 주문 목록
-	
 
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	@ResponseBody
@@ -170,42 +183,14 @@ public class PeymentController {
 		return res;
 
 	}
-
-	@GetMapping("/complete")
-	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, HttpSession session, Model model,
-			@RequestParam(value = "pagingNum", required = false, defaultValue = "1")String pagingNum)
-			throws Exception {
-		
-
-		String svNum = ((UserVO) session.getAttribute("uvo")).getId();
 	
-		
-		String saveNUM = String.valueOf(svNum);
-		List<Long> codeList = orderService.MyOrderCount(saveNUM); 
-		
-		System.out.println("saveNum : " + saveNUM);
-		System.out.println("codeList : " +codeList);
-		
-		
-		
-		pagingVO pvo = new pagingVO();
-		pvo.setPageNo(Integer.parseInt(pagingNum));
-		pvo.setQty(3);
-		
-		List<Long> limitList = new ArrayList<Long>();
-		
-		try {
-			limitList = codeList.subList(pvo.getPageStart(), pvo.getPageStart()+3);
-		} catch (Exception e) {
-			limitList = codeList.subList(pvo.getPageStart(), codeList.size());
-		}
-		
-		
-		@SuppressWarnings("rawtypes")
-		Map<Long, List> orderMap = orderService.getMyOrderList(saveNUM, limitList);
-		
-		
-		
+
+
+	
+	
+	
+	@GetMapping("/complete")
+	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, HttpSession session, Model model) throws Exception {
 		
 		
 		
@@ -221,24 +206,19 @@ public class PeymentController {
 		System.out.println("pldto >>>>>" + pldto.get(0));
 		model.addAttribute("pldto", pldto.get(0));
 
+		
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
 		model.addAttribute("msVo", msVo);
-
+		
+		String svNum = ((UserVO) session.getAttribute("uvo")).getId();
+		int totalCount = orderService.OrderCount(svNum);
+		model.addAttribute("totalCount", totalCount); 
+		log.info("유저수 >>>>>> {}", totalCount);
+		
+		
+		
 		return "/package/complete";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping(value = "pay_info", method = RequestMethod.GET)
 	@ResponseBody

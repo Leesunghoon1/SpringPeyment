@@ -118,6 +118,8 @@ public class UserController {
 		model.addAttribute("uvoList", uvoList);
 	}
 	
+	
+	
 	// 회원정보 수정
 	@GetMapping("modify")
 	public void getUserModify() {}

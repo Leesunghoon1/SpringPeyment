@@ -15,6 +15,7 @@
 	type="text/css">
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 body, h1, h2, h3, h4, h5, h6, p, span {
 	font-family: 'Noto Sans KR', sans-serif !important;
@@ -67,9 +68,11 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 		<div class="main-body">
 			<div class="main-item">
 				<div class="item-head">
-					<h2>예약 내역</h2>
-					<a>총 1건</a>
+					<h2>결제내역</h2>
+					<a><h2>결제내역 리스트 가기</h2></a>
 				</div>
+
+
 				<div class="item-reserve">
 					<div class="item-img">
 						<c:forEach items="${pldto.pfList }" var="pfList">
@@ -77,6 +80,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 								src="/product_upload/${fn:replace(pfList.pfSaveDir,'-','/')}/${pfList.pfUuid}_${pfList.pfName}">
 						</c:forEach>
 					</div>
+
 					<div class="item-info">
 						<div class="no">
 							<dl>
@@ -105,14 +109,12 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 						<div class="item-info-pey">
 							<strong>${payDTO.payAmount }</strong><span>원</span>
 						</div>
-
 					</div>
 				</div>
-				<div class="paging">
-					<a href="#" class="btn-prev"></a> <a href="#" class="selected">1</a>
-					<a href="#" class="btn-next"></a>
-				</div>
 			</div>
+
+
+
 		</div>
 		<div class="panel-item">
 			<div class="tit">
@@ -133,10 +135,14 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 	</div>
 	<script type="text/javascript">
 		let pkVo = `<c:out value="${payDTO}" />`;
-		console.log(pkVo);
+		let prev = `<c:out value="${ph.prev}" />`;
+		let next = `<c:out value="${ph.next}" />`;
 	</script>
 
 	<script src="/resources/js/peyment/myOrder.js">
+		
+	</script>
+	<script type="text/javascript" src="/resources/js/pagenation.js">
 		
 	</script>
 </body>

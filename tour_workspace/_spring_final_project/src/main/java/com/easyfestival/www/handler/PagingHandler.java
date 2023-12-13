@@ -51,6 +51,5 @@ public class PagingHandler {
 	{
 		return this.type !=null ? type.split(""):new String[] {};
 	}
-
 	
 }

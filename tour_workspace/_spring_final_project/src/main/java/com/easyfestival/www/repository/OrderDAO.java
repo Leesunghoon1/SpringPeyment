@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.easyfestival.www.domain.OrderDTO;
 import com.easyfestival.www.domain.PayDTO;
+import com.easyfestival.www.handler.PagingHandler;
+import com.easyfestival.www.security.UserVO;
 
 public interface OrderDAO {
 
@@ -13,10 +15,8 @@ public interface OrderDAO {
 	int insert_payinfo(PayDTO payDTO);
 
 	PayDTO getLastPay(PayDTO payDTO);
-
+	
 	PayDTO getPay(long payNum);
-
-	List<Long> myOrderCount(String saveNUM);
 
 	OrderDTO adminList(OrderDTO orderDTO);
 
@@ -24,7 +24,14 @@ public interface OrderDAO {
 
 	int orderCancle(Long long1);
 
-	Map<Long, List> getMyOrderList(String num, List limitList);
+	int OrderCount(String svNum);
 
+	List<OrderDTO> getOrder(PagingHandler ph);
+
+
+
+	/*
+	 * public List<Long> getMyOrderList(String id, Long code);
+	 */
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.easyfestival.www.domain.ProductDTO;
 import com.easyfestival.www.domain.ProductListDTO;
+import com.easyfestival.www.handler.PagingHandler;
 
 
 public interface ProductService {
