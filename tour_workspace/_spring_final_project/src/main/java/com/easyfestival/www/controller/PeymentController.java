@@ -74,15 +74,13 @@ public class PeymentController {
 		this.api = new IamportClient("7820725586500628",
 				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
 	}
-
+	
+	
 	@GetMapping("/detail")
 	public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount,
 			HttpSession session, Model model) {
-		System.out.println("/detail >>>>>");
-		System.out.println("pkNo >>>>>" + pkNo);
+		
 		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);
-		System.out.println("pldto >>>>>" + pldto.get(0));
-		System.out.println("userCount>>>" + userCount);
 
 		model.addAttribute("pldto", pldto.get(0));
 
@@ -106,7 +104,35 @@ public class PeymentController {
 
 		return "/package/detail";
 	}
-
+	
+	
+	@GetMapping("/OrderList")
+	public String myOrder(HttpSession session, Model model,
+			@RequestParam("pageNo")int pageNo) throws Exception{
+		
+		System.out.println("myorderList");
+		String svNum = ((UserVO) session.getAttribute("uvo")).getId();
+		
+		
+		int totalCount = orderService.OrderCount(svNum); // 총 유저수 가하기
+		
+		PagingHandler ph = new PagingHandler(pageNo, 1, 5, totalCount); // 페이지네이션 설정 핸들
+		log.info("ph >>>>>> {}", ph.toString());
+		
+		log.info("글수 >>>>>> {}", totalCount);
+		
+		List<OrderDTO> uvoList = orderService.getOrder(ph);
+		log.info("uvoList >>>>>> {}", uvoList);
+		
+		model.addAttribute("ph", ph);
+		model.addAttribute("uvoList", uvoList);
+		
+		
+		
+		return "/package/OrderList";
+	}
+	
+	
 	@RequestMapping(value = "/peverifyIamport/{imp_uid}")
 	@ResponseBody
 	// 검증구간

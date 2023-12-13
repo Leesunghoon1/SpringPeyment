@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,6 +80,12 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		return orderDAO.OrderCount(svNum);
 	}
+
+	public List<OrderDTO> getOrder(PagingHandler ph) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrder(ph);
+	}
+
 
 
 	

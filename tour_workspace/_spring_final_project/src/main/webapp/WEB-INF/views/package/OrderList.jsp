@@ -34,45 +34,11 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 
 
 	<div class="main-container">
-		<div class="main-header">
-			<div class="my-style">
-				<span class="tita">${uvo.name }</span>
-				<!-- 나중에 여기는 유저 정보로 이동  -->
-				<span class="titb">님, 안녕하세요.</span>
-				<div class="text-head">
-					<p>
-						포인트는<span>${msVo.point }P가 있어요 </span> 등급은 <span>${msVo.grade }입니다!!</span>
-					</p>
-					<p>
-						<span>${uvo.name }</span>님이 좋아하는 여행 스타일은 어떤걸까요 ?
-					</p>
-				</div>
-				<div class="text-bottom">
-					나는 <span class="current-icon"> <img
-						src="https://img-kyowontour.kyowontour.com/hp/icon/who.icon2.svg"
-						alt="">친구와 함께
-					</span> <span class="current-icon"> <img
-						src="https://img-kyowontour.kyowontour.com/hp/icon/where.icon3.svg"
-						alt="">일본에서
-					</span> <br> <span class="current-icon"> <img
-						src=" https://cdn-icons-png.flaticon.com/512/2314/2314620.png "
-						width="50" height="50"> 온천을
-					</span>즐기고 싶어요.
-				</div>
-			</div>
-			<div class="my-icon">
-				<img src="https://cdn-icons-png.flaticon.com/512/7858/7858530.png "
-					width="400" height="400">
-			</div>
-		</div>
 		<div class="main-body">
 			<div class="main-item">
 				<div class="item-head">
-					<h2>결제내역</h2>
-					<a><h2>예약내역 리스트 가기</h2></a>
+					<h2>예약내역</h2>
 				</div>
-
-
 				<div class="item-reserve">
 					<div class="item-img">
 						<c:forEach items="${pldto.pfList }" var="pfList">
@@ -98,19 +64,31 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 							</dl>
 						</div>
 						<div>
-							<button type="button" order-num="${payDTO.orderNum}"
-								class="payMentCancel site-btn">
-								<span>예약 취소</span>
+						<a class="prev-a" href="/peyment/detail?pkNo=${pkNoVal}&userCount=${userCount}">
+							<button type="button" class="payMentCancel site-btn">
+								<span>결제 하기</span>
 							</button>
+						
+						</a>
 						</div>
 						<div class="item-info-tit">
 							<strong>${packvo.pkContent }</strong>
 						</div>
-						<div class="item-info-pey">
-							<strong>${payDTO.payAmount }</strong><span>원</span>
-						</div>
 					</div>
 				</div>
+			</div>
+			<!-- 페이지네이션 영역 ${ph.prev ? '' : 'disabled'} -->
+			<div class="paging-container">
+				<a class="prev-a" href="/peyment/OrderList?pageNo=${ph.pageStart-1}"><i
+					id="${ph.prev eq false ? 'disable' : 'enable'}"
+					class="fa-solid fa-circle-chevron-left"></i></a>
+				<c:forEach begin="${ph.pageStart}" end="${ph.pageEnd}" var="i">
+					<a href="//peyment/OrderList=${i}"><span
+						id="${ph.pageNo eq i ? 'selectNo' : ''}">${i}</span></a>
+				</c:forEach>
+				<a class="next-a" href="//peyment/OrderList=${ph.pageEnd+1}"><i
+					id="${ph.next eq false ? 'disable' : 'enable'}"
+					class="fa-solid fa-circle-chevron-right"></i></a>
 			</div>
 
 

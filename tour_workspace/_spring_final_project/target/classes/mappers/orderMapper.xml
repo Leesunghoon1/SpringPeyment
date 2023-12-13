@@ -52,16 +52,18 @@
 		WHERE order_num=#{orderNum}
 	</delete>
 
-	<select id="adminList" parameterType="orderDTO"
+	<select id="getOrder" parameterType="orderDTO"
 		resultType="orderDTO">
 		SELECT *
 		from pay_order_user
-		WHERE order_num=#{orderNum}
+		limit #{limitStart}, #{listQty}
 	</select>
 
 	<select id="OrderCount" resultType="int">
 	select count(id) from pay_order_user;
 	</select>
+	
+	
 
 <!-- <select id="getMyOrderList" parameterType="map" resultType="OrderDTO">
     SELECT *
