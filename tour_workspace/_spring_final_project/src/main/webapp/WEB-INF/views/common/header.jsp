@@ -77,7 +77,7 @@
 					<dd><a href="/user/login">로그인</a></dd>
 					<dd><a href="/user/join">회원가입</a></dd>
 					<dd><a href="/user/modify">회원정보</a></dd>
-					<dd><a href="#">예약확인</a></dd>
+					<dd><a href="/peyment/OrderList?pageNo=1">예약확인</a></dd>
 					<dd><a href="/user/logout">로그아웃</a></dd>
 					<dd><span><i class="fa-solid fa-magnifying-glass"></i></span></dd>
 				</dl>

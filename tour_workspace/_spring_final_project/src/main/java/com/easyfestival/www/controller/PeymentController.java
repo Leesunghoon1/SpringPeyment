@@ -26,7 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.easyfestival.www.domain.MemberShipVO;
-import com.easyfestival.www.domain.OrderDTO;
+import com.easyfestival.www.domain.OllPayDTO;
+import com.easyfestival.www.domain.OrderVO;
 import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
@@ -74,12 +75,11 @@ public class PeymentController {
 		this.api = new IamportClient("7820725586500628",
 				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
 	}
-	
-	
+
 	@GetMapping("/detail")
 	public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount,
 			HttpSession session, Model model) {
-		
+
 		List<ProductListDTO> pldto = productService.getdtoDetail(pkNo);
 
 		model.addAttribute("pldto", pldto.get(0));
@@ -104,35 +104,31 @@ public class PeymentController {
 
 		return "/package/detail";
 	}
-	
-	
+
 	@GetMapping("/OrderList")
-	public String myOrder(HttpSession session, Model model,
-			@RequestParam("pageNo")int pageNo) throws Exception{
-		
+	public String myOrder(HttpSession session, Model model, @RequestParam("pageNo") int pageNo) throws Exception {
+
 		System.out.println("myorderList");
 		String svNum = ((UserVO) session.getAttribute("uvo")).getId();
-		
-		
+
 		int totalCount = orderService.OrderCount(svNum); // 총 유저수 가하기
-		
-		PagingHandler ph = new PagingHandler(pageNo, 1, 5, totalCount); // 페이지네이션 설정 핸들
-		log.info("ph >>>>>> {}", ph.toString());
-		
+
+		PagingHandler ph = new PagingHandler(pageNo, 2, 5, totalCount); // 페이지네이션 설정 핸들
+
 		log.info("글수 >>>>>> {}", totalCount);
-		
-		List<OrderDTO> uvoList = orderService.getOrder(ph);
-		log.info("uvoList >>>>>> {}", uvoList);
-		
+		List<OllPayDTO> ollList = orderService.ollOrder(ph, svNum);
+
+		log.info("ollList >>>>>> {}", ollList.size());
+
+		log.info("ph >>>>>> {}", ph);
+
 		model.addAttribute("ph", ph);
-		model.addAttribute("uvoList", uvoList);
-		
-		
-		
+
+		model.addAttribute("ollList", ollList);
+
 		return "/package/OrderList";
 	}
-	
-	
+
 	@RequestMapping(value = "/peverifyIamport/{imp_uid}")
 	@ResponseBody
 	// 검증구간
@@ -143,26 +139,26 @@ public class PeymentController {
 
 	@PostMapping("orderCancle")
 	@ResponseBody
-	public int orderCancle(OrderDTO orderDTO, PayDTO payDTO) throws Exception {
+	public int orderCancle(OrderVO orderVO, PayDTO payDTO) throws Exception {
 //		userId == 0 비회원
-		System.out.println("1 : " + orderDTO);
-		System.out.println("1 : " + orderDTO.getImpUid());
-		System.out.println("1 : " + orderDTO.getOrderNum());
+		System.out.println("1 : " + orderVO);
+		System.out.println("1 : " + orderVO.getImpUid());
+		System.out.println("1 : " + orderVO.getOrderNum());
 
-		orderDTO = orderService.adminList(orderDTO);
+		orderVO = orderService.adminList(orderVO);
 
-		System.out.println("2 : " + orderDTO);
-		System.out.println("2 : " + orderDTO.getImpUid());
-		System.out.println("2 : " + orderDTO.getOrderNum());
+		System.out.println("2 : " + orderVO);
+		System.out.println("2 : " + orderVO.getImpUid());
+		System.out.println("2 : " + orderVO.getOrderNum());
 
 		int result1 = orderService.payMentCancle(payDTO);
 		System.out.println("rrr");
 
-		int result = orderService.orderCancle(orderDTO);
+		int result = orderService.orderCancle(orderVO);
 
-		int result2 = memberShipService.pointCancle(orderDTO.getId(), orderDTO.getTotalPrice()); // 일단 보류
-		System.out.println("결제결제금액금액이야?" + orderDTO.getTotalPrice());
-		System.out.println("orderDTO.getTotalPrice()" + orderDTO.getTotalPrice());
+		int result2 = memberShipService.pointCancle(orderVO.getId(), orderVO.getTotalPrice()); // 일단 보류
+		System.out.println("결제결제금액금액이야?" + orderVO.getTotalPrice());
+		System.out.println("orderDTO.getTotalPrice()" + orderVO.getTotalPrice());
 		if (result > 0) {
 			System.out.println("DB 삭제성공");
 		}
@@ -181,48 +177,39 @@ public class PeymentController {
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	@ResponseBody
 	public int paymentComplete(HttpSession session, String imp_uid, String merchant_uid, String totalPrice,
-			@RequestBody OrderDTO orderDTO) throws Exception {
+			@RequestBody OrderVO orderVO) throws Exception {
 		// DB저장 구간
 
-		log.info(" orderDTO >>>> {}", orderDTO);
+		log.info(" orderDTO >>>> {}", orderVO);
 		String token = payService.getToken();
 		log.info(" tocen >>>> {}", token);
 
 		// 결제 완료된 금액
-		String amount = payService.paymentInfo(orderDTO.getImpUid(), token);
+		String amount = payService.paymentInfo(orderVO.getImpUid(), token);
 		log.info("amount >>>> {}", amount);
 
 		int res = 1;
 
-		if (orderDTO.getTotalPrice() != Long.parseLong(amount)) {
-			System.out.println(orderDTO.getTotalPrice());
+		if (orderVO.getTotalPrice() != Long.parseLong(amount)) {
+			System.out.println(orderVO.getTotalPrice());
 			res = 0;
 			// 결제 취소
-			payService.payMentCancle(token, orderDTO.getImpUid(), amount, "결제 금액 오류");
+			payService.payMentCancle(token, orderVO.getImpUid(), amount, "결제 금액 오류");
 			return res;
 		}
 
-		orderService.insert_pay(orderDTO);
+		orderService.insert_pay(orderVO);
 
-		memberShipService.insert_point(orderDTO);
+		memberShipService.insert_point(orderVO);
 
 		return res;
 
 	}
-	
 
-
-	
-	
-	
 	@GetMapping("/complete")
-	public String getOrderComplete(@RequestParam long payNum, OrderDTO orderDTO, HttpSession session, Model model) throws Exception {
-		
-		
-		
-		
-		
-		
+	public String getOrderComplete(@RequestParam long payNum, OrderVO orderVO, HttpSession session, Model model)
+			throws Exception {
+
 		System.out.println("404에러 ");
 		PayDTO payDTO = orderService.getPay(payNum);
 		model.addAttribute("payDTO", payDTO);
@@ -232,19 +219,42 @@ public class PeymentController {
 		System.out.println("pldto >>>>>" + pldto.get(0));
 		model.addAttribute("pldto", pldto.get(0));
 
-		
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
 		model.addAttribute("msVo", msVo);
-		
+
 		String svNum = ((UserVO) session.getAttribute("uvo")).getId();
 		int totalCount = orderService.OrderCount(svNum);
-		model.addAttribute("totalCount", totalCount); 
+		model.addAttribute("totalCount", totalCount);
 		log.info("유저수 >>>>>> {}", totalCount);
+
+		return "/package/OrderList";
+	}
+	
+	
+	
+	
+	@GetMapping("/getList")
+	public String getOrderGetList(@RequestParam long orderNum, HttpSession session, Model model) {
 		
 		
+		
+		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
+		
+		model.addAttribute("msVo", msVo);
+		
+		List<OllPayDTO> ollList = orderService.ollList(orderNum);
+		
+		log.info("ollList >>>>>> {}", ollList);
+
+		model.addAttribute("ollList", ollList);
 		
 		return "/package/complete";
 	}
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "pay_info", method = RequestMethod.GET)
 	@ResponseBody
@@ -288,11 +298,11 @@ public class PeymentController {
 
 	@PostMapping("payMentCancel")
 	@ResponseBody
-	public int payMentCancle(OrderDTO orderDTO) throws Exception {
+	public int payMentCancle(OrderVO orderVO) throws Exception {
 		int result = 0;
-		System.out.println("payMentCancel" + orderDTO);
-		System.out.println("1 : " + orderDTO.getOrderNum());
-		if (orderDTO.getOrderNum() != null) {
+		System.out.println("payMentCancel" + orderVO);
+		System.out.println("1 : " + orderVO.getOrderNum());
+		if (orderVO.getOrderNum() != null) {
 			result = 1;
 		}
 		return result;

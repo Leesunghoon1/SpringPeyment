@@ -69,48 +69,52 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 			<div class="main-item">
 				<div class="item-head">
 					<h2>결제내역</h2>
-					<a><h2>예약내역 리스트 가기</h2></a>
+					<a href="/peyment/OrderList?pageNo=1"><h2>예약내역 리스트 가기</h2></a>
 				</div>
 
 
-				<div class="item-reserve">
-					<div class="item-img">
-						<c:forEach items="${pldto.pfList }" var="pfList">
+			<c:forEach items="${ollList }" var="ollList">
+					<div class="item-reserve">
+						<div class="item-img">
 							<img class="listImg"
-								src="/product_upload/${fn:replace(pfList.pfSaveDir,'-','/')}/${pfList.pfUuid}_${pfList.pfName}">
-						</c:forEach>
-					</div>
+								src="/product_upload/${fn:replace(ollList.pfSaveDir,'-','/')}/${ollList.pfUuid}_${ollList.pfName}">
+						</div>
 
-					<div class="item-info">
-						<div class="no">
-							<dl>
-								<dt>예약번호</dt>
-								<dd>${payDTO.orderNum }</dd>
-							</dl>
+						<div class="item-info">
+							<div class="no">
+								<dl>
+									<dt>예약번호</dt>
+									<dd>${ollList.orderNum }</dd>
+								</dl>
 
-							<dl>
-								<dt>출발일</dt>
-								<dd>${avo.apDeparture }</dd>
-							</dl>
-							<dl>
-								<dt>도착일</dt>
-								<dd>${avo.apArrival }</dd>
-							</dl>
+								<dl>
+									<dt>출발일</dt>
+									<dd>${ollList.apDeparture }</dd>
+								</dl>
+								<dl>
+									<dt>도착일</dt>
+									<dd>${ollList.apArrival }</dd>
+								</dl>
+							</div>
+							<div class="item-info-tit">
+								<strong>${ollList.pkContent }</strong>
+							</div>
+							<div>
+								<a class="prev-aa"
+									href="/peyment/getList?orderNum=${ollList.orderNum}">
+									<button type="button" class="payMentCancel site-btn">
+										<span>결제취소</span>
+									</button>
+
+								</a>
+							</div>
+							<div class="item-price">
+								<strong>${ollList.totalPrice}원</strong>
+							</div>
 						</div>
-						<div>
-							<button type="button" order-num="${payDTO.orderNum}"
-								class="payMentCancel site-btn">
-								<span>예약 취소</span>
-							</button>
-						</div>
-						<div class="item-info-tit">
-							<strong>${packvo.pkContent }</strong>
-						</div>
-						<div class="item-info-pey">
-							<strong>${payDTO.payAmount }</strong><span>원</span>
-						</div>
+
 					</div>
-				</div>
+				</c:forEach>
 			</div>
 
 

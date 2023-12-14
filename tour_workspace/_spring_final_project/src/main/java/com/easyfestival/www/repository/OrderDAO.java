@@ -3,14 +3,18 @@ package com.easyfestival.www.repository;
 import java.util.List;
 import java.util.Map;
 
-import com.easyfestival.www.domain.OrderDTO;
+import org.apache.ibatis.annotations.Param;
+
+import com.easyfestival.www.domain.OllPayDTO;
+import com.easyfestival.www.domain.OrderVO;
 import com.easyfestival.www.domain.PayDTO;
+import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.UserVO;
 
 public interface OrderDAO {
 
-	int insert_pay(OrderDTO orderDTO);
+	int insert_pay(OrderVO orderVO);
 
 	int insert_payinfo(PayDTO payDTO);
 
@@ -18,7 +22,7 @@ public interface OrderDAO {
 	
 	PayDTO getPay(long payNum);
 
-	OrderDTO adminList(OrderDTO orderDTO);
+	OrderVO adminList(OrderVO orderVO);
 
 	int payMentCancle(Long orderNum);
 
@@ -26,12 +30,11 @@ public interface OrderDAO {
 
 	int OrderCount(String svNum);
 
-	List<OrderDTO> getOrder(PagingHandler ph);
+	List<OrderVO> getOrder(@Param("ph") PagingHandler ph, @Param("id") String id);
 
+	List<OllPayDTO> ollOrder(@Param("ph") PagingHandler ph, @Param("id") String id);
 
+	List<OllPayDTO> ollList(long orderNum);
 
-	/*
-	 * public List<Long> getMyOrderList(String id, Long code);
-	 */
-
+	
 }

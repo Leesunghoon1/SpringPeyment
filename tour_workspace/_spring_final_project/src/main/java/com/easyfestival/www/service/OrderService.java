@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ParseException;
@@ -12,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.easyfestival.www.domain.OrderDTO;
+import com.easyfestival.www.domain.OllPayDTO;
+import com.easyfestival.www.domain.OrderVO;
 import com.easyfestival.www.domain.PayDTO;
+import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.repository.OrderDAO;
+import com.easyfestival.www.repository.PackageDAO;
 import com.easyfestival.www.security.UserVO;
 
 @Service
@@ -26,21 +30,22 @@ public class OrderService {
 	
 	@Autowired
 	private PayService payService;
+	
 
-	public int insert_pay(OrderDTO orderDTO) throws Exception{
+	public int insert_pay(OrderVO orderVO) throws Exception{
 		
 		
-		return orderDAO.insert_pay(orderDTO);
+		return orderDAO.insert_pay(orderVO);
 	}
 
-	public int insert_payinfo(PayDTO payDTO) throws Exception{
+	public int insert_payinfo(PayDTO payVO) throws Exception{
 		
-		return orderDAO.insert_payinfo(payDTO);
+		return orderDAO.insert_payinfo(payVO);
 	}
 
-	public PayDTO getLastPay(PayDTO payDTO) throws Exception{
+	public PayDTO getLastPay(PayDTO payVO) throws Exception{
 		
-		return orderDAO.getLastPay(payDTO);
+		return orderDAO.getLastPay(payVO);
 	}
 
 	public PayDTO getPay(long payNum) {
@@ -49,31 +54,31 @@ public class OrderService {
 	}
 
 
-	public OrderDTO adminList(OrderDTO orderDTO) {
+	public OrderVO adminList(OrderVO orderVO) {
 		
-		return orderDAO.adminList(orderDTO);
+		return orderDAO.adminList(orderVO);
 	}
 
-	public int payMentCancle(PayDTO payDTO) {
+	public int payMentCancle(PayDTO payVO) {
 		
-		return orderDAO.payMentCancle(payDTO.getOrderNum());
+		return orderDAO.payMentCancle(payVO.getOrderNum());
 	}
 	
 	@Transactional
-	public int orderCancle(OrderDTO orderDTO) throws Exception {
-		System.out.println("1 : " + orderDTO);
-		System.out.println("2 : " + orderDTO.getOrderNum());
-		System.out.println("3 : " + orderDTO.getImpUid());
-		if(!orderDTO.getImpUid().equals("")) {
+	public int orderCancle(OrderVO orderVO) throws Exception {
+		System.out.println("1 : " + orderVO);
+		System.out.println("2 : " + orderVO.getOrderNum());
+		System.out.println("3 : " + orderVO.getImpUid());
+		if(!orderVO.getImpUid().equals("")) {
 			String token = payService.getToken(); 
-			Long price = orderDTO.getTotalPrice();
+			Long price = orderVO.getTotalPrice();
 			Long refundPrice = price ;
 			System.out.println("Test ss");
-			payService.payMentCancle(token, orderDTO.getImpUid(), refundPrice+"", "환불");
+			payService.payMentCancle(token, orderVO.getImpUid(), refundPrice+"", "환불");
 			System.out.println("Test ss2222");
 		}
 		
-		return orderDAO.orderCancle((orderDTO.getOrderNum()));
+		return orderDAO.orderCancle((orderVO.getOrderNum()));
 	}
 
 	public int OrderCount(String svNum) {
@@ -81,25 +86,21 @@ public class OrderService {
 		return orderDAO.OrderCount(svNum);
 	}
 
-	public List<OrderDTO> getOrder(PagingHandler ph) {
+	public List<OrderVO> getOrder(PagingHandler ph, String svNum) {
 		// TODO Auto-generated method stub
-		return orderDAO.getOrder(ph);
+		return orderDAO.getOrder(ph, svNum);
 	}
 
+	public List<OllPayDTO> ollOrder(PagingHandler ph, String svNum) {
+		// TODO Auto-generated method stub
+		return orderDAO.ollOrder(ph, svNum);
+	}
 
+	public List<OllPayDTO> ollList(long orderNum) {
+		// TODO Auto-generated method stub
+		return orderDAO.ollList(orderNum);
+	}
 
-	
-	/*
-	 * //회원의 주문 목록 // OrderService.java public Map<String, List<Long>>
-	 * getMyOrderList(String id, List<Long> limitList) throws Exception {
-	 * Map<String, List<Long>> orderMap = new HashMap<>();
-	 * 
-	 * for (Long code : limitList) { List<Long> orderList =
-	 * orderDAO.getMyOrderList(id, code); orderMap.put(String.valueOf(code),
-	 * orderList); }
-	 * 
-	 * return orderMap; }
-	 */
 
 
 }

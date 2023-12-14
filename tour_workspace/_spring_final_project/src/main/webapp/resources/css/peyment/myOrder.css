@@ -7,7 +7,6 @@ body {
 }
 
 .main-container {
-	margin: 0 auto;
 	padding: 110px ;
 	min-height: 400px;
 	box-sizing: border-box;
@@ -99,11 +98,12 @@ body {
 
 .item-info-tit{
 	margin-top: 10px;
+	margin-bottom: 40px;
 }
 
 .item-info {
 	margin-left: 20px;
-	width: 65%;
+	width: 100%;
 }
 
 .text-head {
@@ -202,6 +202,10 @@ body {
 	background-color: #e9f1f8;
 }
 
+.panel-item{
+	margin-bottom: 100px;
+}
+
 .aa{
 	border: 0;
 	vertical-align: middle;
@@ -228,6 +232,11 @@ body {
 	border-radius: 10px;
 	border: solid #666;
 	margin-left: 130px;
+}
+
+.item-price{
+	width: 150px;
+	margin-bottom: 20px;
 }
 
 .paging-container{

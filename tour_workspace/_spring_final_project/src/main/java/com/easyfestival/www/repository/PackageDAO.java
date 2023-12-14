@@ -47,8 +47,6 @@ public interface PackageDAO {
 
 	List<ProductListDTO> getOrder(PagingHandler ph);
 
-	
-
 	//List<ProductListDTO> getDTOList(String pkContinent);
 
 	//ProductListDTO getDTO(String pkContinent);

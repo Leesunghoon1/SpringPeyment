@@ -19,5 +19,6 @@ public class PackageVO {
 	private long pkPrice; // 패키지 가격
 	private String pkContinent; // 패키지 대륙
 	private String pkContent; // 패키지 내용
-
+	
+	
 }

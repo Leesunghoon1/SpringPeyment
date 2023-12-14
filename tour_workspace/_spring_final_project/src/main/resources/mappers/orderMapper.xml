@@ -7,7 +7,7 @@
 
 
 	<!-- 주문 정보 생성 -->
-	<insert id="insert_pay" parameterType="orderDTO">
+	<insert id="insert_pay" parameterType="orderVO">
 		insert into
 		pay_order_user(order_num, pk_no, id, order_date, total_price,
 		imp_uid,
@@ -42,7 +42,7 @@
 		= #{payNum}
 	</select>
 
-	<delete id="orderCancle" parameterType="orderDTO">
+	<delete id="orderCancle" parameterType="orderVO">
 		delete from
 		pay_order_user WHERE order_num=#{orderNum}
 	</delete>
@@ -52,25 +52,47 @@
 		WHERE order_num=#{orderNum}
 	</delete>
 
-	<select id="getOrder" parameterType="orderDTO"
-		resultType="orderDTO">
+	<select id="getOrder" parameterType="orderVO"
+		resultType="orderVO">
 		SELECT *
-		from pay_order_user
-		limit #{limitStart}, #{listQty}
+		from pay_order_user where id = #{id}
+		limit
+		#{ph.limitStart}, #{ph.listQty}
 	</select>
 
 	<select id="OrderCount" resultType="int">
-	select count(id) from pay_order_user;
+		select count(id) from
+		pay_order_user;
+	</select>
+
+
+	<select id="ollOrder" resultType="OllPayDTO">
+		SELECT * FROM pay_order_user o
+		JOIN package p ON o.pk_no = p.pk_no
+		JOIN airplane a ON a.pk_no =
+		o.pk_no
+		JOIN hotel h ON h.pk_no = o.pk_no
+		JOIN product_file pf ON
+		pf.pk_no = o.pk_no
+		WHERE o.id = #{id}
+		limit #{ph.limitStart}, #{ph.listQty}
 	</select>
 	
-	
 
-<!-- <select id="getMyOrderList" parameterType="map" resultType="OrderDTO">
-    SELECT *
-    FROM pay_order_user o
-    JOIN package PK ON o.pkNo = PK.pkNo
-    WHERE o.orderNum = #{orderNum}
-</select>
+	<select id="ollList" resultType="OllPayDTO">
+		SELECT * FROM pay_order_user o
+		JOIN package p ON o.pk_no = p.pk_no
+		JOIN airplane a ON a.pk_no =
+		o.pk_no
+		JOIN hotel h ON h.pk_no = o.pk_no
+		JOIN product_file pf ON
+		pf.pk_no = o.pk_no
+		WHERE o.order_num = #{orderNum}
+	</select>
 
- -->
+
+
+	<!-- <select id="getMyOrderList" parameterType="map" resultType="OrderDTO"> 
+		SELECT * FROM pay_order_user o JOIN package PK ON o.pkNo = PK.pkNo WHERE 
+		o.orderNum = #{orderNum} </select> -->
 </mapper>

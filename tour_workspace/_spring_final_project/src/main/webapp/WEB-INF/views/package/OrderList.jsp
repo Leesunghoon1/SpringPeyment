@@ -37,91 +37,102 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 		<div class="main-body">
 			<div class="main-item">
 				<div class="item-head">
-					<h2>예약내역</h2>
+					<h2>결제내역</h2>
 				</div>
-				<div class="item-reserve">
-					<div class="item-img">
-						<c:forEach items="${pldto.pfList }" var="pfList">
+				<c:forEach items="${ollList }" var="ollList">
+					<div class="item-reserve">
+						<div class="item-img">
 							<img class="listImg"
-								src="/product_upload/${fn:replace(pfList.pfSaveDir,'-','/')}/${pfList.pfUuid}_${pfList.pfName}">
-						</c:forEach>
-					</div>
+								src="/product_upload/${fn:replace(ollList.pfSaveDir,'-','/')}/${ollList.pfUuid}_${ollList.pfName}">
+						</div>
 
-					<div class="item-info">
-						<div class="no">
-							<dl>
-								<dt>예약번호</dt>
-								<dd>${payDTO.orderNum }</dd>
-							</dl>
+						<div class="item-info">
+							<div class="no">
+								<dl>
+									<dt>예약번호</dt>
+									<dd>${ollList.orderNum }</dd>
+								</dl>
 
-							<dl>
-								<dt>출발일</dt>
-								<dd>${avo.apDeparture }</dd>
-							</dl>
-							<dl>
-								<dt>도착일</dt>
-								<dd>${avo.apArrival }</dd>
-							</dl>
+								<dl>
+									<dt>출발일</dt>
+									<dd>${ollList.apDeparture }</dd>
+								</dl>
+								<dl>
+									<dt>도착일</dt>
+									<dd>${ollList.apArrival }</dd>
+								</dl>
+							</div>
+							<div class="item-info-tit">
+								<strong>${ollList.pkContent }</strong>
+							</div>
+							<div>
+								<a class="prev-aa"
+									href="/peyment/getList?orderNum=${ollList.orderNum}">
+									<button type="button" class="payMentCancel site-btn">
+										<span>상세보기</span>
+									</button>
+
+								</a>
+							</div>
+							<div class="item-price">
+								<strong>${ollList.totalPrice}원</strong>
+							</div>
 						</div>
-						<div>
-						<a class="prev-a" href="/peyment/detail?pkNo=${pkNoVal}&userCount=${userCount}">
-							<button type="button" class="payMentCancel site-btn">
-								<span>결제 하기</span>
-							</button>
-						
-						</a>
-						</div>
-						<div class="item-info-tit">
-							<strong>${packvo.pkContent }</strong>
-						</div>
+
 					</div>
-				</div>
+				</c:forEach>
 			</div>
+
 			<!-- 페이지네이션 영역 ${ph.prev ? '' : 'disabled'} -->
+
 			<div class="paging-container">
 				<a class="prev-a" href="/peyment/OrderList?pageNo=${ph.pageStart-1}"><i
 					id="${ph.prev eq false ? 'disable' : 'enable'}"
 					class="fa-solid fa-circle-chevron-left"></i></a>
 				<c:forEach begin="${ph.pageStart}" end="${ph.pageEnd}" var="i">
-					<a href="//peyment/OrderList=${i}"><span
+					<a href="/peyment/OrderList?pageNo=${i}"><span
 						id="${ph.pageNo eq i ? 'selectNo' : ''}">${i}</span></a>
 				</c:forEach>
-				<a class="next-a" href="//peyment/OrderList=${ph.pageEnd+1}"><i
+				<a class="next-a" href="/peyment/OrderList?pageNo=${ph.pageEnd+1}"><i
 					id="${ph.next eq false ? 'disable' : 'enable'}"
 					class="fa-solid fa-circle-chevron-right"></i></a>
 			</div>
 
-
-
 		</div>
-		<div class="panel-item">
-			<div class="tit">
-				<h2 class="main-item">항공권 예약 내역</h2>
-			</div>
-			<div class="banner-box">
-				<div class="text-head">
-					온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
-						src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
-						alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다. <a><button
-							type="button" class="btn-gradient-bottom">
-							<span>나의 항공권</span>
-						</button></a>
 
-				</div>
+
+
+
+	</div>
+	<div class="panel-item">
+		<div class="tit">
+			<h2 class="main-item">항공권 예약 내역</h2>
+		</div>
+		<div class="banner-box">
+			<div class="text-head">
+				온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
+					src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
+					alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다. <a><button
+						type="button" class="btn-gradient-bottom">
+						<span>나의 항공권</span>
+					</button></a>
+
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		let pkVo = `<c:out value="${payDTO}" />`;
 		let prev = `<c:out value="${ph.prev}" />`;
 		let next = `<c:out value="${ph.next}" />`;
 	</script>
 
-	<script src="/resources/js/peyment/myOrder.js">
-		
-	</script>
 	<script type="text/javascript" src="/resources/js/pagenation.js">
 		
 	</script>
+	<script src="/resources/js/peyment/myOrder.js">
+		
+	</script>
+
 </body>
 </html>

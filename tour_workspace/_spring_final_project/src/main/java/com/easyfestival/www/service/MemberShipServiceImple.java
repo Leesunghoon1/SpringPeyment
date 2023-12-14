@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.easyfestival.www.domain.MemberShipVO;
-import com.easyfestival.www.domain.OrderDTO;
+import com.easyfestival.www.domain.OrderVO;
 import com.easyfestival.www.repository.MemberShipDAO;
 import com.easyfestival.www.security.UserVO;
 
@@ -19,7 +19,7 @@ public class MemberShipServiceImple implements MemberShipService {
 
 	@Override
 	@Transactional
-	public void insert_point(OrderDTO orderDTO) {
+	public void insert_point(OrderVO orderDTO) {
 	    // 1. 결제 금액에 따라 포인트 계산
 	    long point = calculatePoints(orderDTO.getTotalPrice());
 
