@@ -50,13 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/peyment/*")
 public class PeymentController {
 
-	@Value("7820725586500628")
-	private String apiKey;
 
-	@Value("P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr")
-	private String secretKey;
-
-	private IamportClient api = new IamportClient(apiKey, secretKey);
 
 	@Autowired
 	private PayService payService;
@@ -70,12 +64,17 @@ public class PeymentController {
 	@Autowired
 	private MemberShipService memberShipService;
 
+<<<<<<< HEAD
 	public PeymentController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
 		this.api = new IamportClient("7820725586500628",
 				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
 	}
 
+=======
+
+	
+>>>>>>> a8db07770eb4cc5d6c334accfac3c15cc5a3622c
 	@GetMapping("/detail")
 	public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount,
 			HttpSession session, Model model) {
