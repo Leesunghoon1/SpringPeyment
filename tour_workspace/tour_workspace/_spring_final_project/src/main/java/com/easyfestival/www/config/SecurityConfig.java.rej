@@ -1,0 +1,9 @@
+diff a/_spring_final_project/src/main/java/com/easyfestival/www/config/SecurityConfig.java b/_spring_final_project/src/main/java/com/easyfestival/www/config/SecurityConfig.java	(rejected hunks)
+@@ -58,6 +58,7 @@
+ 		http.csrf().disable();
+ 		// http 승인 요청
+ 		http.authorizeRequests().antMatchers("/user/list").hasRole("ADMIN") // 관리자 권한
++		.antMatchers("/","/resources/**","/user/join" ,"/user/login","/user/checkId/*","/package/**","/product/**","/product_upload/**").permitAll() // 모든 이용자 권한
+ 		.anyRequest().authenticated(); // => 인증된 사용자만 처리
+ 		
+ 		// 커스텀 로그인 페이지 구성

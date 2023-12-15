@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+body{
+    margin: 0;
+    padding: 0;
+}
+.air-all-container{
+    width: 100%;
+    
+}
+
+.air-reservation-div{
+    width: 100%;
+    height: 1000px;
+    background-image: url(/resources/image/list-image/유럽.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+.air-reservation-info{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 40%;
+    left: 50%;
+    border: 1px solid black;
+    background-color: white;
+    width: 1200px;
+    border-radius: 10px;
+}
+.air-info{
+    padding: 32px 48px;
+}
+.air-tranport{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+.air-operation-info  a{
+    color: #494949;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 16px;
+}
+
+.checked{
+    border-bottom: 3.5px solid red;
+}
+.fa-solid{
+    font-size: 20px;
+    color: #494949;
+    cursor: pointer;
+    padding-right: 20px;
+}
+
+.travel-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    margin: 0;
+}
+.travel-info  li{
+    list-style: none;  
+}
+
+.travel-info  li input{
+    cursor: pointer;
+    width: 340px;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 32px;
+    font-weight: 700;
+    border: none;
+}
+
+.travel-peple-count{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px 0 0;
+}
+.trip-peple-count{
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.47);
+}
+.peple-count{
+    margin: 8px 0 0;
+    font-weight: 700;
+    font-size: 24px;
+}
+.search-btn{
+    font-size: 24px;
+    color: #fff;
+    background-color: #E53E30;
+    padding: 18px 0
+    ;
+    width: 200px;
+    display: block;
+    text-align: center;
+    border-radius: 9px;
+    font-weight: 700;
+}
+.world-map{
+    background-image: url(/resources/image/list-image/세계지도.png);
+    width: 100%;
+    height: 800px;
+    background-size: cover;
+}
+.world-map strong{
+    font-size: 48px;
+    color: #e53e30;
+    font-weight: 600;
+}
