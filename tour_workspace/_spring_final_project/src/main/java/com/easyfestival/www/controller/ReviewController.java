@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.List;
 import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +16,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/review")
+@RequestMapping("/review/*")
 public class ReviewController 
 {
 	private final String UPLOAD_DIR="C:\\upload_file\\review";
@@ -97,14 +99,29 @@ public class ReviewController
 	@GetMapping("/reviewList")
 	public String reviewList(Model m,pagingVO pgvo)
 	{
+		List<reviewVO>list =rsv.list(pgvo);
+		for(int i=0;i<list.size();i++)
+		{
+			while(list.get(i).getContent().contains("<img"))
+			{
+				String text=list.get(i).getContent();
+				String substr=text.substring(text.indexOf("<img"), text.indexOf("\">")+2);
+				String result = text.replaceAll(substr,"");
+				log.info("자른 결과:"+result);
+				list.get(i).setContent(result);
+				String src=substr.substring(substr.indexOf("\"")+1,substr.indexOf("\">"));
+				list.get(i).setThumbnail(src);
+			}
+		}
 		
-		m.addAttribute("list", rsv.list(pgvo));
+		m.addAttribute("list",list);
 		int totalCount=rsv.getTotalCount(pgvo);
 		ReviewPagingHandler ph=new ReviewPagingHandler(pgvo, totalCount);
 		m.addAttribute("ph", ph);
 		
 		return "/review/ReviewList";
 	}
+	
 	@GetMapping("/reviewDetail")
 	public String reviewDetail(Model m,@RequestParam("rvNo")int rvNo,HttpServletRequest request, RedirectAttributes re)
 	{
@@ -112,14 +129,18 @@ public class ReviewController
 		UserVO uvo=(UserVO)ses.getAttribute("uvo");
 		log.info("uvo는???"+uvo);
 		reviewVO rvo=rsv.detail(rvNo);
-		if(uvo.getId().equals(rvo.getId()))
+		if(rvo.getSecret()=='Y')
 		{
-			isOk=rsv.readCountUp(rvNo);
-			m.addAttribute("rvo", rvo);
-			return "/review/ReviewDetail";
+			if(!uvo.getId().equals(rvo.getId()))
+			{
+				re.addFlashAttribute("msg","secret");
+				return "redirect:/review/reviewList";
+			}
 		}
-		re.addFlashAttribute("msg","secret");
-		return "redirect:/review/reviewList";
+		isOk=rsv.readCountUp(rvNo);
+		m.addAttribute("rvo", rvo);
+		
+		return "/review/ReviewDetail";
 		
 	}
 	@GetMapping("/remove")
@@ -169,11 +190,36 @@ public class ReviewController
 	@GetMapping("/BestReview")
 	public String BestReview(Model m,pagingVO pgvo)
 	{
-		m.addAttribute("list", rsv.bestList(pgvo));
+		List<reviewVO>list =rsv.bestList(pgvo);
+		
+		for(int i=0;i<list.size();i++)
+		{
+			while(list.get(i).getContent().contains("<img"))
+			{
+				String text=list.get(i).getContent();
+				String substr=text.substring(text.indexOf("<img"), text.indexOf("\">")+2);
+				String result = text.replaceAll(substr,"");
+				log.info("자른 결과:"+result);
+				list.get(i).setContent(result);
+				String src=substr.substring(substr.indexOf("\"")+1,substr.indexOf("\">"));
+				list.get(i).setThumbnail(src);
+			}
+		}
+		
+		m.addAttribute("list", list);
 		int besttotalCount=rsv.getbestTotalCount(pgvo);
 		ReviewPagingHandler ph=new ReviewPagingHandler(pgvo, besttotalCount);
 		m.addAttribute("ph", ph);
 		return "/review/ReviewList";
+	}
+	
+	@GetMapping(value = "/cnt/{rvNo}",produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String>getLikeCount(@PathVariable("rvNo")int rvNo)
+	{
+		log.info("getLikeCount 들어옴");
+		int cnt=rsv.getLikeCount(rvNo);
+		log.info("cnt는??"+cnt);
+		return cnt>=0 ? new ResponseEntity<String>(String.valueOf(cnt),HttpStatus.OK):new ResponseEntity<String>("-1",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 

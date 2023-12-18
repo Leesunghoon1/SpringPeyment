@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/resources/css/tmpCss.css" rel="stylesheet">
+<link href="/resources/css/review/ReviewRegister.css" rel="stylesheet">
 
 <!-- include libraries(jQuery, bootstrap) -->
 <link
@@ -24,31 +24,31 @@
 
 </head>
 <body>
-	<div class="all-container">
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 		<!-- <hr> -->
 		<form action="/review/reviewRegister" method="post">
-			<table>
-				<tr>
-					<th>리뷰 제목</th>
-					<td><input type="text" name="title"></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type="text" name="id" value="${uvo.id}"></td>
-				</tr>
-				<tr>
-					<th>비밀글</th>
-					<td><input type="checkbox" name="secret" value="Y"></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea id="summernote" name="content"></textarea></td>
-				</tr>
-			</table>
-			<button type="submit">등록</button>
+			<div class="title-div">
+				<div>제목</div>
+				<input type="text" name="title" class="inp">
+			</div>
+			
+			<div class="write-div">
+				<textarea id="summernote" name="content"></textarea>
+			</div>
+			
+			<input type="hidden" name="id" value="${uvo.id}">
+			
+			<div class="secret-div">
+				<input type="checkbox" name="secret" value="Y">
+				<span>비밀글로 작성하시겠습니까?</span>
+			</div>
+		
+			<button type="submit" class="submit">작성</button>
 		</form>
-	</div>
-	<script type="text/javascript" src="/resources/js/summernote.js"></script>
+		
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+	<script type="text/javascript" src="/resources/js/review/summernote.js"></script>
 	<script type="text/javascript">
 		function uploadImage(file) {
 			var formData = new FormData();

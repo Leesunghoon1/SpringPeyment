@@ -9,19 +9,23 @@ import com.easyfestival.www.domain.OrderVO;
 import com.easyfestival.www.repository.MemberShipDAO;
 import com.easyfestival.www.security.UserVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MemberShipServiceImple implements MemberShipService {
 
 	@Autowired
 	private MemberShipDAO mdao;
 
 	// MemberShipServiceImple.java
+	
 
 	@Override
 	@Transactional
 	public void insert_point(OrderVO orderDTO) {
 	    // 1. 결제 금액에 따라 포인트 계산
-	    long point = calculatePoints(orderDTO.getTotalPrice());
+		long point = calculatePoints(orderDTO.getTotalPrice());
 
 	    // 2. 적립된 포인트를 데이터베이스에 저장
 	    mdao.savePoints(orderDTO.getId(), point, orderDTO.getTotalPrice());
@@ -79,39 +83,33 @@ public class MemberShipServiceImple implements MemberShipService {
 	    if (point != null && point > 0) {
 	        mdao.UpdateMemberShip(id, point);
 	    }
-	    // 이후 추가적인 로직이 있다면 처리할 수 있습니다.
-
-	    // 업데이트 이후의 멤버십 정보를 조회하거나 반환하는 로직 추가 가능
 
 	    return 1;
 	}
 
 
 
-	@Override
-	@Transactional
-	public int pointCancle(String id, Long totalPrice) {
-		MemberShipVO memberShipVO = mdao.getmemberShip(id);
-	    if (memberShipVO == null) {
-	        // 멤버십 정보가 없으면 처리 중단
-	        return 0;
-	    }
-
-	    // 2. 환불할 포인트 및 금액 계산
-	    long canceledPoints = calculatePoints(totalPrice);
-	    
-	    long point = memberShipVO.getAccumulatedPoint() - canceledPoints;
-	    long totalPirce = Math.max(0,memberShipVO.getTotalPurchase() - totalPrice);
-
-	    // 3. 데이터베이스에서 포인트 및 금액 환불
-	    mdao.cancelPoints(id, point);
-	    mdao.updateTotalPurchase(id, totalPirce); // 예시: 데이터베이스에서 총 구매 금액 업데이트
-
-	    // 4. 이후 추가적인 로직이 있다면 처리
-
-	    return 1;
-	}
-	
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public int pointCancle(String id, Long totalPrice) {
+	 * MemberShipVO memberShipVO = mdao.getmemberShip(id); if (memberShipVO == null)
+	 * { // 멤버십 정보가 없으면 처리 중단 return 0; }
+	 * 
+	 * // 2. 환불할 포인트 및 금액 계산 long canceledPoints = calculatePoints(totalPrice);
+	 * 
+	 * long point = memberShipVO.getAccumulatedPoint() - canceledPoints; long
+	 * totalPirce = Math.max(0,memberShipVO.getTotalPurchase() - totalPrice);
+	 * 
+	 * log.info("point--- ()", point + "totalPirce --- ()", totalPirce);
+	 * 
+	 * // 3. 데이터베이스에서 포인트 및 금액 환불 mdao.cancelPoints(id, point);
+	 * mdao.updateTotalPurchase(id, totalPirce); // 예시: 데이터베이스에서 총 구매 금액 업데이트
+	 * 
+	 * // 4. 이후 추가적인 로직이 있다면 처리
+	 * 
+	 * return 1; }
+	 */
 
 	private long calculatePoints(Long totalPrice) {
 	    // 포인트 계산 로직
@@ -125,6 +123,48 @@ public class MemberShipServiceImple implements MemberShipService {
 	public void insertId(String id) {
 		mdao.insertId(id);
 		
+	}
+
+	@Override
+	@Transactional
+	public int pointCancle(OrderVO orderVO) {
+		// TODO Auto-generated method stub
+		MemberShipVO memberShipVO = mdao.getmemberShip(orderVO.getId());
+	    if (memberShipVO == null) {
+	        // 멤버십 정보가 없으면 처리 중단
+	        return 0;
+	    }
+
+	    // 2. 환불할 포인트 및 금액 계산
+	    
+	    long pointA = orderVO.getSayongPointeu();
+	
+	    
+	
+	    
+	    // 3. 데이터베이스에서 포인트 및 금액 환불
+	    mdao.cancelPoints(orderVO.getId(), pointA);
+	
+
+	    // 4. 이후 추가적인 로직이 있다면 처리
+
+	    return 1;
+	}
+
+	@Override
+	public int ollCancle(OrderVO orderVO) {
+		
+		long totalPirce2 = orderVO.getTotalPrice();
+		
+		
+		long point = calculatePoints(orderVO.getTotalPrice());
+		
+	    mdao.updateTotalPurchase(orderVO.getId(), totalPirce2); // 예시: 데이터베이스에서 총 구매 금액 업데이트
+	    
+	    System.out.println("point ++++" + point);
+	    
+	    mdao.pointCancle(point, orderVO.getId());
+	    return 1;
 	}
 
 }

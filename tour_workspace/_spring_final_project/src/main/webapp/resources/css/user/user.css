@@ -187,7 +187,73 @@
 	height: 100%;
 	font-size: 20px;
 }
-
+.search-id-pwd{
+	display: flex;
+	gap:0.5rem;
+}
+.search-id, .search-pwd{
+	cursor:pointer;
+}
+.search-modal{
+	/* 아이디, 비밀번호찾기 모달 */
+	position: relative;
+	position:fixed;
+	top:30%;
+	left:50%;
+	transform:translate(-50%, -30%);
+	border:1px solid #1c1c1c;
+	width:450px;
+	display: none;
+	flex-direction: column;
+	align-items:center;
+	padding-top: 1rem;
+	background-color: #fff;
+    box-shadow: 0 0 5px 3.5px rgba(0, 0, 0, .5);
+}
+.search-modal #close-btn{
+	font-size:2rem;
+	position: absolute;
+	right:10px;
+	top:10px;
+	cursor: pointer;
+}
+#searchIdBtn, #searchPwdBtn{
+	cursor: pointer;
+}
+.search-modal h2{
+	margin: 0;
+}
+.search-modal>div:not(:nth-child(6)){
+	width: 90%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+.search-modal>div:nth-child(6){
+	margin-top:1rem;
+	width: 100%;
+	height: 45px;
+}
+.search-modal div:nth-child(2),.search-modal div:nth-child(4){
+	display: flex;
+	justify-content: flex-start;
+}
+.search-modal input{
+	width: 100%;
+	height: 100%;
+	border:1px solid #1c1c1c;
+	box-sizing: border-box;
+	padding-left:20px; 
+}
+.search-modal button{
+	width: 100%;
+	height: 100%;
+	border:none;
+	font-size:1.1rem;
+	color:#fff;
+	box-sizing: border-box;
+	background-color: #1c1c1c;
+}
 /* login-fail-modal*/
 .loginFail-background{
 	/* 로그인 실패시 백그라운드 색상 변경 */
@@ -246,6 +312,237 @@
 	cursor: pointer;
 	padding: 0;
 }
+
+
+/* user-detail 마이페이지 */
+.detail-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 15rem;
+	margin-bottom: 15rem;
+}
+.user-infomation{
+	display: flex;
+	flex-direction: column;
+	width: 750px;
+	
+}
+.user-infomation>div{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+.user-infomation>div:nth-child(1)>div{
+	display: flex;
+	align-items: center;
+}
+.user-infomation>div:nth-child(1) i{
+	margin-left: 0.3rem;
+}
+.user-infomation>div:nth-child(1) span{
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	color: #1c1c1c;
+	font-weight: 700;
+}
+.user-infomation>div>span{
+	display: flex;
+	align-items: center;
+}
+.user-infomation>div:nth-child(2)>div{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 30%;
+	height: 100px;
+	background-color: #1c1c1c;
+	color: #fff;
+	border-radius: 30px;
+	gap: 1rem;
+}
+.user-infomation>div:nth-child(2)>div>span{
+	font-size: 1.1rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+}
+#p{
+	font-size: 1.01rem;
+	margin-left: 0.3rem;
+}
+.user-detail-top{
+	width: 100%;
+	background-color: aliceblue;
+	font-size: 1.1rem;
+	padding: 2rem;
+	box-sizing: border-box;
+}
+.user-detail-top>div{
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem;
+}
+.user-detail-mid{
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+	width: 1200px;
+	height: 300px;
+	display: flex;
+	justify-content: space-between;
+}
+.user-package-reservation, .user-airplane-reservation{
+	width: 49%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.user-package-reservation>:first-child, .user-airplane-reservation>:first-child{
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.user-detail-bottom{
+	width: 1200px;
+	height: 300px;
+	display: flex;
+	justify-content: space-between;
+}
+.user-wishlist, .user-inquiryHistory{
+	width: 49%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.user-wishlist>:first-child, .user-inquiryHistory>:first-child{
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.my-list{
+	width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;	
+    justify-content: center;
+	border: 1px solid #1c1c1c;
+    box-sizing: border-box;
+}
+.list-items{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-direction: column;
+	padding: 30px 0 1rem 0;
+	box-sizing: border-box;
+}
+.list-items>.fixed-title{
+	/* 문의유형, 제목 고정 */
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 30px;
+	background-color: #e5e5e5;
+	display: flex;
+	align-items: center;
+	font-weight: 700;
+}
+.list-items>.qa-list{
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 1rem;
+}
+/* 내역 고정 메뉴 */
+.inquiry-type{
+	/* 문의유형 */
+	width: 20%;
+	height: 100%;
+}
+.inquiry-title{
+	/* 문의제목 */
+	width: 65%;
+	height: 100%;
+}
+.inquiry-title a{
+	color : inherit;
+}
+.inquiry-answer{
+	/* 문의답변 */
+	width: 15%;
+	height: 100%;
+}
+.inquiry-type,.inquiry-title, .inquiry-answer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.answer-yes{
+	/* 답변완료 글자색 */
+	color: #1640D6;
+	font-weight: 700;
+}
+
+
+.noHistory{
+	/* 내역 없는경우 div */
+	gap: 1rem;
+	display: flex;
+	font-size: 1.2rem;
+}
+
+.user-category{
+	background-color: #1c1c1c;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	box-sizing: border-box;
+	top: 100px;
+	right: 0;
+	padding: 0.5rem;
+}
+.user-category>div{
+	width: 100px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.user-category>div>a{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	gap:0.5rem;
+}
+.user-category>div>a>span{
+	color: #e1e1e1;
+}
+
 
 
 /* user-modify */

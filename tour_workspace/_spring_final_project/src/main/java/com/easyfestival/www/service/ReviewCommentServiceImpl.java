@@ -35,4 +35,9 @@ public class ReviewCommentServiceImpl implements ReviewCommentService
 		return rcdao.ModifyComment(rcvo);
 	}
 
+	@Override
+	public int getCommentCount(int rvNo) {
+		return rcdao.getCommentCount(rvNo);
+	}
+
 }

@@ -57,6 +57,16 @@ public class UserServiceImpl implements UserService{
 		return udao.getUserList(ph);
 	}
 
+	@Override
+	public List<AuthVO> selectAuths(String username) {
+		return udao.selectAuths(username);
+	}
+
+	@Override
+	public UserVO getId(String name, String email) {
+		return udao.getId(name, email);
+	}
+
 	
 	
 }

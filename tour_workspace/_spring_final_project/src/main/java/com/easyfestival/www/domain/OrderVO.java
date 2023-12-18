@@ -24,7 +24,7 @@ public class OrderVO {
 	private Long totalPrice;
 	private String impUid;
 	private Long userCount;
-	
+	private Long sayongPointeu;
 	
 	
 }

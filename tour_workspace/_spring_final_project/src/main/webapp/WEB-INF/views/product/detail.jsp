@@ -232,7 +232,7 @@
 	         	<a href="/product/remove?pkNo=${packvo.pkNo }">상품삭제</a>
 	         </div>
          </div>
-      </div>	
+      </div>
    </div>
 	
 	
@@ -250,7 +250,7 @@
 	console.log(country);
 	console.log(pkNoVal);
 </script>
-<script type="text/javascript" src="/resources/js/product/product_price.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/product/product_price.js"></script> -->
 <script type="text/javascript" src="/resources/js/product/product_modal.js"></script>
 </body>
 </html>

@@ -60,10 +60,10 @@
 							<a href="/product/list?pkContinent=아메리카">아메리카</a>
 						</span>	
 						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
+							<a href="http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList">테스트2</a>
 						</span>	
 						<span>
-							<a href="/product/list?pkContinent=아메리카">아메리카</a>
+							<a href="http://openapi.airport.co.kr/service/rest/AirportCodeList/getAirportCodeList?ServiceKey=ijQL0nu774ZPOX%2B4O4A1liiipYbCGKpoAGKZfExa6pDSbgqb4r1kI33P%2Byoz1pZ3MuNh4YuLM8SH%2BHI57KBwEQ%3D%3D&pageNo=1">테스트해보기]</a>
 						</span>	
 																									
 					</div>

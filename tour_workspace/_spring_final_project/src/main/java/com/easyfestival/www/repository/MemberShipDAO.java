@@ -23,4 +23,6 @@ public interface MemberShipDAO {
 
 	void insertId(String id);
 
+	void pointCancle(@Param("point") long point, @Param("id") String id);
+
 }

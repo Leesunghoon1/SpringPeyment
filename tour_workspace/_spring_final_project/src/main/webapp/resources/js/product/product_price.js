@@ -1,12 +1,11 @@
-/**
- * 
- */
-let reservation = document.querySelector('.option-submit-button');
-let peple = document.getElementById('pepleCnt');
-let btn = document.querySelectorAll('.option-button');
+var xhr = new XMLHttpRequest();
+var url = 'http://openapi.airport.co.kr/service/rest/AirportCodeList/getAirportCodeList'; /*URL*/
+var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'서비스키'; /*Service Key*/
+xhr.open('GET', url + queryParams);
+xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+    }
+};
 
-    btn.forEach(e=>{
-        e.addEventListener('click',()=>{
-            console.log('peple-count >'+ peple.value);
-        })
-    })
+xhr.send('');

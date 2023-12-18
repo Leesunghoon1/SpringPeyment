@@ -22,7 +22,7 @@ placeAll.addEventListener('click',()=>{
     }else if(placeAll.classList.contains("exit")){
         placeAll.classList.remove('exit');
 
-        placeDiv.style.height = '0' ;
+        placeDiv.style.height = '0';
         placeDiv.style.transition = '0.7s';
         placeDiv.style.borderTop = "none";
 

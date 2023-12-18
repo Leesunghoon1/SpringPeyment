@@ -11,9 +11,9 @@
 		insert into
 		pay_order_user(order_num, pk_no, id, order_date, total_price,
 		imp_uid,
-		user_count)
+		user_count, sayong_pointeu)
 		values(#{orderNum}, #{pkNo}, #{id}, #{orderDate},
-		#{totalPrice}, #{impUid}, #{userCount})
+		#{totalPrice}, #{impUid}, #{userCount}, #{sayongPointeu})
 
 	</insert>
 
@@ -22,9 +22,9 @@
 	<insert id="insert_payinfo" parameterType="payDTO">
 		insert into sc_pay
 		(id, order_num, pay_method, pay_date, product_name,
-		pay_amount, pk_no)
+		pay_amount, pk_no, sayong_pointeu)
 		values (#{id}, #{orderNum}, #{payMethod}, #{payDate}, #{productName},
-		#{payAmount}, #{pkNo})
+		#{payAmount}, #{pkNo}, #{sayongPointeu})
 	</insert>
 
 
@@ -52,6 +52,13 @@
 		WHERE order_num=#{orderNum}
 	</delete>
 
+	<select id="adminList" parameterType="orderVO"
+		resultType="orderVO">
+		SELECT *
+		from pay_order_user
+		WHERE order_num=#{orderNum}
+	</select>
+
 	<select id="getOrder" parameterType="orderVO"
 		resultType="orderVO">
 		SELECT *
@@ -59,6 +66,8 @@
 		limit
 		#{ph.limitStart}, #{ph.listQty}
 	</select>
+
+
 
 	<select id="OrderCount" resultType="int">
 		select count(id) from
@@ -75,9 +84,10 @@
 		JOIN product_file pf ON
 		pf.pk_no = o.pk_no
 		WHERE o.id = #{id}
-		limit #{ph.limitStart}, #{ph.listQty}
+		limit #{ph.limitStart},
+		#{ph.listQty}
 	</select>
-	
+
 
 	<select id="ollList" resultType="OllPayDTO">
 		SELECT * FROM pay_order_user o

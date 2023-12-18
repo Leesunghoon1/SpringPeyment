@@ -12,7 +12,6 @@ import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.PlaceVO;
 import com.easyfestival.www.domain.ProductBoardVO;
 import com.easyfestival.www.domain.ProductListDTO;
-import com.easyfestival.www.handler.PagingHandler;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,11 +40,7 @@ public interface PackageDAO {
 
 	int removeProduct(long pkNo);
 
-	int update(@Param("totalPrice") long totalPrice, @Param("pkNo") long pkNo);
-
-	PackageVO getDetail(int pkNo);
-
-	List<ProductListDTO> getOrder(PagingHandler ph);
+	
 
 	//List<ProductListDTO> getDTOList(String pkContinent);
 

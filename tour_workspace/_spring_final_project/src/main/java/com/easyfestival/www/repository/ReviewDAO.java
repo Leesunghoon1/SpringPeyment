@@ -32,6 +32,8 @@ public interface ReviewDAO {
 
 	int getbestTotalCount(pagingVO pgvo);
 
+	int getLikeCount(int rvNo);
+
 
 
 }

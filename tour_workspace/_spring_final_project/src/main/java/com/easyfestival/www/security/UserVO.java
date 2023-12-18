@@ -23,7 +23,5 @@ public class UserVO{
    private String email;
    private String phoneNumber;
    private List<AuthVO> authList;
-   private String grade;
-   private int point;
    
 }

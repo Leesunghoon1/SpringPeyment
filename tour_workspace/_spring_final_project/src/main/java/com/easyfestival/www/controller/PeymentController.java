@@ -50,7 +50,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/peyment/*")
 public class PeymentController {
 
+	@Value("7820725586500628")
+	private String apiKey;
 
+	@Value("P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr")
+	private String secretKey;
+
+	private IamportClient api = new IamportClient(apiKey, secretKey);
 
 	@Autowired
 	private PayService payService;
@@ -64,18 +70,19 @@ public class PeymentController {
 	@Autowired
 	private MemberShipService memberShipService;
 
-<<<<<<< HEAD
 	public PeymentController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
 		this.api = new IamportClient("7820725586500628",
 				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
 	}
-
-=======
-
 	
->>>>>>> a8db07770eb4cc5d6c334accfac3c15cc5a3622c
-	@GetMapping("/detail")
+	/*
+	 * @GetMapping("/peyDetail") public String getTest() {
+	 * 
+	 * return "/package/peyDetail"; }
+	 */
+	
+	@GetMapping("/peyDetail")
 	public String getDetail(@RequestParam("pkNo") long pkNo, @RequestParam("userCount") long userCount,
 			HttpSession session, Model model) {
 
@@ -85,9 +92,7 @@ public class PeymentController {
 
 		long memberPrice = pldto.get(0).getPackvo().getPkPrice() * userCount;
 
-		model.addAttribute("memberPrice", memberPrice);
-
-		model.addAttribute("userCount", userCount);
+		
 
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
 
@@ -97,11 +102,20 @@ public class PeymentController {
 
 		long memberDiscountPrice = Math.round(msVo.getMemberDiscountRate() * pkPrice);
 
+	
+		long lastTotalCount = Math.round(memberPrice - memberDiscountPrice);
+		
 		model.addAttribute("memShp", msVo);
 
 		model.addAttribute("memberDiscountPrice", memberDiscountPrice);
+		
+		model.addAttribute("memberPrice", memberPrice);
 
-		return "/package/detail";
+		model.addAttribute("userCount", userCount);
+		
+		model.addAttribute("lastTotalCount", lastTotalCount);
+		
+		return "/package/peyDetail";
 	}
 
 	@GetMapping("/OrderList")
@@ -140,26 +154,31 @@ public class PeymentController {
 	@ResponseBody
 	public int orderCancle(OrderVO orderVO, PayDTO payDTO) throws Exception {
 //		userId == 0 비회원
-		System.out.println("1 : " + orderVO);
-		System.out.println("1 : " + orderVO.getImpUid());
-		System.out.println("1 : " + orderVO.getOrderNum());
+		System.out.println("1111 : " + orderVO);
+		System.out.println("1111 : " + orderVO.getImpUid());
+		System.out.println("1111 : " + orderVO.getOrderNum());
+		System.out.println("1111 : " + orderVO.getTotalPrice());
 
 		orderVO = orderService.adminList(orderVO);
 
-		System.out.println("2 : " + orderVO);
-		System.out.println("2 : " + orderVO.getImpUid());
-		System.out.println("2 : " + orderVO.getOrderNum());
+		System.out.println("2222 : " + orderVO);
+		System.out.println("2222 : " + orderVO.getImpUid());
+		System.out.println("2222 : " + orderVO.getOrderNum());
+		System.out.println("2222 : " + orderVO.getTotalPrice());
+
 
 		int result1 = orderService.payMentCancle(payDTO);
 		System.out.println("rrr");
 
 		int result = orderService.orderCancle(orderVO);
+		
+		int result2 = memberShipService.pointCancle(orderVO); // 사용한 포인트 환불
+		
+		int result3 = memberShipService.ollCancle(orderVO);
 
-		int result2 = memberShipService.pointCancle(orderVO.getId(), orderVO.getTotalPrice()); // 일단 보류
-		System.out.println("결제결제금액금액이야?" + orderVO.getTotalPrice());
-		System.out.println("orderDTO.getTotalPrice()" + orderVO.getTotalPrice());
+		
 		if (result > 0) {
-			System.out.println("DB 삭제성공");
+			System.out.println("예약 DB 삭제성공");
 		}
 		if (result1 > 0) {
 			System.out.println("Pay DB 삭제성공");
@@ -185,7 +204,7 @@ public class PeymentController {
 
 		// 결제 완료된 금액
 		String amount = payService.paymentInfo(orderVO.getImpUid(), token);
-		log.info("amount >>>> {}", amount);
+		log.info("============amount >>>> {}", amount);
 
 		int res = 1;
 
@@ -204,9 +223,10 @@ public class PeymentController {
 		return res;
 
 	}
+	
 
-	@GetMapping("/complete")
-	public String getOrderComplete(@RequestParam long payNum, OrderVO orderVO, HttpSession session, Model model)
+		@GetMapping("/complete")
+		public String getOrderComplete(@RequestParam long payNum, OrderVO orderVO, HttpSession session, Model model)
 			throws Exception {
 
 		System.out.println("404에러 ");
@@ -226,7 +246,7 @@ public class PeymentController {
 		model.addAttribute("totalCount", totalCount);
 		log.info("유저수 >>>>>> {}", totalCount);
 
-		return "/package/OrderList";
+		return "redirect:/peyment/OrderList?pageNo=1";
 	}
 	
 	
@@ -241,11 +261,15 @@ public class PeymentController {
 		
 		model.addAttribute("msVo", msVo);
 		
+		
 		List<OllPayDTO> ollList = orderService.ollList(orderNum);
 		
 		log.info("ollList >>>>>> {}", ollList);
 
 		model.addAttribute("ollList", ollList);
+		
+		
+		model.addAttribute("orderNum", orderNum);
 		
 		return "/package/complete";
 	}
@@ -262,21 +286,8 @@ public class PeymentController {
 			@RequestParam String enteredPoints) throws Exception {
 		IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
 		PayDTO payDTO = new PayDTO();
-
-		System.out.println(((UserVO) session.getAttribute("uvo")).getId());
-		payDTO.setId(((UserVO) session.getAttribute("uvo")).getId());
-		payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
-		payDTO.setPayMethod(result.getResponse().getPayMethod());
-		payDTO.setProductName(result.getResponse().getName());
-		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
-		payDTO.setPkNo(pkNo);
-		orderService.insert_payinfo(payDTO);
-
-		payDTO = orderService.getLastPay(payDTO);
-		System.out.println("이건" + payDTO);
-
-		// 유효성 검사 후 String을 long으로 변환
 		long point = 0; // 기본값 설정
+		
 		if (enteredPoints != null && !enteredPoints.isEmpty()) {
 			try {
 				point = Long.parseLong(enteredPoints);
@@ -287,8 +298,24 @@ public class PeymentController {
 			}
 		}
 
-		int isOK = memberShipService.updateMemberShip(((UserVO) session.getAttribute("uvo")).getId(), point);
+		System.out.println(((UserVO) session.getAttribute("uvo")).getId());
+		payDTO.setId(((UserVO) session.getAttribute("uvo")).getId());
+		payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
+		payDTO.setPayMethod(result.getResponse().getPayMethod());
+		payDTO.setProductName(result.getResponse().getName());
+		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
+		payDTO.setPkNo(pkNo);
+		payDTO.setSayongPointeu(point);
+		orderService.insert_payinfo(payDTO);
 
+		payDTO = orderService.getLastPay(payDTO);
+		System.out.println("이건" + payDTO);
+
+		// 유효성 검사 후 String을 long으로 변환
+
+		int isOK = memberShipService.updateMemberShip(((UserVO) session.getAttribute("uvo")).getId(), point);
+		
+		
 		/* model.addAttribute("payDTO", payDTO); */
 		System.out.println("aaa이거모임 ?" + point);
 

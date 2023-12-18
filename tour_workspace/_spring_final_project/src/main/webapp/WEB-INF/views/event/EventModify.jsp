@@ -43,9 +43,9 @@
 				<th>이벤트 타입</th>
 				<td><select name="evType" >
 						<option>선택...</option>
-						<option value="discountEv">할인</option>
+						<option value="prboxEv">선물상자</option>
 						<option value="rouletteEv">룰렛</option>
-						<option value="LadderEv">사다리 타기</option>
+						<option value="AttendanceEv">출석체크</option>
 				</select></td>
 			</tr>
 			<tr>
@@ -57,51 +57,30 @@
 		<button type="submit">등록</button>
 	</form>
 	
-<script type="text/javascript">
-		$('#summernote').summernote({
-			height : 300, // 에디터 높이 설정
-			callbacks : {
-				onImageUpload : function(files, editor, welEditable) {
-					// 이미지 업로드 시 호출되는 콜백 함수
-					 for (var i = files.length - 1; i >= 0; i--) {
-						uploadImage(files[0], editor, welEditable); // 파일 업로드 함수 호출
-					}
-				}
+
+	<script type="text/javascript" src="/resources/js/review/summernote.js"></script>
+	<script type="text/javascript">
+	function uploadImage(file) {
+		var formData = new FormData();
+		formData.append('file', file);
+
+		$.ajax({
+			url : '/event/image',
+			method : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			enctype : 'multipart/form-data',
+			success : function(url) {
+				console.log('Image uploaded successfully. URL:', url);
+				var imgTag = '<img src="' + url + '" />';
+				$('#summernote').summernote('pasteHTML', imgTag);
+			},
+			error : function() {
+				console.error('Error uploading image');
 			}
 		});
-	</script>
-	<script type="text/javascript">
-		function uploadImage(file, editor, welEditable) {
-			var formData = new FormData();
-			formData.append('file', file);
-
-			$.ajax({
-				url : '/event/uploadSummernoteImageFile', // 이미지 업로드를 처리하는 서버 URL
-				method : 'POST',
-				data : formData,
-				processData : false,
-				contentType : false,
-				datatype : 'JSON',
-				enctype : 'multipart/form-data',
-				success : function(resp, editor, welEditable) {
-					// 이미지 업로드 성공 시 처리
-					console.log('success!!');
-					console.log(resp);
-
-					let Rurl = resp.url;
-
-					$('#summernote').summernote('editor.insertText', '해치웠나	');
-					 let imgData = $("<img>").attr('src',Rurl);
-					 console.log(imgData);
-					 $('#summernote').summernote("insertNode", imgData[0]);
-				},
-				error : function(resp) {
-					// 이미지 업로드 실패 시 처리
-					console.log(resp);
-					console.log('이미지 업로드 실패');
-				}
-			});
-		}
+	}
 	</script>
 
 </body>

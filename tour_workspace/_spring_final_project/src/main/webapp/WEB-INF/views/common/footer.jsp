@@ -16,7 +16,7 @@
 				<span><a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"></i></a></span>
 				<span><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a></span>
 				<span><a href="https://twitter.com/?lang=ko"><i class="fa-brands fa-square-x-twitter"></i></a></span>
-				<span><a href="#">고객센터</a></span>
+				<span><a href="/help/customerCenter">고객센터</a></span>
 			</div>
 			<div class="foot-menu">
 				<div>

@@ -45,6 +45,10 @@
   		limit #{limitStart}, #{listQty}
   	</select>
   	
+  	<select id="getId" resultType="uvo">
+  		select * from user
+  		where name = #{name} and email = #{email}
+  	</select>
   	
   	
   	<sql id="modify">

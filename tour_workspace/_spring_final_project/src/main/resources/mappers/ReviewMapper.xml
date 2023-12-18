@@ -8,16 +8,13 @@
 		(#{title},#{content},#{id},#{secret})
 	</insert>
 	<select id="list" resultType="com.easyfestival.www.domain.reviewVO">
-		select * from review rv
-		left join (select rv_no,count(rv_no)cmt_count from review_comment group by rv_no)rc using(rv_no)
-		left join (select rv_no,count(rv_no)like_count from review_history group by rv_no)rl using(rv_no)
+		select * from review
 		<include refid="search"></include>
 		order by rv_no desc
 		limit #{pageStart},#{qty}
 	</select>
 	<select id="detail" resultType="com.easyfestival.www.domain.reviewVO">
-		select * from review where rv_no=#{rvNo}
-
+		select * from review rv where rv_no=#{rvNo}
 	</select>
 	<delete id="remove">
 		delete from review where rv_no=#{rvNo}
@@ -40,19 +37,24 @@
 	<insert id="insertLike">
 		insert into review_history values(#{rvNo},#{userNo})
 	</insert>
+	
 	<select id="bestList" resultType="com.easyfestival.www.domain.reviewVO">
 		select * from review rv
 		left join (select rv_no,count(rv_no)cmt_count from review_comment group by rv_no)rc using(rv_no)
 		left join (select rv_no,count(rv_no)like_count from review_history group by rv_no)rl using(rv_no)
 		<include refid="best"></include>
-		
 		order by like_count desc
 		limit #{pageStart},#{qty}
 	</select>
+	
 	<select id="getbestTotalCount" resultType="int">
 		select count(rv_no) from review 
 		left join (select rv_no,count(rv_no)like_count from review_history group by rv_no)rl using(rv_no)
 		<include refid="best"></include>
+	</select>
+	
+	<select id="getLikeCount" resultType="int">
+		select count(rv_no) from review_history where rv_no=#{rvNo}
 	</select>
 
 	<sql id="search">
@@ -63,9 +65,6 @@
 						<choose>
 							<when test="type == 't'.toString()">
 								title like concat('%',#{keyword},'%')
-							</when>
-							<when test="type == 'w'.toString()">
-								id like concat('%',#{keyword},'%')
 							</when>
 							<when test="type == 'c'.toString()">
 								content like concat('%',#{keyword},'%')

@@ -1,5 +1,6 @@
 package com.easyfestival.www.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,13 +20,18 @@ public class EventServiceImpl implements EventService
 	private EventDAO edao;
 
 	@Override
-	public int eventRegister(eventVO evo) {
+	public int OneventList(eventVO evo) {
 		return edao.eventRegister(evo);
 	}
+	
 
 	@Override
-	public List<eventVO> list() {
-		return edao.eventList();
+	public List<eventVO> OneventList(LocalDateTime now) {
+		return edao.OneventList(now);
+	}
+	@Override
+	public List<eventVO> LasteventList(LocalDateTime now) {
+		return edao.LasteventList(now);
 	}
 
 	@Override
@@ -42,6 +48,14 @@ public class EventServiceImpl implements EventService
 	public int eventModify(eventVO evo) {
 		return edao.eventModify(evo);
 	}
+
+
+	@Override
+	public int eventRegister(eventVO evo) {
+		return edao.eventRegister(evo);
+	}
+
+	
 
 	
 

@@ -20,5 +20,5 @@ public class eventVO
 	private String evType; //이벤트 타입
 	private long userNo; //당첨자 유저 번호
 	private String evContent; //이벤트 내용
-
+	private String thumbnail;
 }

@@ -60,7 +60,7 @@ document.getElementById('reservation-btn').addEventListener('click', () => {
         alert("약관을 동의해주세요");
     } else {
         // 여기에서 이동할 URL을 지정하세요.
-        aBtn.href = `/peyment/detail?pkNo=${pkNoVal}&userCount=${userCount}`;
+        aBtn.href = `/peyment/peyDetail?pkNo=${pkNoVal}&userCount=${userCount}`;
 
         // 예시로 "/"로 지정되어 있습니다. 실제로 이동할 URL을 지정해주세요.
         aBtn.click();  // 버튼 클릭을 프로그래밍적으로 시뮬레이션
@@ -97,7 +97,7 @@ document.addEventListener('click', (e) => {
 
     // 결과를 출력
     reservationPrice.value = totalPrice;
- 	 userCount = pepleValue;
+     userCount = pepleValue;
     
     console.log("ssss" + userCount);
 
@@ -107,5 +107,4 @@ document.addEventListener('click', (e) => {
     console.log("totalPrice:", totalPrice);
 
 });
-
 

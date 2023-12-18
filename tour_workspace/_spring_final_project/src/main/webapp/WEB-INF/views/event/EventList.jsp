@@ -6,30 +6,72 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/event/EventList.css" rel="stylesheet">
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>evNO</th>
-				<th>eName</th>
-				<th>evType</th>
-				<th>eStart</th>
-				<th>eEnd</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list}" var="evo">
-				<tr>
-					<td> <a href="/event/eventDetail?evNo=${evo.evNo}">${evo.evNo}</a> </td>
-					<td>${evo.evName}</td>
-					<td>${evo.evType}</td>
-					<td>${evo.evStart}</td>
-					<td>${evo.evEnd}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<a href="/event/eventRegister"><button type="button">이벤트 추가</button></a>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
+
+		
+			
+	<div class="event-now">
+			<c:choose>
+				<c:when test="${msg eq 'on' }">
+					<p>
+						<strong>NOW</strong> <strong>진행 중인 이벤트</strong>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<p>
+						<strong>END</strong> <strong>지나간 이벤트</strong>
+					</p>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		
+		
+		<div class="event-list-container">
+			<div class="event-tap">
+				<div class="event-tap-side">
+					<ul>
+						<li>
+							<a href="/event/OneventList" id="on">진행중인 이벤트<span>></span></a>
+						</li>
+						<li>
+							<a href="/event/LasteventList" id="last">지난 이벤트<span>></span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="item-list-div">
+			<ul class="item-list-ul">
+				<c:forEach items="${list}" var="evo">
+					<li>
+						<div class="event-item">
+							<div class="event-img">
+								<img src="${evo.thumbnail}">
+							</div>
+							<div class="event-title">
+								<a href="/event/eventDetail?evNo=${evo.evNo}"> <strong>
+										${evo.evName} </strong>
+								</a>
+							</div>
+							<div class="event-period">${evo.evStart} ~ ${evo.evEnd}</div>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+		</div>
+		<a href="/event/eventRegister"><button type="button">이벤트
+				추가</button></a>
+		<script type="text/javascript">
+			let msg = `<c:out value='${msg}'/>`;
+			console.log(msg);
+		</script>
+		<script type="text/javascript" src="/resources/js/event/EventList.js"></script>
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

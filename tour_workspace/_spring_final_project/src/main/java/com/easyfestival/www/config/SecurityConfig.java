@@ -16,6 +16,7 @@ import com.easyfestival.www.security.CustomAuthUserService;
 import com.easyfestival.www.security.LoginFailureHandler;
 import com.easyfestival.www.security.LoginSuccessHandler;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -59,9 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       // http 승인 요청
       http.authorizeRequests().antMatchers("/user/list").hasRole("ADMIN") // 관리자 권한
       .antMatchers("/user/modify").hasRole("USER") // 일반 회원
-      .antMatchers("/","/user/index","/resources/**","/user/join","/user/login","/user/checkId/*"
+      .antMatchers("/","/resources/**","/user/join","/user/login","/user/checkId/*"
             ,"/package/**","/product/**","/product_upload/**","/review/**","/freetour/**"
-            ,"/login/oauth2/**").permitAll() // 모든 이용자 권한
+            ,"/login/oauth2/**","/help/customerCenter","/user/searchAccount/*","/static/list").permitAll() // 모든 이용자 권한
       .anyRequest().authenticated(); // => 인증된 사용자만 처리
       
       // 커스텀 로그인 페이지 구성

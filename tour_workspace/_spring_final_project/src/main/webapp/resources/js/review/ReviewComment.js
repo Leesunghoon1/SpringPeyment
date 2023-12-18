@@ -36,6 +36,7 @@ cmtPostBtn.addEventListener('click', (e)=>{
         if(result==1){
             alert('댓글 등록 성공');
             getCommentList(rnoVal);
+            spreadCommentCount(rnoVal);
         }
     })
 })
@@ -62,14 +63,36 @@ function getCommentList(rvNo)
         {
             for(let i=0;i<result.length;i++)
             {
-                let str=`<ul>`;
-                str+=`<li><input type="text" value="${result[i].rcNo}" id="cmtModNo" readonly="readonly"></li>`;
-                str+=`<li><input type="text" value="${result[i].rcWriter}" id="cmtModWriter" readonly="readonly"></li>`;
-                str+=`<li><input type="text" value="${result[i].rcContent}" id="cmtModText"></li>`;
-                str+=`<li>${result[i].rcRegAt}</li>`;
-                str+=`<li><button type="button" class="cmtModBtn" data-rcno="${result[i].rcNo}">수정</button></li>`;
-                str+=`<li><button type="button" class="cmtDelBtn" data-rcno="${result[i].rcNo}">삭제</button></li>`;
-                str+=`</ul>`;
+                let str=`<div class="cmt-list-div">`;
+
+                str+=`<div class="cmt-header">`;
+                str+=`<div class="cmt-id-div">${result[i].rcWriter} </div>`;
+                str+=`<div class="cmt-reg-div">`;
+                str+=`${result[i].rcRegAt}`;
+                str+=`<button type="button" class="showmod" onclick="showModifyDiv(${i})"><i class="fa-solid fa-trash"></i>수정</button>`;
+                str+=`<button type="button" class="cmtDelBtn" data-rcno="${result[i].rcNo}"><i class="fa-solid fa-pencil"></i>삭제</button>`;
+                str+=`</div>`; //<div class="cmt-reg-div">닫기
+                str+=`</div>`; //<div class="cmt-header">닫기
+
+                str+=`<div class="cmt-content">`;
+                str+=`${result[i].rcContent}`;
+                str+=`</div>` //<div class="cmt-content">닫기
+
+                str+=`</div>`;  //<div class="cmt-list-div">닫기
+
+                str+=`<div class="cmt-modify" id="cmtmod${i}">`; //수정 div
+
+                str+=`<div class="cmt-modify-writer">`;
+                str+=`<input type="text" readonly="readonly" value="${result[i].rcWriter}">`
+                str+=`</div>`;
+
+                str+=`<div class="cmt-modify-content">`;
+                str+=`<textarea id="cmtModText" onkeyup="autoResize(this)" onkeydown="autoResize(this)">${result[i].rcContent}</textarea>`
+                str+=`<button type="button" class="cmtModBtn" data-rcno="${result[i].rcNo}">수정</button>`;
+                str+=`</div>`;  //<div class="cmt-modify-content">
+
+                str+=`</div>`;//<div class="cmt-modify">닫기
+
                 ReviewCmtArea.innerHTML+=str;
             }
         }
@@ -133,17 +156,66 @@ document.addEventListener('click',(e)=>{
     }
     else if(e.target.classList.contains('cmtModBtn'))
     {
-        let cmtModNo=document.getElementById('cmtModNo').value;
-        let cmtModText=document.getElementById('cmtModText').value;
+        let div=e.target.closest('div')
+
+        let cmtModNo=div.lastChild.dataset.rcno;
+        let cmtModText=div.firstChild.value;
+
+        console.log(cmtModText);
 
         let cmtData={
             rcNo:cmtModNo,
             rcContent:cmtModText
         };
+        
         ModifyComment(cmtData).then(result=>{
-            if(result==1)
+            if(result==1){
                 alert('수정 성공');
+                getCommentList(rnoVal);
+            }
         })
 
     }
 })
+
+async function getCommentCount(rvNo)
+{
+    console.log('getCommentCount');
+    try {
+        const url='/reviewcmt/cnt/'+rvNo;
+        const config={
+            method:'get'
+        };
+        const resp=await fetch(url,config);
+        const result=await resp.text();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function spreadCommentCount(rvNo)
+{
+    console.log("spreadCommentCount");
+    getCommentCount(rvNo).then(result=>{
+        if(result!=-1){
+            let cmtCountA=document.getElementById('cmtCount');
+            cmtCountA.innerHTML=`댓글수:`;
+            cmtCountA.innerHTML+=`${result}`;
+        }
+    })
+
+}
+
+async function showModifyDiv(idx)
+{
+    let showmod=document.getElementById(`cmtmod${idx}`);
+    
+    console.log("스타일:"+showmod.style.display);
+    if(showmod.style.display=="none"){
+        showmod.style.display="block";
+    }
+    else{
+        showmod.style.display="none";
+    }
+}

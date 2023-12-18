@@ -16,4 +16,7 @@
 	<update id="ModifyComment">
 		update review_comment set rc_content=#{rcContent} where rc_no=#{rcNo}
 	</update>
+	<select id="getCommentCount" resultType="int">
+		select count(rc_no) from review_comment where rv_no=#{rvNo}
+	</select>
 </mapper>

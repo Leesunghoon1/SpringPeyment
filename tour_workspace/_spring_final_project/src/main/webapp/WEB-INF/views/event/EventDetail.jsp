@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/resources/css/Roulette.css">
+<link href="/resources/css/event/EventDetail.css" rel="stylesheet">
+<!-- <link href="/resources/css/event/Roulette.css"> -->
 <style type="text/css">
 @font-face {
     font-family: 'Orbit-Regular';
@@ -22,42 +23,46 @@ canvas {
 </style>
 </head>
 <body>
-	
-	<table class="table table-hover">
-		<tr>
-			<th>evNo</th>
-			<td>${evo.evNo }</td>
-		</tr>
-		<tr>
-			<th>evName</th>
-			<td>${evo.evName }</td>
-		</tr>
-		<tr>
-			<th>evType</th>
-			<td>${evo.evType }</td>
-		</tr>
-		<tr>
-			<th>evStart</th>
-			<td>${evo.evStart }</td>
-		</tr>
-		<tr>
-			<th>evEnd</th>
-			<td>${evo.evEnd}</td>
-		</tr>
-	</table>
-
-	<div id="contentArea">${fn:replace(evo.evContent,'\\','/')}</div>
-	<c:if test="${evo.evType eq 'rouletteEv'}">
-		<div>
-			<canvas width="500" height='500' onclick="clickCanvas(window.event)"></canvas>
-			<button onclick="rotate()">룰렛 돌리기</button>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<div class="event-detail-container">
+		<div class="event-tap">
+			<div class="event-tap-side">
+				<ul>
+					<li>
+						<a href="/event/OneventList" id="on">진행중인 이벤트<span>></span></a>
+					</li>
+					<li>
+						<a href="/event/LasteventList" id="last">지난 이벤트<span>></span></a>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</c:if>
+		<div class="event-detail-div">
+			<div class="event-detail-title">${evo.evName }</div>
+			<div class="event-detail-period">${evo.evStart } ~ ${evo.evEnd}</div>
+			<div class="event-detail-content" id="contentArea">
+				${fn:replace(evo.evContent,'\\','/')}
+			</div>
+			<div class="detail-lower-div">
+				<a href="/event/OneventList"><button type="button" class="listbtn">목록보기</button></a>
+			</div>
+		</div>
+	</div>
+
+	
+
 	<a href="/event/eventRemove?evNo=${evo.evNo}"><button type="button">삭제</button></a>
 	<a href="/event/eventModify?evNo=${evo.evNo}"><button type="button">수정</button></a>
-
-	<script type="text/javascript"
-		src="/resources/js/RouletteEvent.js"></script>
-
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	<!-- <script type="text/javascript" src="/resources/js/event/RouletteEvent.js"></script> -->
+	<script type="text/javascript">
+		let uid=`<c:out value='${uvo.id}'/>`;
+		let evType=`<c:out value='${evo.evType}'/>`;
+	</script>
+		
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script charset="UTF-8" src="https://gamekiki.com/kshop/kwidget/js/kwidget.js"></script>
+	 <script type="text/javascript" src="/resources/js/event/gamekiki.js"></script>
 </body>
 </html>

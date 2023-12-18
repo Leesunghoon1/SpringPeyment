@@ -19,3 +19,6 @@ CREATE TABLE auth_user (
   auth varchar(100) DEFAULT 'ROLE_USER',
   CONSTRAINT fk_auth_user_id FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 )
+
+
+

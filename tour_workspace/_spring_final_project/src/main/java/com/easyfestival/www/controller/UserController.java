@@ -5,9 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +18,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.easyfestival.www.domain.HelpDTO;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.AuthVO;
 import com.easyfestival.www.security.UserVO;
-import com.easyfestival.www.service.MemberShipService;
+import com.easyfestival.www.service.HelpService;
+import com.easyfestival.www.service.MailService;
 import com.easyfestival.www.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,10 +40,9 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	
 	private final UserService usv;
+	private final HelpService hsv;
+	private final MailService msv;
 	private final BCryptPasswordEncoder bcEncoder; // password 암호화 객체
-	
-	@Autowired
-	private MemberShipService memberShipService;
 	
 	@GetMapping("index")
 	public String index() {
@@ -64,14 +64,12 @@ public class UserController {
 		avo.setAuth("ROLE_USER");
 		isOk *= usv.authUser(avo);
 		
-		memberShipService.insertId(uvo.getId());
-		
 		log.info("user join >>>>> " + (isOk > 0 ? "Success" : "Fail"));
 		if(isOk > 0) {
 			re.addFlashAttribute("message", 1); // 성공하면 메시지로 1 리턴
 			re.addFlashAttribute("joinID", uvo.getId()); // 회원가입 완료 아이디 전달
 		}
-		return "redirect:/user/index";
+		return "redirect:/";
 	}
 	
 	@GetMapping(value="checkId/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -108,7 +106,7 @@ public class UserController {
 	@GetMapping("list")
 	public void getUserList(Model model, @RequestParam("pageNo")int pageNo) {
 //		List<UserVO> uvoList = usv.getList();
-		int totalCount = usv.getUserCount(); // 총 유저수 가하기
+		int totalCount = usv.getUserCount(); // 총 유저수 구하기
 		log.info("유저수 >>>>>> {}", totalCount);
 		PagingHandler ph = new PagingHandler(pageNo, 10, 5, totalCount); // 페이지네이션 설정 핸들
 		log.info("ph >>>>>> {}", ph.toString());
@@ -117,8 +115,6 @@ public class UserController {
 		model.addAttribute("ph", ph);
 		model.addAttribute("uvoList", uvoList);
 	}
-	
-	
 	
 	// 회원정보 수정
 	@GetMapping("modify")
@@ -135,7 +131,7 @@ public class UserController {
 			uvo = usv.getId(uvo.getId());
 			session.setAttribute("uvo", uvo);
 		}
-		return "redirect:/user/index";
+		return "redirect:/";
 	}
 	
 	// 회원탈퇴
@@ -146,9 +142,40 @@ public class UserController {
 			log.info(">>>>>>>>>> 회원탈퇴 <<<<<<<<<");
 		}
 		logout(request, response);
-		return "redirect:/user/index";
+		return "redirect:/";
 	}
 	
+	// 마이페이지
+	@GetMapping("detail")
+	public void getDetailUser(HttpSession session, Model model) {
+		UserVO uvo = (UserVO) session.getAttribute("uvo");
+		List<HelpDTO>hList = hsv.getList(uvo.getId(), "");
+		model.addAttribute("hList", hList);
+	}
+	
+	// 아이디, 비밀번호 찾기
+	@PostMapping(value="searchAccount/{value}", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> searchAccount(@PathVariable("value")String value, @RequestBody UserVO uvo){
+		log.info(" >>>>> searchAccount <<<<< ");
+		String result = "";
+		log.info("name >>>>> " + uvo.getName() + ", email >>>>> " + uvo.getEmail());
+		UserVO searchUvo = usv.getId(uvo.getName(), uvo.getEmail());
+		if(searchUvo == null) {
+			log.info("search null >>>>> ");
+			return ResponseEntity.ok("notFound");
+		}
+		
+		if(value.equals("searchId")) {
+			// 아이디 찾기면 sendId 메시지를 전달
+			msv.sendEmail(searchUvo, value);
+			result = "sendId";
+		}else if(value.equals("searchPwd")) {
+			// 비밀번호 찾기면 sendPwd 메시지를 전달
+			msv.sendEmail(searchUvo, value);
+			result = "sendPwd";
+		}
+		return ResponseEntity.ok(result);
+	}
 	
 	
 	// 시큐리티를 통한 로그아웃 메서드

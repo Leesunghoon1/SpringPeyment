@@ -26,8 +26,8 @@
 				<c:forEach items="${uvoList}" var="uvo">
 				<div>
 					<span>${uvo.id}</span>
-					<span>${uvo.grade}</span>
-					<span>${uvo.point}</span>
+					<span>bronze</span>
+					<span>0</span>
 					<span>${uvo.name}</span>
 					<span>${uvo.age}</span>
 					<span>${uvo.email}</span>
@@ -52,6 +52,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
+	let uvoVal = `<c:out value="${uvo}" />`;
 	let prev = `<c:out value="${ph.prev}" />`;
 	let next = `<c:out value="${ph.next}" />`;
 </script>

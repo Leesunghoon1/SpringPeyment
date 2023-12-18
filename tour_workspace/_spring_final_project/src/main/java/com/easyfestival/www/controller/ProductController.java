@@ -80,7 +80,6 @@ public class ProductController {
 			m.addAttribute("pldto", pldto);
 		}
 		
-		System.out.println("pdto >> " + pldto);
 		
 		return "/product/list";
 	}

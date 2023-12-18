@@ -14,4 +14,6 @@ public interface ReviewCommentDAO {
 
 	int ModifyComment(ReviewCommentVO rcvo);
 
+	int getCommentCount(int rvNo);
+
 }

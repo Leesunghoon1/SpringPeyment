@@ -23,4 +23,8 @@ public interface UserService {
 	int getUserCount();
 
 	List<UserVO> getList(PagingHandler ph);
+	
+	List<AuthVO> selectAuths(String username);
+
+	UserVO getId(String name, String email);
 }

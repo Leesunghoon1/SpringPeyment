@@ -9,3 +9,4 @@ if(prev == 'false'){
 if(next == 'false'){
 	nextLink.removeAttribute('href'); // 페이징핸들러의 next변수가 false면 href 제거
 }
+

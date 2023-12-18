@@ -4,9 +4,15 @@ package com.easyfestival.www.service;
 
 import java.util.List;
 
+import com.easyfestival.www.domain.AirplaneVO;
+import com.easyfestival.www.domain.FestivalVO;
+import com.easyfestival.www.domain.HotelVO;
+import com.easyfestival.www.domain.PackageVO;
+import com.easyfestival.www.domain.PlaceVO;
+import com.easyfestival.www.domain.ProductBoardVO;
 import com.easyfestival.www.domain.ProductDTO;
+import com.easyfestival.www.domain.ProductFileVO;
 import com.easyfestival.www.domain.ProductListDTO;
-import com.easyfestival.www.handler.PagingHandler;
 
 
 public interface ProductService {
@@ -21,7 +27,6 @@ public interface ProductService {
 
 	int removeProduct(long pkNo);
 
-	int update(long totalPrice, long pkNoVal);
 //	ProductListDTO productDetail(long pkNo);
 
 

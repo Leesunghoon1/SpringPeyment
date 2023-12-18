@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/resources/css/tmpCss.css" rel="stylesheet">
+<link href="/resources/css/review/ReviewRegister.css" rel="stylesheet">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -21,35 +21,30 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<form action="/review/modify" method="post">
-	<table class="table table-hover">
-		<tr>
-			<th>rvNo</th>
-			<td><input type="text" value="${rvo.rvNo}" name="rvNo" readonly="readonly"></td>
-		</tr>
-		<tr>
-			<th>title</th>
-			<td><input type="text" value="${rvo.title}" name="title"></td>
-		</tr>
-		<tr>
-			<th>userNo</th>
-			<td><input type="text" value="${uvo.id}" name="id" readonly="readonly"></td>
-		</tr>
-		<tr>
-			<th>비밀글</th>
-			<td>
-			<input type="checkbox" name="secret" id="secret" value="y">
-			</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td><textarea id="summernote" name="content" >${rvo.content}</textarea></td>
-		</tr>
-	</table>
-	<button type="submit">수정</button>	
-	</form>
+			<div class="title-div">
+				<div>제목</div>
+				<input type="text" name="title" class="inp" value="${rvo.title}">
+			</div>
+			
+			<div class="write-div">
+				<textarea id="summernote" name="content">${rvo.content}</textarea>
+			</div>
+			
+			<input type="hidden" value="${rvo.rvNo}" name="rvNo">
+			<input type="hidden" name="id" value="${uvo.id}">
+			
+			<div class="secret-div">
+				<input type="checkbox" name="secret" value="Y">
+				<span>비밀글로 작성하시겠습니까?</span>
+			</div>
+		
+			<button type="submit" class="submit">수정</button>
+		</form>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	<script type="text/javascript" src="/resources/js/summernote.js"></script>
+	<script type="text/javascript" src="/resources/js/review/summernote.js"></script>
 	<script type="text/javascript">
 		function uploadImage(file) {
 			var formData = new FormData();

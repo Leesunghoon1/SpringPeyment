@@ -2,6 +2,8 @@ package com.easyfestival.www.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.AuthVO;
 import com.easyfestival.www.security.UserVO;
@@ -25,6 +27,8 @@ public interface UserDAO {
 	int getUserCount();
 
 	List<UserVO> getUserList(PagingHandler ph);
+
+	UserVO getId(@Param("name")String name, @Param("email")String email);
 
 
 }

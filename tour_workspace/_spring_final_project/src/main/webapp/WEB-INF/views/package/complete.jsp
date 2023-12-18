@@ -73,7 +73,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 				</div>
 
 
-			<c:forEach items="${ollList }" var="ollList">
+				<c:forEach items="${ollList }" var="ollList">
 					<div class="item-reserve">
 						<div class="item-img">
 							<img class="listImg"
@@ -95,18 +95,19 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 									<dt>도착일</dt>
 									<dd>${ollList.apArrival }</dd>
 								</dl>
+								<dl>
+									<dt>여행지</dt>
+									<dd>${ollList.pkName }</dd>
+								</dl>
 							</div>
 							<div class="item-info-tit">
 								<strong>${ollList.pkContent }</strong>
 							</div>
 							<div>
-								<a class="prev-aa"
-									href="/peyment/getList?orderNum=${ollList.orderNum}">
-									<button type="button" class="payMentCancel site-btn">
-										<span>결제취소</span>
-									</button>
-
-								</a>
+								<button type="button" order-num="${ollList.orderNum}"
+									class="payMentCancel site-btn">
+									<span>결제 취소</span>
+								</button>
 							</div>
 							<div class="item-price">
 								<strong>${ollList.totalPrice}원</strong>
@@ -120,33 +121,30 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 
 
 		</div>
-		<div class="panel-item">
-			<div class="tit">
-				<h2 class="main-item">항공권 예약 내역</h2>
-			</div>
-			<div class="banner-box">
-				<div class="text-head">
-					온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
-						src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
-						alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다. <a><button
-							type="button" class="btn-gradient-bottom">
-							<span>나의 항공권</span>
-						</button></a>
+	<div class="panel-item">
+					<div class="tit">
+						<h2 class="main-item">항공권 예약 내역</h2>
+					</div>
+					<div class="banner-box">
+						<div class="text-head">
+							온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
+								src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
+								alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다.
+						</div>
+						<div>
+							<a><button type="button" class="btn-gradient-bottom">
+									<span>나의 항공권</span>
+								</button></a>
+						</div>
 
+					</div>
 				</div>
-			</div>
-		</div>
 	</div>
 	<script type="text/javascript">
-		let pkVo = `<c:out value="${payDTO}" />`;
-		let prev = `<c:out value="${ph.prev}" />`;
-		let next = `<c:out value="${ph.next}" />`;
+		let orderNum = `<c:out value="${orderNum}" />`;
 	</script>
 
 	<script src="/resources/js/peyment/myOrder.js">
-		
-	</script>
-	<script type="text/javascript" src="/resources/js/pagenation.js">
 		
 	</script>
 </body>

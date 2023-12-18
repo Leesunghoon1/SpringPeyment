@@ -25,6 +25,11 @@
 						<div class="title">비밀번호</div>
 						<div class="input-box"><input type="password" id="pwd" name="pwd" placeholder="비밀번호를 입력하세요."></div>
 					</div>
+					<div class="search-id-pwd">
+						<span class="search-id">아이디찾기</span>
+						<span>|</span>
+						<span class="search-pwd">비밀번호찾기</span>
+					</div>
 					<div class="button-box">
 						<span id="login-span"><button type="submit" id="login-btn">로그인</button></span>
 					</div>
@@ -43,7 +48,13 @@
 					</div>
 				</div>
 			</form>
+			
+			
 			<div class="loginFail-background">
+				<!-- 아이디, 비밀번호 찾기 모달 -->
+				<div class="search-modal"></div>
+				
+				<!-- 로그인 입력 오류 모달 -->
 				<div class="loginFail-modal">
 					<span class="material-symbols-outlined" id="confirm-btn">close</span>
 					<span class="modal-text"></span>
@@ -57,4 +68,12 @@
 	let loginFail = `<c:out value="${loginFail}" />`;
 </script>
 <script type="text/javascript" src="/resources/js/user/login.js"></script>
+<script type="text/javascript">
+	let closeBtn = document.querySelector('#close-btn');
+	document.addEventListener('click', e=>{
+	    if(e.target.id == 'close-btn' || e.target.id == 'searchIdBtn' || e.target.id == 'searchPwdBtn'){
+	        searchModal.style.display = 'none';
+	    }
+	})
+</script>
 </html>

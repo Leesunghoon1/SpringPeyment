@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/reviewcmt")
+@RequestMapping("/reviewcmt/*")
 public class ReviewCommentController 
 {
 	@Inject
@@ -44,6 +44,17 @@ public class ReviewCommentController
 		log.info("댓글리스트:"+list);
 		return new ResponseEntity<List<ReviewCommentVO>>(list,HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/cnt/{rvNo}",produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String>getCommentCount(@PathVariable("rvNo")int rvNo)
+	{
+		log.info("getCommentCount 들어옴");
+		log.info("rvNo는?"+rvNo);
+		int cnt=rcsv.getCommentCount(rvNo);
+		
+		return cnt>=0? new ResponseEntity<String>(String.valueOf(cnt),HttpStatus.OK):new ResponseEntity<String>("-1",HttpStatus.OK);
+	}
+	
 	@DeleteMapping(value="/{rcNo}",produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> DeleteComment(@PathVariable("rcNo")int rcNo)
 	{

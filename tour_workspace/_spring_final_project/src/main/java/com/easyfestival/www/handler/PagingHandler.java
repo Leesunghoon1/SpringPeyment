@@ -40,7 +40,7 @@ public class PagingHandler {
 		
 		this.limitStart = (pageNo - 1) * listQty;
 	}
-	public PagingHandler(int pageNo, int listQty, int pageQty, int totalCount, String keyword,String type)
+	public PagingHandler(int pageNo, int listQty, int pageQty, int totalCount, String keyword, String type)
 	{
 		this (pageNo, listQty, pageQty,totalCount);
 		this.type=type;
@@ -51,5 +51,6 @@ public class PagingHandler {
 	{
 		return this.type !=null ? type.split(""):new String[] {};
 	}
+
 	
 }

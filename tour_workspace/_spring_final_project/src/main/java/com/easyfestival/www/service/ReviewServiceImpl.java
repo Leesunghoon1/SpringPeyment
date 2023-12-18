@@ -77,5 +77,10 @@ public class ReviewServiceImpl implements ReviewService{
 		return rdao.getbestTotalCount(pgvo);
 	}
 
+	@Override
+	public int getLikeCount(int rvNo) {
+		return rdao.getLikeCount(rvNo);
+	}
+
 	
 }

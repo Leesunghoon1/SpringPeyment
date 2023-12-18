@@ -33,37 +33,48 @@
 	<update id="UpdateMemberShip">
 		UPDATE membership
 		SET point = point - #{point}
+		WHERE id
+		= #{id}
+	</update>
+
+
+
+
+	<!-- 적립 포인트 취소 -->
+	<update id="cancelPoints">
+		UPDATE membership
+		SET point = point + #{point}
+		WHERE id
+		= #{id}
+	</update>
+
+
+	<!-- 총 구매 금액 업데이트 -->
+	<update id="updateTotalPurchase">
+		UPDATE membership
+		SET total_price = total_price -
+		#{totalPrice}
 		WHERE id = #{id}
 	</update>
-	
-	    <!-- 적립 포인트 취소 -->
-    <update id="cancelPoints" >
-        UPDATE membership
-        SET point = #{point}
-        WHERE id = #{id}
-    </update>
 
-    <!-- 총 구매 금액 업데이트 -->
-    <update id="updateTotalPurchase">
-        UPDATE membership
-        SET total_price = #{totalPrice}
-        WHERE id = #{id}
-    </update>
-    
-    <select id="getTotalPrice" resultType="long">
-    	 SELECT total_price FROM membership where id = #{id}
-    </select>
-    
-    
+	<select id="getTotalPrice" resultType="long">
+		SELECT total_price FROM
+		membership where id = #{id}
+	</select>
+
+
 	<insert id="insertId">
 		INSERT INTO membership (id)
 		VALUES
 		(#{id})
 	</insert>
-	
 
-
-
+	<!-- 환불에 따른 포인트 조정 -->
+	<update id="pointCancle">
+		UPDATE membership
+		SET point = point - #{point}
+		WHERE id = #{id}
+	</update>
 
 
 </mapper>

@@ -13,10 +13,12 @@ public interface MemberShipService {
 
 	int updateMemberShip(String id, Long point);
 
-	int pointCancle(String id, Long totalPrice);
-
 
 	void insertId(String id);
+
+	int pointCancle(OrderVO orderVO);
+
+	int ollCancle(OrderVO orderVO);
 
 
 }

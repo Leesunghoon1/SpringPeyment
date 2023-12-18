@@ -61,6 +61,10 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 									<dt>도착일</dt>
 									<dd>${ollList.apArrival }</dd>
 								</dl>
+									<dl>
+									<dt>여행지</dt>
+									<dd>${ollList.pkName }</dd>
+								</dl>
 							</div>
 							<div class="item-info-tit">
 								<strong>${ollList.pkContent }</strong>

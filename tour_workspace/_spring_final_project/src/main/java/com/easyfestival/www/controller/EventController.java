@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,12 +92,50 @@ public class EventController {
         }
     }
 	
-	@GetMapping("/eventList")
-	public String eventList(Model m)
+	@GetMapping("/OneventList")
+	public String OneventList(Model m)
 	{
-		List<eventVO>eList=esv.list();
+		LocalDateTime now=LocalDateTime.now();
+		
+		List<eventVO>eList=esv.OneventList(now);
+		for(int i=0;i<eList.size();i++)	//썸네일 따오기
+		{
+			if(eList.get(i).getEvContent().contains("<img"))
+			{
+				String content=eList.get(i).getEvContent();
+				String img=content.substring(content.indexOf("<img"), content.indexOf("\">")+2);
+				String src=img.substring(img.indexOf("\"")+1,img.indexOf("\">"));
+				eList.get(i).setThumbnail(src);
+			}
+		}
+		
 		log.info("이벤트리스트:"+eList);
 		m.addAttribute("list", eList);
+		m.addAttribute("msg","on");
+		return "/event/EventList";
+	}
+	
+	@GetMapping("/LasteventList")
+	public String LasteventList(Model m)
+	{
+		LocalDateTime now=LocalDateTime.now();
+		
+		List<eventVO>eList=esv.LasteventList(now);
+		
+		for(int i=0;i<eList.size();i++)	//썸네일 따오기
+		{
+			if(eList.get(i).getEvContent().contains("<img"))
+			{
+				String content=eList.get(i).getEvContent();
+				String img=content.substring(content.indexOf("<img"), content.indexOf("\">")+2);
+				String src=img.substring(img.indexOf("\"")+1,img.indexOf("\">"));
+				eList.get(i).setThumbnail(src);
+			}
+		}
+		
+		log.info("이벤트리스트:"+eList);
+		m.addAttribute("list", eList);
+		m.addAttribute("msg","last");
 		return "/event/EventList";
 	}
 	
@@ -125,7 +164,7 @@ public class EventController {
 	public String eventModify(eventVO evo)
 	{
 		isOk=esv.eventModify(evo);
-		return "redirect:/event/eventList";
+		return "redirect:/event/OneventList";
 	}
 	
 	

@@ -14,4 +14,6 @@ public interface ReviewCommentService {
 
 	int ModifyComment(ReviewCommentVO rcvo);
 
+	int getCommentCount(int rvNo);
+
 }

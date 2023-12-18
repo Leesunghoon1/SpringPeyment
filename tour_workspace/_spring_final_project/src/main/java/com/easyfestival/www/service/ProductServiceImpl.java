@@ -10,7 +10,6 @@ import com.easyfestival.www.domain.PackageVO;
 import com.easyfestival.www.domain.ProductDTO;
 import com.easyfestival.www.domain.ProductFileVO;
 import com.easyfestival.www.domain.ProductListDTO;
-import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.repository.PackageDAO;
 import com.easyfestival.www.repository.ProductFileDAO;
 
@@ -66,10 +65,6 @@ public class ProductServiceImpl implements ProductService{
 			}
 		}
 		
-		
-		
-		
-		
 		return isUp;
 	}
 	@Override
@@ -114,8 +109,6 @@ public class ProductServiceImpl implements ProductService{
 		
 		return isOk;
 	}
-	
-	
 	@Override
 	public int removeProduct(long pkNo) {
 		// TODO Auto-generated method stub
@@ -128,12 +121,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		return isOk;
 	}
-	@Override
-	public int update(long totalPrice, long pkNoVal) {
-		int isOk = packdao.update(totalPrice, pkNoVal);
-		
-		return isOk;
-	}
+
 	
 	
 
