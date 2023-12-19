@@ -13,6 +13,7 @@ body {
 	min-width: 1200px;
 	width: 1200px;
 	margin-top: 120px;
+	background-color: #f5f6fb;
 }
 
 .main-top-top {
@@ -126,10 +127,13 @@ col {
 }
 
 .k1-kwk-ico-arr {
+	margin-left: 30px;
+	margin-right: 30px;
 	width: 24px;
 	height: 24px;
 	margin-left: 15px;
 	padding-right: 15px;
+	width: 24px;
 }
 
 .mid-detail {
@@ -159,15 +163,138 @@ col {
 }
 
 .mid-mid {
+	margin-top: 50px;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	padding-bottom: 24px;
-	border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+	display: flex;
 }
 
 .mid-mid-top {
 	float: left;
 	vertical-align: middle;
+	width: 100%;
+	
+}
+
+.main-mid-mid {
+	width: 100%;
+	border-top: 1px solid rgba(0, 0, 0, 0.87);
+	font-size: 18px;
+}
+
+.main-mid-mid tr th {
+	height: auto;
+	padding: 16px 10px;
+	background: rgba(0, 0, 0, 0.02);
+	border: none;
+	border-right: none;
+	border-bottom: none;
+	line-height: 23px;
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.6);
+	text-align: center;
+}
+
+.main-mid-mid tr td span {
+	display: block;
+	font-family: 'SpoqaHanSansNeo';
+	font-weight: 600px;
+	font-size: 25px;
+	text-align: center;
+}
+
+.mid-pay-box {
+	width: 100%;
+	margin-top: 50px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.87);
+	border-top: 1px solid rgba(0, 0, 0, 0.87);
+	display: flex;
+}
+
+.pay-txt p {
+	margin-left: 30px; font-size : 30px;
+	font-weight: 600px;
+	line-height: 30px;
+	color: rgba(0, 0, 0, 0.87);
+	font-size: 30px;
+}
+
+.pay_txt span {
+	display: block;
+	font-size: 16px;
+	line-height: 20px;
+	color: rgba(0, 0, 0, 0.47);
+	margin-top: 8px;
+}
+
+.pay-peyment {
+	display: inline-block;
+	margin-left: 16px;
+	font-size: 32px;
+	line-height: 40px;
+	color: #e53e30;
+	vertical-align: sub;
+	font-family: 'SpoqaHanSansNeo';
+	font-weight: 600;
+	margin-right: 45px;
+}
+
+.pay-box {
+	width: 100%
+}
+
+.pay-box ul {
+	position: relative;
+	padding: 0 0 0 12px;
+	background: none;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: left;
+	color: rgba(0, 0, 0, 0.47);
+}
+
+.left-content {
+	width: 70%;
+}
+
+.top-content {
+	width: 100%;
+}
+
+.mid-content {
+	width: 100%;
+}
+
+.mid-mid-bottom {
+	width: 100%;
+}
+
+.bottom-content {
+	width: 100%;
+}
+
+.mid-mid-user {
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.bottom-content-end {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.87);
+}
+
+.k1_kwk_agree .k_agree_tab {
+    display: flex;
+    min-height: 159px;
+    max-height: 680px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+    box-sizing: border-box;
 }

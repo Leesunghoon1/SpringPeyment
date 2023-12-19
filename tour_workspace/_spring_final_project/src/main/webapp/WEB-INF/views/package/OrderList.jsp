@@ -55,11 +55,11 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 
 								<dl>
 									<dt>출발일</dt>
-									<dd>${ollList.apDeparture }</dd>
+									<dd>${ollList.apArrival }</dd>
 								</dl>
 								<dl>
 									<dt>도착일</dt>
-									<dd>${ollList.apArrival }</dd>
+									<dd>${ollList.apDeparture }</dd>
 								</dl>
 									<dl>
 									<dt>여행지</dt>

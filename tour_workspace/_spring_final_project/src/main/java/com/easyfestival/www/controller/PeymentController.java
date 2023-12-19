@@ -307,6 +307,7 @@ public class PeymentController {
 		payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
 		payDTO.setPayMethod(result.getResponse().getPayMethod());
 		payDTO.setProductName(result.getResponse().getName());
+		System.out.println("result.getResponse().getName()" + result.getResponse().getName());
 		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
 		payDTO.setPkNo(pkNo);
 		payDTO.setSayongPointeu(point);
