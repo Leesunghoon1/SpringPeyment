@@ -103,11 +103,20 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 							<div class="item-info-tit">
 								<strong>${ollList.pkContent }</strong>
 							</div>
-							<div>
+							<div class="button-class">
+
 								<button type="button" order-num="${ollList.orderNum}"
-									class="payMentCancel site-btn">
+									class="payMentOk site-btn"  id="confirmButton">
+									<span>결제 확정</span>
+								</button>
+								
+								
+								<button type="button" order-num="${ollList.orderNum}"
+									class="payMentCancel site-btn" id="cancelButton">
 									<span>결제 취소</span>
 								</button>
+
+
 							</div>
 							<div class="item-price">
 								<strong>${ollList.totalPrice}원</strong>
@@ -121,24 +130,24 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 
 
 		</div>
-	<div class="panel-item">
-					<div class="tit">
-						<h2 class="main-item">항공권 예약 내역</h2>
-					</div>
-					<div class="banner-box">
-						<div class="text-head">
-							온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
-								src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
-								alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다.
-						</div>
-						<div>
-							<a><button type="button" class="btn-gradient-bottom">
-									<span>나의 항공권</span>
-								</button></a>
-						</div>
-
-					</div>
+		<div class="panel-item">
+			<div class="tit">
+				<h2 class="main-item">항공권 예약 내역</h2>
+			</div>
+			<div class="banner-box">
+				<div class="text-head">
+					온라인을 통해 항공권을 예약하신 고객께서는 <img class="aa"
+						src="https://www.kyowontour.com/images/emoji/emoji-airplane-departure02.svg"
+						alt="" style="width: 70px;"> 나의 항공권에서 확인이 가능합니다.
 				</div>
+				<div>
+					<a><button type="button" class="btn-gradient-bottom">
+							<span>나의 항공권</span>
+						</button></a>
+				</div>
+
+			</div>
+		</div>
 	</div>
 	<script type="text/javascript">
 		let orderNum = `<c:out value="${orderNum}" />`;

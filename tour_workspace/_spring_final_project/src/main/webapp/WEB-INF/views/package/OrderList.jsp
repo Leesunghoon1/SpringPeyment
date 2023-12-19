@@ -134,9 +134,5 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 	<script type="text/javascript" src="/resources/js/pagenation.js">
 		
 	</script>
-	<script src="/resources/js/peyment/myOrder.js">
-		
-	</script>
-
 </body>
 </html>

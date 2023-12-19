@@ -44,3 +44,6 @@ add sayong_pointeu bigint;
 
 ALTER TABLE pay_order_user
 add sayong_pointeu bigint;
+
+ALTER TABLE pay_order_user
+add confirmation CHAR(1);

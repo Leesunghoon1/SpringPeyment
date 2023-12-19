@@ -25,6 +25,6 @@ public class OrderVO {
 	private String impUid;
 	private Long userCount;
 	private Long sayongPointeu;
-	
+	private char confirmation;
 	
 }
