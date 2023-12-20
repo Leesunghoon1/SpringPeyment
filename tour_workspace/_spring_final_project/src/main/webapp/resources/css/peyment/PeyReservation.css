@@ -298,3 +298,147 @@ col {
     border-bottom: 1px solid rgba(0, 0, 0, 0.24);
     box-sizing: border-box;
 }
+
+.reservation-agree-strong{
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: 700;
+}
+.reservation-agree-span{
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+}
+.fa-solid fa-check{
+    margin-right: 10px;
+}
+.all-agree-span{
+    margin-right: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.all-agree-span2{
+    font-size: 14px;
+    font-weight: 700;
+}
+.reservation-agree-div{
+    padding-top: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.reservation-agree-check{
+    font-size: 14px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.bottom-peyment{
+		margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+	display: flex;
+}
+
+
+.selectBox * {
+	box-sizing: border-box;
+}
+
+.selectBox {
+	position: relative;
+	width: 150px;
+	height: 35px;
+	border-radius: 4px;
+	border: 2px solid #81D8D0;
+	background-size: 20px;
+	cursor: pointer;
+}
+
+.selectBox:after {
+	content: '';
+	display: block;
+	width: 2px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 35px;
+	background: #81D8D0;
+}
+
+.selectBox .label {
+	display: flex;
+	align-items: center;
+	width: inherit;
+	height: inherit;
+	border: 0 none;
+	outline: 0 none;
+	padding-left: 15px;
+	background: transparent;
+	cursor: pointer;
+}
+
+.selectBox .optionList {
+	position: absolute;
+	top: 28px;
+	left: 0;
+	width: 100%;
+	background: #81D8D0;
+	color: #fff;
+	list-style-type: none;
+	padding: 0;
+	border-radius: 6px;
+	overflow: hidden;
+	max-height: 0;
+	transition: .3s ease-in;
+}
+
+.selectBox .optionList::-webkit-scrollbar {
+	width: 6px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb {
+	background: #303030;
+	border-radius: 45px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb:hover {
+	background: #303030;
+}
+
+.selectBox.active .optionList {
+	max-height: 500px;
+}
+
+.selectBox .optionItem {
+	border-bottom: 1px dashed rgb(170, 72, 72);
+	padding: 5px 15px 5px;
+	transition: .1s;
+}
+
+.selectBox .optionItem:hover {
+	background: rgb(175, 93, 93);
+}
+
+.selectBox .optionItem:last-child {
+	border-bottom: 0 none;
+}
+label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+
+.btn-gradient {
+	position: relative;
+	width: 150px;
+	background: calc(100% - 7px) center no-repeat;
+	padding: 8px 18px;
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.btn-gradient .optionList::-webkit-scrollbar-track {
+	background: #303030;
+}

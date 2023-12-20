@@ -211,7 +211,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 							<td><span>598498원</span></td>
 							<td><span>5454원</span></td>
 							<td><span>9984원</span></td>
-							<td><span>6999999원</span></td>
+							<td><span>${aivo.price }</span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -253,50 +253,99 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 
 
 			<div class="bottom-content">
+				<div class="reservation-agree">
+					<div class="reservation-agree-strong">
+						<strong>약관동의</strong>
+					</div>
 
-				<div class="mid-mid-user">
-					<h2 class="mid-mid-user">탑승객</h2>
+					<div class="reservation-agree-span">
+						<i class="fa-solid fa-check all-check" id="icon-check"></i><span
+							class="all-agree-span">약관 전체 동의</span> <span
+							class="all-agree-span2">약관 전문을 모두 동의 하셔야 예약이 완료됩니다.</span>
+					</div>
 
-				</div>
+					<div class="reservation-agree-div">
+						<div class="reservation-agree-checklist">
+							<div>
+								<i class="fa-solid fa-check all-check select-check"
+									id="check-btn1"></i> <span class="reservation-agree-check">특별약관
+									설명 및 확인 (필수)</span>
+							</div>
+							<span> <a href="#" class="reservation-agree-content">내용보기</a>
+							</span>
+						</div>
 
-				<div class="pay-box">
-					<ul>
-						<li>영문 성/영문 이름/생년월일은 여권과 동일한 정보를 입력해주세요. (특수문자 및 공백 불가)</li>
-						<li>소아는 출발일 기준 만 2세 이상~만12세미만, 유아는 만2세 미만입니다.</li>
-						<li>도착일 기준, 만12세 이상 소아 / 만2세 이상 유아 / 성인을 동반하지 않은 혼자 여행하는 16세
-							미만 소아는 추가 요금이 발생하므로 당사로 문의 바랍니다.</li>
-					</ul>
-				</div>
+						<div class="reservation-agree-checklist">
+							<div>
+								<i class="fa-solid fa-check all-check select-check"
+									id="check-btn2"></i> <span class="reservation-agree-check">약관동의
+									(필수)</span>
+							</div>
+							<span> <a href="#" class="reservation-agree-content">내용보기</a>
+							</span>
+						</div>
 
+						<div class="reservation-agree-checklist">
+							<div>
+								<i class="fa-solid fa-check all-check select-check"
+									id="check-btn3"></i> <span class="reservation-agree-check">개인정보
+									수집 및 이용동의 (필수)</span>
+							</div>
+							<span> <a href="#" class="reservation-agree-content">내용보기</a>
+							</span>
+						</div>
 
-				<div class="bottom-content-end">
-					<h2 class="mid-mid-top">항공권 결제 동의사항</h2>
-				</div>
+						<div class="reservation-agree-checklist">
+							<div>
+								<i class="fa-solid fa-check all-check select-check"
+									id="check-btn4"></i> <span class="reservation-agree-check">개인정보
+									3자 제공 (필수)</span>
+							</div>
+							<span> <a href="#" class="reservation-agree-content">내용보기</a>
+							</span>
+						</div>
 
-				<div class="k1_kwk_agree">
-					<div class="k_agree_tab">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
+						<div class="reservation-agree-checklist">
+							<div>
+								<i class="fa-solid fa-check all-check select-check"
+									id="check-btn5"></i> <span class="reservation-agree-check">고유식별정보
+									수집안내 (필수)</span>
+							</div>
+							<span> <a href="#" class="reservation-agree-content">내용보기</a>
+							</span>
+						</div>
+
+					</div>
+					<div class="agree-span">
+						<span class="material-symbols-outlined">error</span> <span>개인정보의
+							수집, 제공 및 활용에 동의하지 않을 권리가 있으며, 미동의 시 여행서비스의 제공이 제한됩니다.</span>
 					</div>
 				</div>
 			</div>
 
+			<div class="bottom-peyment">
+					<div class="box">
+						<div class="selectBox">
+							<button class="label">결제수단 선택</button>
+							<ul class="optionList" id="paymentMethod">
+								<li class="optionItem" value="kakaopay" data-v-16d1a795>카카오페이</li>
+								<li class="optionItem" value="tosspay">토스</li>
+								<li class="optionItem" value="html5_inicis">KG이니시스</li>
+								<li class="optionItem" value="payco">페이코</li>
+								<li class="optionItem" value="settle">핵토파이낸셜</li>
+								<li class="optionItem" value="daou">키움페이</li>
+							</ul>
+
+						</div>
+
+					</div>
+					<button class="btn-gradient cyan" type="button"
+						onclick="requestPay()">
+						<span>결제하기</span>
+					</button>
+				</div>
 
 		</div>
-
-
-		<div></div>
-
-
 
 
 

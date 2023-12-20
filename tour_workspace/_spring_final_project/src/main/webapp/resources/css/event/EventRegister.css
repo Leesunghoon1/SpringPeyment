@@ -1,11 +1,16 @@
 body{
-  margin-top: 100px;
-  font-family: 'Trebuchet MS', serif;
-  line-height: 1.6;
   background-color: #ededed;
 }
 form{
-	width: 70%	
+	width: 70%
+}
+button{
+	background-color: #9c27b0;
+	color: #ffffff;
+	font-size: 12px;
+	border: none;
+	border-radius: 3px;
+	padding: 12px 30px;
 }
 .container{
 	padding-top:20px;
@@ -96,14 +101,19 @@ ul.tabs li{
 
 .tab1-low{
 	display: flex;
+	justify-content: flex-end;
+}
+
+.tab3-low{
+	display: flex;
 	justify-content: space-between;
 }
 
-#tab-2 div{
+#tab-3 div{
 	margin-bottom: 20px;
 }
 
-#tab-2 label{
+#tab-3 label{
 	margin-right: 10px;
 }
 
@@ -115,7 +125,7 @@ ul.tabs li{
 	width: 300px;
 }
 
-#tab-2 input:focus{
+#tab-3 input:focus{
 	border-color: #4caf50;
 }
 
@@ -139,4 +149,8 @@ ul.tabs li.current{
 	justify-content:center;
 	flex-direction: column;
   align-items: center;
+}
+
+.nextButton,.prevButton,.submitButton{
+	color: white;
 }

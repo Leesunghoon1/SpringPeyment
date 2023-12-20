@@ -40,6 +40,9 @@
 						<li>
 							<a href="/event/LasteventList" id="last">지난 이벤트<span>></span></a>
 						</li>
+						<li>
+							<a href="/event/eventRegister">이벤트 추가 <span>></span></a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -64,13 +67,16 @@
 			</ul>
 		</div>
 		</div>
-		<a href="/event/eventRegister"><button type="button">이벤트
-				추가</button></a>
 		<script type="text/javascript">
 			let msg = `<c:out value='${msg}'/>`;
+			let uid=`<c:out value='${uvo.id}'/>`;
 			console.log(msg);
 		</script>
+	
 		<script type="text/javascript" src="/resources/js/event/EventList.js"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script charset="UTF-8" src="https://gamekiki.com/kshop/kwidget/js/kwidget.js"></script>
+	 <script type="text/javascript" src="/resources/js/event/gamekiki.js"></script> -->
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

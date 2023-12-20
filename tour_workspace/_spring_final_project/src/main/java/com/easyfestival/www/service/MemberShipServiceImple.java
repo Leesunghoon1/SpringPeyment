@@ -130,7 +130,9 @@ public class MemberShipServiceImple implements MemberShipService {
 	@Transactional
 	public int pointCancle(OrderVO orderVO) {
 		// TODO Auto-generated method stub
+		
 		MemberShipVO memberShipVO = mdao.getmemberShip(orderVO.getId());
+		
 	    if (memberShipVO == null) {
 	        // 멤버십 정보가 없으면 처리 중단
 	        return 0;

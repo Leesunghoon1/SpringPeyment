@@ -89,12 +89,20 @@
 					
 					<div class="final-reser-payment-pay-info">
 						<div>
-							<span class="pep-cnt">인원</span>
-							<span class="reser-pay">0원</span>
+							<span class="pep-cnt">${aivo.pepleCount }</span>
+							<span class="reser-pay">${aivo.price }원</span>
 						</div>
-						<div>
-							<button>예약하기</button>
-						</div>
+						<form action="/peyment/PeyReservation" method="post">
+							<input type="hidden" name=ftPrice value="${aivo.price}">
+							<input type="hidden" name="departureDay" value="${aivo.departure }">
+							<input type="hidden" name="arruvalDay" value="${aivo.arrival }">
+							<input type="hidden" name="seatType" value="${aivo.seat }">
+							<input type="hidden" name="flightType" value="${aivo.verification }">
+							<input type="hidden" name="tfPeple" value="${aivo.peple }">
+							<div>
+								<button type="submit">예약하기</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
