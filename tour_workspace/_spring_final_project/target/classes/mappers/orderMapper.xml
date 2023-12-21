@@ -10,9 +10,9 @@
    <!-- 주문 정보 생성 -->
    <insert id="insert_pay" parameterType="orderVO">
       INSERT INTO pay_order_user (order_num, pk_no, id, order_date, total_price,
-      imp_uid, user_count, sayong_pointeu, product_name)
+      imp_uid, user_count, sayong_pointeu, product_name, airplane)
       VALUES (#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid},
-      #{userCount}, #{sayongPointeu}, #{productName});
+      #{userCount}, #{sayongPointeu}, #{productName}, #{airplane});
    </insert>
 
 

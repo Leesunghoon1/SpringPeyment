@@ -33,10 +33,12 @@ import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.UserVO;
+import com.easyfestival.www.service.FreeTitcketOrderService;
 import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.OrderService;
 import com.easyfestival.www.service.PayService;
 import com.easyfestival.www.service.ProductService;
+import com.mysql.cj.Session;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -68,6 +70,9 @@ public class PeymentController {
 
 	@Autowired
 	private MemberShipService memberShipService;
+	
+	@Autowired
+	private FreeTitcketOrderService freeTitcketOrderService;
 
 	public PeymentController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -135,6 +140,8 @@ public class PeymentController {
 			@PathVariable(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
 		return api.paymentByImpUid(imp_uid);
 	}
+	
+	
 
 	@PostMapping("orderCancle")
 	@ResponseBody
@@ -203,9 +210,10 @@ public class PeymentController {
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	@ResponseBody
 	public int paymentComplete(HttpSession session, String imp_uid, String merchant_uid, String totalPrice,
-			@RequestBody OrderVO orderVO) throws Exception {
+			@RequestBody OrderVO orderVO, @RequestBody FreeTitcketOrderVO freeTitcketOrderVO) throws Exception {
 		log.info(" orderDTO >>>> {}", orderVO);
 		String token = payService.getToken();
+		
 		log.info(" tocen >>>> {}", token);
 
 		String amount = payService.paymentInfo(orderVO.getImpUid(), token);
@@ -220,14 +228,19 @@ public class PeymentController {
 			payService.payMentCancle(token, orderVO.getImpUid(), amount, "결제 금액 오류");
 			return res;
 		}
-
+		
+		
+		
 		orderService.insert_pay(orderVO);
-
+		
+//		freeTitcketOrderVO.setOrderNum(orderVO.getOrderNum());
+		
+//		freeTitcketOrderService.update_num(freeTitcketOrderVO, orderVO.getId());
 		return res;
 
 	}
 
-	@GetMapping("/complete")
+	@GetMapping("/")
 	public String getOrderComplete(@RequestParam long payNum, OrderVO orderVO, HttpSession session, Model model)
 			throws Exception {
 
@@ -274,6 +287,7 @@ public class PeymentController {
 	public ResponseEntity<Long> payInfoPOST(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam String imp_uid, HttpSession session, @RequestParam long pkNo,
 			@RequestParam String enteredPoints) throws Exception {
+		
 		IamportResponse<Payment> result = api.paymentByImpUid(imp_uid);
 		PayDTO payDTO = new PayDTO();
 		long point = 0; // 기본값 설정
@@ -327,40 +341,5 @@ public class PeymentController {
 		return new ResponseEntity<>(orderStatus, HttpStatus.OK);
 	}
 
-	
-	 @GetMapping("PeyReservation") public String reservation(Model model,
-	 RedirectAttributes re) { AirplaneInfoVO aivo = (AirplaneInfoVO)
-	 model.getAttribute("aivo");
-	 
-	 System.out.println("aivo++" + aivo); re.addAttribute("aivo", aivo); 
-	 return	"/package/PeyReservation"; 
-	 }
-	 
-
-	@PostMapping("/peyment/PeyReservation")
-	public String handleReservation(@RequestParam("ftPrice") String ftPrice, @RequestParam("departureDay") String departureDay, @RequestParam("arruvalDay") String arruvalDay,
-			@RequestParam("seatType") String seatType, @RequestParam("flightType") String flightType,
-			@RequestParam("tfPeple") String tfPeple, Model model) {
-
-		FreeTitcketOrderVO freeTitcketOrderVO = new FreeTitcketOrderVO();
-		long ftPriceA = Long.parseLong(ftPrice);
-		long tfPepleA = Long.parseLong(tfPeple);
-		
-		freeTitcketOrderVO.setFtPrice(ftPriceA);
-		freeTitcketOrderVO.setDepartureDay(departureDay);
-		freeTitcketOrderVO.setArruvalDay(arruvalDay);
-		freeTitcketOrderVO.setSeatType(seatType);
-		freeTitcketOrderVO.setFlightType(flightType);
-		
-		freeTitcketOrderVO.setFtPeple(tfPepleA);
-		
-		model.addAttribute("freeTitcketOrderVO", freeTitcketOrderVO);
-		
-		
-
-		// 여기에서 폼 데이터를 사용하여 원하는 로직 수행
-
-		return "redirect:/payment/peyReservation";
-	}
 
 }

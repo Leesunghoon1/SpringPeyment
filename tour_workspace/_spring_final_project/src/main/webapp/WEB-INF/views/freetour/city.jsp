@@ -92,7 +92,7 @@
 							<span class="pep-cnt">${aivo.pepleCount }</span>
 							<span class="reser-pay">${aivo.price }원</span>
 						</div>
-						<form action="/peyment/PeyReservation" method="post">
+						<form action="/freeTourPeyment/PeyReservation" method="post">
 							<input type="hidden" name=ftPrice value="${aivo.price}">
 							<input type="hidden" name="departureDay" value="${aivo.departure }">
 							<input type="hidden" name="arruvalDay" value="${aivo.arrival }">
