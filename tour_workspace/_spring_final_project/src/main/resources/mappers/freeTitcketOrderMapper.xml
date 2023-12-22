@@ -6,14 +6,14 @@
 	namespace="com.easyfestival.www.repository.FreeTitcketOrderDAO">
 
 	<insert id="insert_payinfo">
-		INSERT INTO free_ticket_order (order_num, arruval,
+		INSERT INTO free_ticket_order (order_num, arrival,
 		departure_day,
-		arruval_day, seat_type, flight_type, ft_price, ft_peple,
-		id)
-		VALUES (#{orderNum}, #{arruval},
-		#{departureDay}, #{arruvalDay},
+		arrival_day, seat_type, flight_type, ft_price, ft_peple,
+		id, gate, city_code)
+		VALUES (#{orderNum}, #{arrival},
+		#{departureDay}, #{arrivalDay},
 		#{seatType}, #{flightType}, #{ftPrice}, #{ftPeple},
-		#{id});
+		#{id}, #{gate}, #{cityCode});
 	</insert>
 
 	<!-- 예시: freeTitcketOrderMapper.xml -->

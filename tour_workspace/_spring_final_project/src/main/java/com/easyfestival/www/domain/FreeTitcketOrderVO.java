@@ -18,13 +18,18 @@ public class FreeTitcketOrderVO {
 	private long orderNum;
 	private String id;
 	private char airplane;
-	private String arruval;
+	private String arrival;
+	private String cityCode;
+	
 	private String departureDay;
-	private String arruvalDay;
+	private String arrivalDay;
+	private String impUid;
 	private String seatType;
 	private String flightType;
 	private long ftPrice;
 	private long ftPeple;
-	private String impUid;
+	private String gate;
+	
+	
 
 }

@@ -200,7 +200,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><span>${freeTitcketOrderVO.arruvalDay }</span></td>
+							<td><span>${freeTitcketOrderVO.arrivalDay }</span></td>
 							<td><span>${freeTitcketOrderVO.seatType }</span></td>
 							<td><span>${freeTitcketOrderVO.flightType }</span></td>
 							<td><span>${freeTitcketOrderVO.ftPeple }</span></td>

@@ -3,10 +3,14 @@ package com.easyfestival.www.controller;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.easyfestival.www.domain.FreeTitcketOrderVO;
 import com.easyfestival.www.domain.OrderVO;
+import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.security.UserVO;
 import com.easyfestival.www.service.FreeTitcketOrderService;
 import com.easyfestival.www.service.MemberShipService;
@@ -64,6 +69,13 @@ public class freeTourPeymentController {
 	@Autowired
 	private FreeTitcketOrderService freeTitcketOrderService;
 	
+	public freeTourPeymentController() {
+		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
+		this.api = new IamportClient("7820725586500628",
+				"P9nYyc55RyknowCswTwMrhHUdHc2A0MJJGTjzuEGbUjsmm9XFl60NOBNleO8eljJn82tjH4O7I0kKQdr");
+	}
+	
+	
 	
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	@ResponseBody
@@ -83,10 +95,18 @@ public class freeTourPeymentController {
 			System.out.println(freeTitcketOrderVO.getFtPrice());
 			res = 0;
 			// 결제 취소
+			
 			payService.payMentCancle(token, freeTitcketOrderVO.getImpUid(), amount, "결제 금액 오류");
 			return res;
 		}
 		
+		/*
+		 * orderService.freeinfo_pay(freeTitcketOrderVO);
+		 */
+		freeTitcketOrderService.insert_payinfo(freeTitcketOrderVO);
+		
+		
+		orderService.freeinfo_pay(freeTitcketOrderVO);
 		
 		
 //		freeTitcketOrderVO.setOrderNum(orderVO.getOrderNum());
@@ -109,9 +129,10 @@ public class freeTourPeymentController {
 	
 	@PostMapping("/PeyReservation")
 	public String handleReservation(@RequestParam("ftPrice") String ftPrice,
-			@RequestParam("departureDay") String departureDay, @RequestParam("arruvalDay") String arruvalDay,
+			@RequestParam("departureDay") String departureDay, @RequestParam("arrivalDay") String arrivalDay,
 			@RequestParam("seatType") String seatType, @RequestParam("flightType") String flightType,
-			@RequestParam("tfPeple") String tfPeple, 
+			@RequestParam("tfPeple") String tfPeple, @RequestParam("arrival") String arrival, @RequestParam("date") String date, @RequestParam("gate") String gate, 
+			@RequestParam("cityCode") String cityCode, 
 			RedirectAttributes redirectAttributes, HttpSession session, Model model) {
 		
 		
@@ -120,16 +141,27 @@ public class freeTourPeymentController {
 		long ftPriceA = Long.parseLong(ftPrice);
 		long tfPepleA = Long.parseLong(tfPeple);
 		
+		System.out.println("date" + date); 
 		
-		freeTitcketOrderVO.setFtPrice(ftPriceA);
-		freeTitcketOrderVO.setDepartureDay(departureDay);
-		freeTitcketOrderVO.setArruvalDay(arruvalDay);
-		freeTitcketOrderVO.setSeatType(seatType);
-		freeTitcketOrderVO.setFlightType(flightType);
-		freeTitcketOrderVO.setFtPeple(tfPepleA);
+		String[] dateArray = date.split("~");
+		
+		departureDay = dateArray[0].trim();
+		
+		arrivalDay = dateArray[1].trim();
+		
+		
+		freeTitcketOrderVO.setArrival(arrival); // 도착공항
+		System.out.println("arruval" + arrival);
+		freeTitcketOrderVO.setFtPrice(ftPriceA); //가격
+		freeTitcketOrderVO.setDepartureDay(departureDay); // 출발일
+		freeTitcketOrderVO.setArrivalDay(arrivalDay); // 도착일
+		freeTitcketOrderVO.setSeatType(seatType); // 좌석타입
+		freeTitcketOrderVO.setFlightType(flightType); // 왕복 편도
+		freeTitcketOrderVO.setFtPeple(tfPepleA); // 인원
+		freeTitcketOrderVO.setGate(gate);
+		freeTitcketOrderVO.setCityCode(cityCode);
 		freeTitcketOrderVO.setId(((UserVO) session.getAttribute("uvo")).getId());
 		
-		freeTitcketOrderService.insert_payinfo(freeTitcketOrderVO);
 		
 		
 		
@@ -141,13 +173,6 @@ public class freeTourPeymentController {
 		/* return "redirect:/peyment/PeyReservation"; */
 	}
 	
-	@PostMapping("freeTour")
-	public String postFreeTour(FreeTitcketOrderVO freeVO, Model model) {
-		
-		System.out.println("FreeTitcketOrderVO++" + freeVO);
-		model.addAttribute("freeVO"+freeVO);
-		return "redirect:/peyment/PeyReservation";
-	}
 
 
 }
