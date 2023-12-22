@@ -132,7 +132,8 @@ public class freeTourPeymentController {
 			@RequestParam("departureDay") String departureDay, @RequestParam("arrivalDay") String arrivalDay,
 			@RequestParam("seatType") String seatType, @RequestParam("flightType") String flightType,
 			@RequestParam("tfPeple") String tfPeple, @RequestParam("arrival") String arrival, @RequestParam("date") String date, @RequestParam("gate") String gate, 
-			@RequestParam("cityCode") String cityCode, 
+			@RequestParam("cityCode") String cityCode, @RequestParam("airlineArr") String airlineArr, @RequestParam("flightIdArr") String flightIdArr, 
+			@RequestParam("airlineDep") String airlineDep, @RequestParam("flightIdDep") String flightIdDep,
 			RedirectAttributes redirectAttributes, HttpSession session, Model model) {
 		
 		
@@ -161,9 +162,10 @@ public class freeTourPeymentController {
 		freeTitcketOrderVO.setGate(gate);
 		freeTitcketOrderVO.setCityCode(cityCode);
 		freeTitcketOrderVO.setId(((UserVO) session.getAttribute("uvo")).getId());
-		
-		
-		
+		freeTitcketOrderVO.setAirlineArr(airlineArr);
+		freeTitcketOrderVO.setFlightIdArr(flightIdArr);
+		freeTitcketOrderVO.setAirlineDep(airlineDep);
+		freeTitcketOrderVO.setFlightIdDep(flightIdDep);
 		
 		System.out.println("freeTitcketOrderVO" + freeTitcketOrderVO);
 		model.addAttribute(freeTitcketOrderVO);
