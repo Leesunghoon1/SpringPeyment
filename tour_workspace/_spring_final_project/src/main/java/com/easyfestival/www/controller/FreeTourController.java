@@ -104,9 +104,9 @@ public class FreeTourController {
 		m.addAttribute("dep", departureAirportCode);
 		m.addAttribute("arr", arrivalAirportCode);
 		
-		List<AirInfoVO> depInfo = fhd.getDepartureInfo(arrivalAirportCode,aivo); // 출발 정보 / 인천 -> 해외
-		List<AirArrInfoVO> arrInfo = fhd.getArrivalInfo(departureAirportCode, aivo); // 도착 정보 / 해외 -> 인천
 		
+		List<AirInfoVO> depInfo = fhd.getDepartureInfo(arrivalAirportCode, aivo); // 출발 정보 / 인천 -> 해외
+		List<AirArrInfoVO> arrInfo = fhd.getArrivalInfo(departureAirportCode, aivo); // 도착 정보 / 해외 -> 인천
 		
 		
 		m.addAttribute("aivo", aivo);
@@ -116,7 +116,9 @@ public class FreeTourController {
 			m.addAttribute("arrInfo", arrInfo);
 		}else {
 			m.addAttribute("arrInfo", "noAirInfo");
-		}	
+		}
+		
+		
 		if(depInfo != null) {							
 			m.addAttribute("depInfo", depInfo);
 		}else {

@@ -104,7 +104,7 @@ public class FreetourHandler {
 		if(items.size() > 0) {
 			for(int i=0; i<items.size(); i++) { 
 				JSONObject a = (JSONObject)items.get(i);
-				airList.add(gson.fromJson(a.toJSONString(), AirArrInfoVO.class)) ;
+				airList.add(gson.fromJson(a.toJSONString(), AirArrInfoVO.class));
 			}			
 			return airList;
 		}else {
@@ -195,7 +195,7 @@ public class FreetourHandler {
 		if(items.size() > 0) {
 			for(int i=0; i<items.size(); i++) { 
 				JSONObject a = (JSONObject)items.get(i);
-				airList.add(gson.fromJson(a.toJSONString(), AirInfoVO.class)) ;
+				airList.add(gson.fromJson(a.toJSONString(), AirInfoVO.class));
 			}
 			return airList;
 		}else {

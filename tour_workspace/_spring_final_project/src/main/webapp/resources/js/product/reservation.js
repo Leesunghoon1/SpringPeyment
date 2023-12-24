@@ -3,8 +3,6 @@
  */
  
 
-console.log("js" + pkNoVal);
-
 
 let checkbox = document.querySelectorAll(".all-check");
 let icon = document.getElementById("icon-check");
@@ -15,8 +13,6 @@ let reservationPrice = document.getElementById("reservation-price"); // 변동�
 let packagePrice = document.getElementById("package-price"); // 패키지 가격
 
 let userCount=0;
-
-console.log("aa" + reservationPrice.value);
 
 
 
@@ -107,6 +103,9 @@ document.addEventListener('click', (e) => {
     console.log("totalPrice:", totalPrice);
 
 });
+
+
+
 
 
 let closeBtn = document.querySelectorAll('.terms-modal-close'), // 모달창 닫기

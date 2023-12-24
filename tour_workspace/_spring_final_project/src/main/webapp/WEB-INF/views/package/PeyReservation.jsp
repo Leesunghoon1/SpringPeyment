@@ -21,13 +21,15 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <link rel="stylesheet" href="/resources/css/peyment/PeyReservation.css"
 	type="text/css">
+	<link rel="stylesheet" href="/resources/css/product/product_reservation.css"
+	type="text/css">
 <title>Home</title>
 </head>
 
 <body>
-
+	<c:set value="${ftvo }" var="ftvo"/>
 	<div class="main-container">
-
+		
 		<div class="left-content">
 			<div class="top-content">
 				<div class="main-top-top">
@@ -36,13 +38,7 @@
 						<span>비행상세</span>
 					</p>
 				</div>
-				<div class="main-top-mid">
-					<div class="main-top-mid-content2">
-						<p class="plan">인천 ICN</p>
-						<span class="mid-content-icon"> </span>
-						<p class="plan">도쿄 NRT</p>
-					</div>
-				</div>
+
 				<table class="main-top-bottom">
 					<colgroup>
 						<col style="width: 29%">
@@ -54,19 +50,20 @@
 						<tr>
 							<th scope="col">항공편</th>
 							<th scope="col">여정</th>
-							<th scope="col">좌석등급</th>
-							<th scope="col">무료수하물</th>
+							<th scope="col">좌석</th>
+							<th scope="col">편명</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
 								<div class="td-top">
-									<img
-										src="https://air.kyowontour.com/air/wfw/imgs/mbl/logo/air/KE.png"
-										alt="KE" class="k1-air-logo">
+									
+									<i class="fa-solid fa-plane-departure"></i>
+									
+									
 									<div class="tit-box">
-										<p>대한항공 705편</p>
+										<p>${ftvo.airlineDep }</p>
 									</div>
 								</div>
 							</td>
@@ -74,23 +71,26 @@
 								<div class="txt_area">
 									<div class="k1-kwk-itinerary_box">
 										<div class="tit-box">
-											<p>인천ICN</p>
-											<p>${freeTitcketOrderVO.departureDay }</p>
-										</div>
-										<span class="k1-kwk-ico-arr"><img
-											src="https://air.kyowontour.com/air/imgs_ibe/b2c/24_Oneway_arr_ico@2x.png"></span>
-										<div class="tit-box">
 											<p>인천 ICN</p>
-											<p>시간~</p>
 										</div>
+										<span class="k1-kwk-ico-arr">
+											<i class="fa-solid fa-caret-right" id="air-arrow"></i>
+										</span>
+										<div class="tit-box">
+											<p>${ftvo.arrival } ${ftvo.cityCode }</p>
+											
+										</div>
+									</div>
+									<div class="ftvo-div">
+										<p class="ftvo-div-p depDay">${ftvo.departureDay }</p>
 									</div>
 								</div>
 							</td>
 							<td>
-								<div class="txt-area">${freeTitcketOrderVO.seatType }</div>
+								<div class="txt-area seat-type">${ftvo.seatType }</div>
 							</td>
 							<td>
-								<div class="txt-area">1개</div>
+								<div class="txt-area flight-id">${ftvo.flightIdDep}</div>
 							</td>
 						</tr>
 					</tbody>
@@ -98,10 +98,6 @@
 
 
 				<div class="mid-detail">
-					<div class="mid-txt-area">
-						<span>총 소요시간</span>
-
-					</div>
 					<div class="mid-txt-area2">
 						<ul>
 							<li>대기예약시 모든 좌석이 확인되어야만, 항공권 구매가 가능합니다.</li>
@@ -120,19 +116,20 @@
 						<tr>
 							<th scope="col">항공편</th>
 							<th scope="col">여정</th>
-							<th scope="col">좌석등급</th>
-							<th scope="col">무료수하물</th>
+							<th scope="col">좌석</th>
+							<th scope="col">편명</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
 								<div class="td-top">
-									<img
-										src="https://air.kyowontour.com/air/wfw/imgs/mbl/logo/air/KE.png"
-										alt="KE" class="k1-air-logo">
+									
+									<i class="fa-solid fa-plane-departure"></i>
+									
+									
 									<div class="tit-box">
-										<p>대한항공 705편</p>
+										<p>${ftvo.airlineArr }</p>
 									</div>
 								</div>
 							</td>
@@ -140,32 +137,31 @@
 								<div class="txt_area">
 									<div class="k1-kwk-itinerary_box">
 										<div class="tit-box">
-											<p>${freeTitcketOrderVO.arrival }${freeTitcketOrderVO.cityCode }</p>
-											<p></p>
+											<p>${ftvo.arrival } ${ftvo.cityCode }</p>
 										</div>
-										<span class="k1-kwk-ico-arr"><img
-											src="https://air.kyowontour.com/air/imgs_ibe/b2c/24_Oneway_arr_ico@2x.png"></span>
+										<span class="k1-kwk-ico-arr">
+											<i class="fa-solid fa-caret-right" id="air-arrow"></i>
+										</span>
 										<div class="tit-box">
 											<p>인천 ICN</p>
-											<p>${freeTitcketOrderVO.arrivalDay }</p>
+											
 										</div>
+									</div>
+									<div class="ftvo-div">
+										<p class="ftvo-div-p arrDay">${ftvo.arrivalDay }</p>
 									</div>
 								</div>
 							</td>
 							<td>
-								<div class="txt-area">${freeTitcketOrderVO.seatType }</div>
+								<div class="txt-area">${ftvo.seatType }</div>
 							</td>
 							<td>
-								<div class="txt-area">개</div>
+								<div class="txt-area">${ftvo.flightIdArr}</div>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="mid-detail">
-					<div class="mid-txt-area">
-						<span>총 소요시간</span>
-
-					</div>
 					<div class="mid-txt-area2">
 						<ul>
 							<li>대기예약시 모든 좌석이 확인되어야만, 항공권 구매가 가능합니다.</li>
@@ -200,11 +196,11 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><span>${freeTitcketOrderVO.arrivalDay }</span></td>
-							<td><span>${freeTitcketOrderVO.seatType }</span></td>
-							<td><span>${freeTitcketOrderVO.flightType }</span></td>
-							<td><span>${freeTitcketOrderVO.ftPeple }</span></td>
-							<td><span>${freeTitcketOrderVO.ftPrice }</span></td>
+							<td><span>${ftvo.arrival }</span></td>
+							<td><span>${ftvo.seatType }</span></td>
+							<td><span>${ftvo.flightType }</span></td>
+							<td><span class="ft-Peple">${ftvo.ftPeple }</span></td>
+							<td><span class="ft-Price">${ftvo.ftPrice }</span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -228,9 +224,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><span>이성훈</span></td>
-							<td><span>010-7441-5488</span></td>
-							<td><span>fecd119@naver.com</span></td>
+							<td><span>${uvo.name }</span></td>
+							<td><span>${uvo.phoneNumber }</span></td>
+							<td><span>${uvo.email }</span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -245,81 +241,12 @@
 
 
 
-			<div class="bottom-content">
-				<div class="reservation-agree">
-					<div class="reservation-agree-strong">
-						<strong>약관동의</strong>
-					</div>
-
-					<div class="reservation-agree-span">
-						<i class="fa-solid fa-check all-check" id="icon-check"></i><span
-							class="all-agree-span">약관 전체 동의</span> <span
-							class="all-agree-span2">약관 전문을 모두 동의 하셔야 예약이 완료됩니다.</span>
-					</div>
-
-					<div class="reservation-agree-div">
-						<div class="reservation-agree-checklist">
-							<div>
-								<i class="fa-solid fa-check all-check select-check"
-									id="check-btn1"></i> <span class="reservation-agree-check">특별약관
-									설명 및 확인 (필수)</span>
-							</div>
-							<span> <a href="#" class="reservation-agree-content">내용보기</a>
-							</span>
-						</div>
-
-						<div class="reservation-agree-checklist">
-							<div>
-								<i class="fa-solid fa-check all-check select-check"
-									id="check-btn2"></i> <span class="reservation-agree-check">약관동의
-									(필수)</span>
-							</div>
-							<span> <a href="#" class="reservation-agree-content">내용보기</a>
-							</span>
-						</div>
-
-						<div class="reservation-agree-checklist">
-							<div>
-								<i class="fa-solid fa-check all-check select-check"
-									id="check-btn3"></i> <span class="reservation-agree-check">개인정보
-									수집 및 이용동의 (필수)</span>
-							</div>
-							<span> <a href="#" class="reservation-agree-content">내용보기</a>
-							</span>
-						</div>
-
-						<div class="reservation-agree-checklist">
-							<div>
-								<i class="fa-solid fa-check all-check select-check"
-									id="check-btn4"></i> <span class="reservation-agree-check">개인정보
-									3자 제공 (필수)</span>
-							</div>
-							<span> <a href="#" class="reservation-agree-content">내용보기</a>
-							</span>
-						</div>
-
-						<div class="reservation-agree-checklist">
-							<div>
-								<i class="fa-solid fa-check all-check select-check"
-									id="check-btn5"></i> <span class="reservation-agree-check">고유식별정보
-									수집안내 (필수)</span>
-							</div>
-							<span> <a href="#" class="reservation-agree-content">내용보기</a>
-							</span>
-						</div>
-
-					</div>
-					<div class="agree-span">
-						<span class="material-symbols-outlined">error</span> <span>개인정보의
-							수집, 제공 및 활용에 동의하지 않을 권리가 있으며, 미동의 시 여행서비스의 제공이 제한됩니다.</span>
-					</div>
-				</div>
-			</div>
+			
 
 			<div class="bottom-peyment">
 				<div class="box">
 					<div class="selectBox">
-						<button class="label">결제수단 선택</button>
+						<button class="label">결제수단 선택 <i class="fa-solid fa-caret-down" id="pay-button-arrow"></i></button>
 						<ul class="optionList" id="paymentMethod">
 							<li class="optionItem" value="kakaopay" data-v-16d1a795>카카오페이</li>
 							<li class="optionItem" value="tosspay">토스</li>
@@ -328,14 +255,15 @@
 							<li class="optionItem" value="settle">핵토파이낸셜</li>
 							<li class="optionItem" value="daou">키움페이</li>
 						</ul>
-
 					</div>
-
 				</div>
-				<button class="btn-gradient cyan" type="button"
-					onclick="requestPay()">
-					<span>결제하기</span>
-				</button>
+				
+				<div class="payment-btn">
+					<button class="btn-gradient cyan" type="button"
+						onclick="requestPay()">
+						<span>결제하기</span>
+					</button>
+				</div>
 			</div>
 
 		</div>
@@ -344,15 +272,25 @@
 
 
 	</div>
+	
+	
 </body>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
+<script type="text/javascript"
+		src="/resources/js/product/reservation.js"></script>
 <script type="text/javascript">
 	let fTOVO = `<c:out value="${freeTitcketOrderVO}" />`;
+	let idVal = `<c:out value="${uvo.id}" />`;
+	let gate = `<c:out value="${freeTitcketOrderVO.gate}" />`;
+	let airplane = `<c:out value="${freeTitcketOrderVO.airplane}" />`;
+	let arrival = `<c:out value="${freeTitcketOrderVO.arrival}" />`;
+	let cityCode = `<c:out value="${freeTitcketOrderVO.cityCode}" />`;
+	let seatType = `<c:out value="${freeTitcketOrderVO.seatType}" />`;
 </script>
 
 <script type="text/javascript"
 	src="/resources/js/peyment/PeyReservation.js">
 	
 </script>
+
 </html>
