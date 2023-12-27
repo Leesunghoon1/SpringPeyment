@@ -66,7 +66,8 @@ canvas {
             <div class="event-detail-period">${evo.evStart }~${evo.evEnd}</div>
          </div>
          <div class="event-detail-content" id="contentArea">
-            ${fn:replace(evo.evContent,'\\','/')}</div>
+         	${fn:replace(evo.evContent,'\\','/')}
+         </div>
          <div class="button-box">
             <button class="play-event">이벤트 참여하기</button>
             <c:if test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get()}">
@@ -90,7 +91,7 @@ canvas {
                   </div>
                   <div class="moving-box">
                      <i class="fa-solid fa-backward" id="play"></i>
-                     <button onclick="rotate()" id="roulette-btn">룰렛 돌리기</button>
+                     <button id="roulette-btn">룰렛 돌리기</button>
                   </div>
                </div>
             </div>
@@ -122,6 +123,8 @@ canvas {
       let msg = `<c:out value='${msg}'/>`;
       if (msg == "attendanced")
          alert('이미 출석했습니다.');
+      else if(msg=="attendance")
+    	  alert('출석완료! ${point}포인트 적립!');
       console.log(evType);
    </script>
    <script type="text/javascript" src="/resources/js/event/EventDetail.js"></script>

@@ -68,7 +68,12 @@
 		VALUES
 		(#{id})
 	</insert>
-
+	
+	<update id="joinPoint">
+		update membership set point = point + 1000
+		where id = #{id}
+	</update>
+	
 	<!-- 환불에 따른 포인트 조정 -->
 	<update id="pointCancle">
 		UPDATE membership

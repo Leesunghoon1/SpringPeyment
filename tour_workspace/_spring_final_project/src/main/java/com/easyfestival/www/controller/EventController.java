@@ -1,10 +1,7 @@
 package com.easyfestival.www.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,9 +14,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,19 +27,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.easyfestival.www.domain.AttendanceHistoryVO;
+import com.easyfestival.www.domain.RouletteHistoryVO;
 import com.easyfestival.www.domain.attendanceVO;
 import com.easyfestival.www.domain.eventDTO;
 import com.easyfestival.www.domain.eventVO;
-import com.easyfestival.www.domain.prizeVO;
 import com.easyfestival.www.domain.rouletteVO;
 import com.easyfestival.www.service.EventService;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -197,7 +189,7 @@ public class EventController {
 	public String eventRemove(@RequestParam("evNo")int evNo)
 	{
 		isOk=esv.eventRemove(evNo);
-		return "redirect:/event/eventList";
+		return "redirect:/event/OneventList";
 	}
 	@GetMapping("/eventModify")
 	public String eventModify(Model m,@RequestParam("evNo")int evNo)
@@ -241,10 +233,10 @@ public class EventController {
 	
 	
 	@PostMapping("/postPrize")
-	public ResponseEntity<String> postPrize(@RequestBody prizeVO prvo)
+	public ResponseEntity<String> postPrize(@RequestBody RouletteHistoryVO rhvo)
 	{
-		log.info("prvo:"+prvo);
-		isOk=esv.registerPrize(prvo);
+		log.info("prvo:"+rhvo);
+		isOk=esv.registerPrize(rhvo);
 		
 		return isOk>0 ? new ResponseEntity<String>("1",HttpStatus.OK):new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -269,16 +261,21 @@ public class EventController {
 		AttendanceHistoryVO ahvo=esv.getAttendanceHistory(evNo,id,now);
 		//현재 이벤트의 포인트 값을 사용하기위해 불러옴
 		attendanceVO atvo=esv.getAttendance(evNo);
+		int point=0;
 		
 		if(ahvo==null) { //같은 기록이 없다면
 			esv.attendanceHistory(evNo,id,now);//출석이벤트 기록 db에 저장
 			esv.addpoint(id,atvo.getPoint()); //포인트 지급
+			point+=atvo.getPoint();
 			//지정횟수만큼 출석했을때마다 추가 포인트를 주기 위해서 몇번 출석했는지 값을 불러옴
 			int AttendanceCount=esv.getAttendanceCount(evNo,id);
 			if(AttendanceCount%atvo.getSpecialPointCount()==0)	//특정횟수만큼 출석하면 추가 포인트
 			{
 				esv.addSpecialPoint(id,atvo.getSpecialPoint());
+				point+=atvo.getSpecialPoint();
 			}
+			redirectattributes.addFlashAttribute("msg", "attendance");
+			redirectattributes.addFlashAttribute("point", point);
 		}
 		else {
 			redirectattributes.addFlashAttribute("msg", "attendanced");	//model로 보내면 redirect를 거쳐서 값을 못씀
@@ -302,6 +299,16 @@ public class EventController {
 		attendanceVO atvo=esv.getAttendance(evNo);
 		
 		return new ResponseEntity<attendanceVO>(atvo,HttpStatus.OK);
+	}
+	
+	@PostMapping("/getRouletteHistory")
+	public ResponseEntity<String> getRouletteHistory(@RequestBody RouletteHistoryVO rhvo)
+	{
+		log.info("rhvo 들어옴?"+rhvo);
+		RouletteHistoryVO Drhvo=esv.getRouletteHistory(rhvo);
+		log.info("rhvo 비었니?"+Drhvo);
+		
+		return Drhvo == null ? new ResponseEntity<String>("1",HttpStatus.OK):new ResponseEntity<String>("2",HttpStatus.OK);
 	}
 
 }

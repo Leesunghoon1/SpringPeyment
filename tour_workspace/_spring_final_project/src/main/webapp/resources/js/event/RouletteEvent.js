@@ -1,5 +1,5 @@
 
- 
+
 const $c = document.querySelector("canvas");
 const ctx = $c.getContext(`2d`);
 
@@ -7,32 +7,32 @@ let product;
 const colors = ["#ffe9bb", "#ffffff"];
 
 
-  $.ajax({
-    type: "POST",            // HTTP method type(GET, POST) 형식이다.
-    url: "/event/getPrize",      // 컨트롤러에서 대기중인 URL 주소이다.
-    data: {evNo:evNo},     
-    success: function (res) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-      if(res!=null){
-        console.log(res);
-        product=res.split(",");
-        console.log(product);
-        newMake();
-      }
-      else{
-        product = [
-          "떡볶이", '돈가스', "초밥", "피자", "냉면", "치킨", '족발', "피자", "삼겹살",
-        ];
-      }
-    },
-    error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-      alert("통신 실패.");
+$.ajax({
+  type: "POST",            // HTTP method type(GET, POST) 형식이다.
+  url: "/event/getPrize",      // 컨트롤러에서 대기중인 URL 주소이다.
+  data: { evNo: evNo },
+  success: function (res) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+    if (res != null) {
+      console.log(res);
+      product = res.split(",");
+      console.log(product);
+      newMake();
     }
-  });
+    else {
+      product = [
+        "떡볶이", '돈가스', "초밥", "피자", "냉면", "치킨", '족발', "피자", "삼겹살",
+      ];
+    }
+  },
+  error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+    alert("통신 실패.");
+  }
+});
 
 
 const newMake = () => { //룰렛 만들기
 
-  
+
   const [cw, ch] = [$c.width / 2, $c.height / 2];
   const arc = Math.PI / (product.length / 2);
 
@@ -45,7 +45,7 @@ const newMake = () => { //룰렛 만들기
     ctx.closePath();
   }
 
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "black";
   ctx.font = "18px Pretendard";
   ctx.textAlign = "center";
 
@@ -68,6 +68,39 @@ const newMake = () => { //룰렛 만들기
     ctx.restore();
   }
 }
+let roulettebtn = document.getElementById('roulette-btn');
+roulettebtn.addEventListener('click', () => {
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+  var day = ('0' + today.getDate()).slice(-2);
+  var dateString = year + '-' + month + '-' + day;
+
+  let RouletteHistoryVO = {
+    evNo: evNo,
+    id: uid,
+    date: dateString
+  };
+
+  $.ajax({
+    type: "POST",            // HTTP method type(GET, POST) 형식이다.
+    url: "/event/getRouletteHistory",      // 컨트롤러에서 대기중인 URL 주소이다.
+    contentType: "application/json;charset=UTF-8",
+    data: JSON.stringify(RouletteHistoryVO),
+    success: function (res) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+      console.log(res);
+      if (res == 1) {
+        rotate();
+      }
+      else if (res == 2) {
+        alert("하루에 한번만 참여가능합니다.");
+      }
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+      alert("통신 실패.");
+    }
+  });
+})
 
 const rotate = () => {  //룰렛 돌리기
   $c.style.transform = `initial`;
@@ -83,8 +116,9 @@ const rotate = () => {  //룰렛 돌리기
     $c.style.transform = `rotate(-${rotate}deg)`;
     $c.style.transition = `2s`;
 
-    setTimeout(() => alert(`축하드립니다! ${product[ran]} 당첨!`), 2000);
-    var prizeVO = {
+    setTimeout(() => alert(`축하드립니다! ${product[ran]} point 당첨!`), 2000);
+    var RouletteHistoryVO = {
+      evNo: evNo,
       id: uid,
       prize: `${product[ran]}`
     }
@@ -93,12 +127,12 @@ const rotate = () => {  //룰렛 돌리기
     $.ajax({
       type: "POST",            // HTTP method type(GET, POST) 형식이다.
       url: "/event/postPrize",      // 컨트롤러에서 대기중인 URL 주소이다.
-      contentType : "application/json;charset=UTF-8",
-      data: JSON.stringify(prizeVO),            // Json 형식의 데이터이다.
+      contentType: "application/json;charset=UTF-8",
+      data: JSON.stringify(RouletteHistoryVO),            // Json 형식의 데이터이다.
       error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
         alert("통신 실패.")
       }
     });
-}, 1);
+  }, 1);
 
-};\
+};

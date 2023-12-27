@@ -76,12 +76,13 @@ public class UserController {
       avo.setId(uvo.getId());
       avo.setAuth("ROLE_USER");
       isOk *= usv.authUser(avo);
-
+      
       log.info("user join >>>>> " + (isOk > 0 ? "Success" : "Fail"));
       if (isOk > 0) {
          re.addFlashAttribute("message", 1); // 성공하면 메시지로 1 리턴
          re.addFlashAttribute("joinID", uvo.getId()); // 회원가입 완료 아이디 전달
          memberShipService.insertId(uvo.getId());
+         memberShipService.joinPoint(uvo.getId());
       }
       return "redirect:/";
    }
@@ -176,10 +177,10 @@ public class UserController {
       // 항공권 리스트
       List<FreeTitcketOrderVO> ftList = ftsv.getFreeTicketList(uvo.getId());
       model.addAttribute("msvo", msvo); // 멤버쉽정보
-      model.addAttribute("hList", hList);
-      model.addAttribute("packList", packageList);
-      model.addAttribute("faList", faList);
-      model.addAttribute("ftList", ftList);
+      model.addAttribute("hList", hList); // 문의사항 정보
+      model.addAttribute("packList", packageList); // 패키지상품 정보
+      model.addAttribute("faList", faList); // 관심상품 정보
+      model.addAttribute("ftList", ftList); // 항공정보
    }
 
    // 아이디, 비밀번호 찾기

@@ -140,7 +140,7 @@ public class MemberShipServiceImple implements MemberShipService {
 
 	    // 2. 환불할 포인트 및 금액 계산
 	    
-	    long pointA = orderVO.getSayongPointeu();
+	    long pointA = orderVO.getUsePoint();
 	
 	    
 	
@@ -168,6 +168,11 @@ public class MemberShipServiceImple implements MemberShipService {
 	    
 	    mdao.pointCancle(point, orderVO.getId());
 	    return 1;
+	}
+
+	@Override
+	public void joinPoint(String id) {
+		mdao.joinPoint(id);
 	}
 
 }

@@ -9,7 +9,7 @@ let ticketModalBack = document.querySelector('.flight-ticket-modal-back'), // ык
 
     ticketList.forEach(e =>{
         e.addEventListener('click', ()=>{
-            let gateVal = e.dataset.gate;
+            let gateVal = '42A';
             let cityCodeVal = e.dataset.city;
             let departureDayVal = e.dataset.departure;
             let seatTypeVal = e.dataset.seat;

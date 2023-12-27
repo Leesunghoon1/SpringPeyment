@@ -59,16 +59,15 @@ body {
 	overflow: hidden;
 	width: 100%;
 	margin-bottom: 30px;
+	box-sizing: border-box;
 }
 
 .no {
 	display: flex;
 	flex-direction: column;
-	margin-top: 20px;
 	width: 100%;
 	font-size: 20px;
 	margin-bottom: 30px;
-	margin-left: 20px;
 }
 
 .nodt {
@@ -110,13 +109,16 @@ body {
 }
 
 .item-info {
-	margin-left: 20px;
+	padding: 20px;
 	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
 }
 
 .text-bottom {
 	text-align: left;
-	padding-top: 30px;
+	padding: 30px 35px 0 0;
 	font-size: 24px;
 	font-weight: 500;
 	line-height: 48px;
@@ -125,7 +127,14 @@ body {
 .text-bottom .current-icon {
 	font-size: 40px;
 }
-
+.travle-info{
+	display: flex;
+	align-items: flex-start;
+	gap:10px;
+}
+h4{
+	margin-bottom: 1rem;
+}
 .main-header {
 	width: 100%;
 	display: flex;
@@ -134,9 +143,10 @@ body {
 	display: flex;
 }
 
-.item-head {
+.item-head, .item-head a{
 	display: flex;
 	justify-content: space-between;
+	color:black;
 }
 
 .my-icon {
@@ -153,39 +163,38 @@ body {
 .payMentCancel {
 	position: relative;
 	width: 150px;
-	background: calc(100% - 7px) center no-repeat;
+	background: #E53E30;
 	padding: 8px 18px;
-	font-size: 14px;
+	font-size: 16px;
 	border-radius: 10px;
-	border: solid red;
+	color: #fff;
 	margin-bottom: 30px;
+	border: none;
+	cursor: pointer;
+	font-weight: 700;
 }
 
 .payMentCancel .optionList::-webkit-scrollbar-track {
 	background: #303030;
 }
 
-.payMentCancel span {
-	color: red;
-}
-
 .payMentOk {
 	position: relative;
+	border: none;
 	width: 150px;
-	background: calc(100% - 7px) center no-repeat;
+	height: 60px;
+	font-weight: 700;
+	background: #222;
 	padding: 8px 18px;
-	font-size: 14px;
+	font-size: 16px;
 	border-radius: 10px;
-	border: solid blue;
+	color: #fff;
 	margin-bottom: 30px;
+	cursor: pointer;
 }
 
 .payMentOk .optionList::-webkit-scrollbar-track {
 	background: #303030;
-}
-
-.payMentOk span {
-	color: blue;
 }
 
 .paging {
@@ -223,16 +232,18 @@ body {
 
 .btn-gradient-bottom {
 	position: relative;
-	width: 150px;
-	background: #fff;
-	padding: 8px 18px;
-	font-size: 14px;
-	border-radius: 10px;
-	border: solid #666;
-	margin-left: 130px;
-	color: #1c1c1c;
+    width: 150px;
+    background: #fff;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #1c1c1c;
+    margin-left: 130px;
+    cursor: pointer;
 }
-
+.btn-gradient-bottom:hover{
+	background: #EEEDED;
+}
 .item-price {
 	width: 100%;
 	padding-right: 40px;

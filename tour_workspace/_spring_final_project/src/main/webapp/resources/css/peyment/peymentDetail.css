@@ -325,7 +325,7 @@ tbody th {
 	position: relative;
 	width: 200px;
 	height: 60px;
-	background-color: #1c1c1c;
+	background-color: #E53E30;
 	color: #fff;
 	border: none;
 	font-size: 20px;
@@ -334,7 +334,7 @@ tbody th {
 	cursor: pointer;
 }
 .btn-gradient:hover{
-	background-color: #524a4e;
+	background-color: #D71313;
 }
 .btn-gradient .optionList::-webkit-scrollbar-track {
 	background: #303030;
@@ -376,12 +376,17 @@ tbody th {
 .btn-gradient-bottom {
 	position: relative;
 	width: 150px;
-	background: calc(100% - 7px) center no-repeat;
+	background: #fff;
 	padding: 8px 18px;
 	font-size: 14px;
 	border-radius: 10px;
-	border: solid #666;
+	border: 2px solid #1c1c1c;
 	margin-left: 130px;
+	cursor: pointer;
+}
+
+.btn-gradient-bottom:hover{
+	background: #EEEDED;
 }
 
 .main-bottom {

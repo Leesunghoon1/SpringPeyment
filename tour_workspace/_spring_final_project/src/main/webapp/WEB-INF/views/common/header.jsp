@@ -31,7 +31,7 @@
          <!-- 메인로고 -->
          <div class="main-logo">
             <a href="/">
-               <img alt="" src="/resources/image/main-logo/landmark-logo2.png">
+               <img alt="" src="/resources/image/main-logo/랜드마크.png">
             </a>
          </div>
          <div class="nav-menu">
@@ -47,8 +47,9 @@
                </dd>
                <dd><a href="#">패키지여행</a>
                   <dl class="sub-menu">
-                     <dd><a href="/product/list/?pkContinent=이색휴양지" class="package">이색 휴양지</a></dd>
-                     <dd><a href="/product/list/?pkContinent=아름다운도시" class="package">아름다운도시</a></dd>
+                     <dd><a href="/product/list/?pkContinent=이색여행지" class="package">이색 여행지</a></dd>
+                     <dd><a href="/product/list/?pkContinent=아름다운휴양지" class="package">아름다운 휴양지</a></dd>
+                     <dd><a href="/product/list/?pkContinent=아름다운도시" class="package">아름다운 도시</a></dd>
                      <dd><a href="/product/list/?pkContinent=커플여행" class="package">커플여행</a></dd>
                      <dd><a href="/product/list/?pkContinent=럭셔리호캉스" class="package">럭셔리호캉스</a></dd>
                      <dd><a href="/product/list/?pkContinent=일본료칸(온천)" class="package">일본 료칸(온천)</a></dd>

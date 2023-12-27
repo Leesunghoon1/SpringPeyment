@@ -7,55 +7,56 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.easyfestival.www.domain.AttendanceHistoryVO;
+import com.easyfestival.www.domain.RouletteHistoryVO;
 import com.easyfestival.www.domain.attendanceVO;
-import com.easyfestival.www.domain.eventDTO;
 import com.easyfestival.www.domain.eventVO;
-import com.easyfestival.www.domain.prizeVO;
 import com.easyfestival.www.domain.rouletteVO;
 
 public interface EventDAO 
 {
 
-	int eventRegister(eventVO evo);
+   int eventRegister(eventVO evo);
 
-	List<eventVO> OneventList(LocalDateTime now);
+   List<eventVO> OneventList(LocalDateTime now);
 
-	eventVO detail(int evNo);
+   eventVO detail(int evNo);
 
-	int eventRemove(int evNo);
+   int eventRemove(int evNo);
 
-	int eventModify(eventVO evo);
+   int eventModify(eventVO evo);
 
-	List<eventVO> LasteventList(LocalDateTime now);
+   List<eventVO> LasteventList(LocalDateTime now);
 
-	int registerPrize(prizeVO prvo);
+   int registerPrize(RouletteHistoryVO rhvo);
 
-	int lastEvno();
+   int lastEvno();
 
-	void rouletteRegister(rouletteVO rlvo);
+   void rouletteRegister(rouletteVO rlvo);
 
-	String getPrize(int evNo);
+   String getPrize(int evNo);
 
-	void attendanceRegister(attendanceVO atvo);
+   void attendanceRegister(attendanceVO atvo);
 
-	void attendanceHistory(@Param("evNo")long evNo,@Param("id")String id,@Param("now") LocalDate now);
+   void attendanceHistory(@Param("evNo")long evNo,@Param("id")String id,@Param("now") LocalDate now);
 
-	AttendanceHistoryVO getAttendanceHistory(@Param("evNo")long evNo,@Param("id")String id,@Param("now") LocalDate now);
+   AttendanceHistoryVO getAttendanceHistory(@Param("evNo")long evNo,@Param("id")String id,@Param("now") LocalDate now);
 
-	attendanceVO getAttendance(long evNo);
+   attendanceVO getAttendance(long evNo);
 
-	void addpoint(@Param("id")String id,@Param("point")int point);
+   void addpoint(@Param("id")String id,@Param("point")int point);
 
-	int getAttendanceCount(@Param("evNo")long evNo,@Param("id") String id);
+   int getAttendanceCount(@Param("evNo")long evNo,@Param("id") String id);
 
-	void addSpecialPoint(@Param("id")String id,@Param("specialPoint") int specialPoint);
+   void addSpecialPoint(@Param("id")String id,@Param("specialPoint") int specialPoint);
 
-	void rouletteModify(rouletteVO rlvo);
+   void rouletteModify(rouletteVO rlvo);
 
-	void attendanceModify(attendanceVO atvo);
-	
+   void attendanceModify(attendanceVO atvo);
+
+   RouletteHistoryVO getRouletteHistory(RouletteHistoryVO rhvo);
+   
 
 
-	
+   
 
 }

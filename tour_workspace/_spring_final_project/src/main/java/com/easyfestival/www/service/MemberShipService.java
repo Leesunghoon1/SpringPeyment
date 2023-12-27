@@ -20,5 +20,7 @@ public interface MemberShipService {
 
 	int ollCancle(OrderVO orderVO);
 
+	void joinPoint(String id);
+
 
 }

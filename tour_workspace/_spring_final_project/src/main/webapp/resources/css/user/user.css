@@ -412,7 +412,9 @@
 	font-size: 1.3rem;
 	font-weight: 600;
 }
-
+.user-package-reservation>:first-child a{
+	color:inherit;
+}
 .user-detail-bottom{
 	width: 1200px;
 	height: 300px;
@@ -466,8 +468,9 @@
 	display: flex;
 	align-items: center;
 	font-weight: 700;
-	padding-left: 15px;
+	padding: 0 15px 0 15px;
 	box-sizing: border-box;
+	letter-spacing: -0.9px;
 }
 .list-items>.qa-list{
 	width: 100%;
@@ -476,9 +479,10 @@
 	align-items: center;
 	justify-content: flex-start;
 	margin-top: 1rem;
+	letter-spacing: -0.9px;
 }
 .qa-list{
-	padding-left: 15px;
+	padding: 0 15px 0 15px;
 	box-sizing: border-box;
 }
 
@@ -496,6 +500,7 @@
 }
 .inquiry-title a{
 	color : inherit;
+	font-weight: bold;
 }
 .inquiry-answer{
 	/* 문의답변 */
@@ -526,6 +531,7 @@
 }
 .packge-name a{
 	color : inherit;
+	font-weight: bold;
 }
 .packge-price{
 	/* 패키지 가격 */
@@ -549,8 +555,9 @@
 	width: 20%;
 	height: 100%;
 }
-.favvorite-continent a{
+.favvorite-name a{
 	color : inherit;
+	font-weight: bold;
 }
 .favvorite-price{
 	/* 관심상품 가격 */
@@ -563,27 +570,28 @@
 	justify-content: center;
 }
 /* 항공권 내역*/
+.ticket-list{
+	cursor: pointer;
+}
 .ticket-date{
 	/* 항공권 스케쥴 */
-	width: 40%;
+	width: 35%;
 	height: 100%;
 }
 .ticket-arrival{
 	/* 도착공항 */
-	width: 20%;
+	width: 25%;
 	height: 100%;
+	font-weight: bold;
 }
 .ticket-flighType{
 	/* 항공유형 */
-	width: 13%;
+	width: 15%;
 	height: 100%;
-}
-.ticket-arrival a{
-	color : inherit;
 }
 .ticket-seatType{
 	/* 좌석유형 */
-	width: 17%;
+	width: 15%;
 	height: 100%;
 }
 .ticket-people{

@@ -449,7 +449,7 @@ label {
 	position: relative;
 	width: 200px;
 	height: 60px;
-	background-color: #1c1c1c;
+	background-color: #E53E30;
 	color: #fff;
 	border: none;
 	font-size: 20px;
@@ -458,7 +458,7 @@ label {
 	cursor: pointer;
 }
 .btn-gradient:hover{
-	background-color: #524a4e;
+	background-color: #D71313;
 }
 
 .btn-gradient .optionList::-webkit-scrollbar-track {

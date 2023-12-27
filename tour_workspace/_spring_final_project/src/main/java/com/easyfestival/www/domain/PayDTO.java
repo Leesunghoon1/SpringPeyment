@@ -28,5 +28,5 @@ public class PayDTO {
 	private Date payDate; // sysdate
 	private Long payAmount;
 	private Long pkNo;
-	private Long sayongPointeu;
+	private Long usePoint;
 }

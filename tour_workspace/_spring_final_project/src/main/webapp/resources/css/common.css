@@ -28,7 +28,7 @@ dl, dd{
     display: flex;
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.75);
-    border-bottom: 1px solid #05566e;
+    border-bottom: 1px solid #1c1c1c;
     transition: all 0.3s;
 }
 
@@ -110,7 +110,7 @@ dl, dd{
     position: relative;
 }
 .main-logo img{
-    width:100px;
+    width:150px;
 }
 .main-logo img:hover{
     transform: translate(3px, 3px);
@@ -177,13 +177,13 @@ dl, dd{
 /* footer */
 .footer-container{
     width: 100%;
-    background-color: #05566e;
+    background-color: #1c1c1c;
     display: flex;
     flex-direction: column;
     padding-top:20px;
     padding-bottom: 30px;
     justify-content: space-between;
-    color:#A9A9A9;
+    color:#fff;
     align-items: center;
     z-index: 3;
 }
@@ -358,6 +358,11 @@ dl, dd{
    background-size: cover;
    position: relative;
    border-radius: 10px;
+}
+.sub-items-link{
+	display:block;
+	width: 100%;
+	height: 100%;
 }
 .sub-slider-item1{
     background-image: url("/resources/image/slide-img/osaka-2225441_1280.jpg");

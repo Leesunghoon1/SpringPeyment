@@ -211,8 +211,8 @@
 					<p>좌석선택</p>
 					<ul class="seat-choice">
 						<li class="regular-seat seat">일반석</li>
-						<li class="premium-seat seat">프리미엄 일반석</li>
-						<li class="business-seat seat">비즈니스석</li>
+						<li class="premium-seat seat">프리미엄</li>
+						<li class="business-seat seat">비즈니스</li>
 						<li class="firstclass-seat seat">일등석</li>
 					</ul>
 				</div>

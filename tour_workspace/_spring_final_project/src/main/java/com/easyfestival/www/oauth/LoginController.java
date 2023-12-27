@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.MembershipService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -32,6 +33,7 @@ import com.easyfestival.www.repository.UserDAO;
 import com.easyfestival.www.security.AuthUser;
 import com.easyfestival.www.security.AuthVO;
 import com.easyfestival.www.security.UserVO;
+import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.UserServiceImpl;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -47,6 +49,7 @@ public class LoginController {
 	private final UserServiceImpl usv;
 	private final UserDAO udao;
 	private final OAuthHandler oh;
+	private final MemberShipService memberShipService;
 	private final BCryptPasswordEncoder bcEncoder;
 	
 	// OAuthBO
@@ -159,6 +162,7 @@ public class LoginController {
         	avo.setAuth("ROLE_OAUTH");
         	usv.authUser(avo); // DB에 권한 저장
         	uvo.setAuthList(udao.selectAuths(uvo.getId())); // AuthVO 셋팅
+        	memberShipService.insertId(uvo.getId()); // 멤버쉽 생성
         }else {
         	// 가입되어 있으면 AuthVO 권한만 셋팅
         	uvo.setAuthList(udao.selectAuths(uvo.getId()));

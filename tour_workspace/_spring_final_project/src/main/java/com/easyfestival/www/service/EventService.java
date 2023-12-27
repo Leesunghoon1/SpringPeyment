@@ -6,10 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.easyfestival.www.domain.AttendanceHistoryVO;
+import com.easyfestival.www.domain.RouletteHistoryVO;
 import com.easyfestival.www.domain.attendanceVO;
-import com.easyfestival.www.domain.eventDTO;
 import com.easyfestival.www.domain.eventVO;
-import com.easyfestival.www.domain.prizeVO;
 import com.easyfestival.www.domain.rouletteVO;
 
 public interface EventService {
@@ -28,7 +27,7 @@ public interface EventService {
 
 	int eventRegister(eventVO eventVO);
 
-	int registerPrize(prizeVO prvo);
+	int registerPrize(RouletteHistoryVO rhvo);
 
 	int lastEvno();
 
@@ -53,6 +52,8 @@ public interface EventService {
 	void rouletteModify(rouletteVO rlvo);
 
 	void attendanceModify(attendanceVO atvo);
+
+	RouletteHistoryVO getRouletteHistory(RouletteHistoryVO rhvo);
 
 
 	

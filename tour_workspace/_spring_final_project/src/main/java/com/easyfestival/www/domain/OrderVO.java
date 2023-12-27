@@ -17,16 +17,22 @@ import lombok.ToString;
 public class OrderVO {
 
 	private Long orderNum;
-	private String productName;
 	private String id;
-	private String pkNo;
 	private Date orderDate;
 	private Long totalPrice;
 	private String impUid;
 	private Long userCount;
-	private Long sayongPointeu;
+	private Long usePoint;
 	private char confirmation;
-    private String airplane;
-
+    private String orderType;
+    private long pkNo;
+    
+    
+    private String productContent;
+    private String pkContinent;
+    private String productName;
+    private String cityName;
+    private String pkContent;
+    
 	
 }

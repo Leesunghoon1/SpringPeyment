@@ -356,5 +356,15 @@ pepleFooterButton.addEventListener('click',()=>{
 
 let searchBtn = document.querySelector('.search-btn');
 searchBtn.addEventListener('click',()=>{
-    document.querySelector('.sub-but').click();
+    let cal_Btn = document.querySelector('.cal-input'); // 날짜
+    let arrivalCity = document.querySelector('.arrival'); // 도착도시
+    if(cal_Btn.value == "날짜를 입력해주세요"){
+        alert("도착지를 선택해주세요");
+    }else if(arrivalCity.value == "도착지"){
+        alert("날짜를 선택해주세요");
+    }
+    else{
+        document.querySelector('.sub-but').click();
+    }
+
 })

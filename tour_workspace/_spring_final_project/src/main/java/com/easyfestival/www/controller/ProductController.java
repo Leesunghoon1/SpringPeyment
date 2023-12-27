@@ -105,22 +105,22 @@ public class ProductController {
 		m.addAttribute("pldto", pldto.get(0));
 		return "/product/detail";
 	}
+	
 	@RequestMapping(value = "peopleVal", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String,String>> peopleCount(@RequestParam("peopleCount")String peopleCount, Model model){
-		Map<String,String> result = new HashMap<>();
-		result.put("result", peopleCount);
-		log.info("인원수 >>>>>>>>>>> {} ", result);
-		model.addAttribute("result",result);
-		return ResponseEntity.ok(result);
+	public ResponseEntity<Map<String,Integer>> peopleCount(@RequestParam("peopleCount")int peopleCount){
+		Map<String,Integer> peopleCnt = new HashMap<>();
+		peopleCnt.put("result", peopleCount);
+		return ResponseEntity.ok(peopleCnt);
 	}
 
 	@GetMapping("reservation")
-	public String reservation(@RequestParam("pkNo")long pkNo , Model m) {
+	public String reservation(@RequestParam("pkNo")long pkNo ,@RequestParam("peopleCount")int peopleCount, Model m) {
 		List<ProductListDTO> pldto = psv.getdtoDetail(pkNo);
 		log.info(pldto+"pldto");
 		
 		m.addAttribute("pldto", pldto.get(0));
-		
+		log.info("peopleCount >>>>>>>>> {}" ,peopleCount);
+		m.addAttribute("peopleCount", peopleCount);
 		
 		return "/product/reservation";
 	}

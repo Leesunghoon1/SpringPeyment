@@ -193,7 +193,7 @@
 									<div class="reservation-peple-count">
 										<button type="button" id="minus-btn">-</button>
 										<input type="text" readonly="readonly" class="peple-input"
-											id="peple-input" value="${peplecount }">
+											id="peple-input" value="${peopleCount}">
 										<button type="button" id="plus-btn">+</button>
 									</div>
 								</td>
@@ -202,7 +202,7 @@
 								<th class="reservation-peple-price-th">최종 합계금액</th>
 								<td class="reservation-peple-price-td">
 									<div>
-										<input type="text" value="${0}"
+										<input type="text" value="${packvo.pkPrice * peopleCount}"
 											readonly="readonly" id="reservation-price"><input
 											type="hidden" value="${packvo.pkPrice}" id="package-price">원
 									</div>

@@ -57,5 +57,22 @@ CREATE TABLE `free_ticket_order` (
   `gate` varchar(45) DEFAULT NULL
 ) 
 
+/개인결제 결제 정보
+CREATE TABLE `user_ticket_order` (
+  `ut_no` bigint,
+  `pk_no` bigint,
+  `id` varchar(50) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `city_name` varchar(100) DEFAULT NULL,
+  `personal` varchar(1) DEFAULT 'U',
+  PRIMARY KEY (`ut_no`)
+);
+
+
+ALTER TABLE pay_order_user
+CHANGE airplane order_type varchar(1);
+
+ALTER TABLE pay_order_user
+CHANGE sayong_pointeu use_point bigint;
 
 

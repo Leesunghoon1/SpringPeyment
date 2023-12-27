@@ -124,9 +124,7 @@ body{
     gap: 10px;
 }
 .reservation-information-div-strong{
-    padding-bottom: 20px;
-    border-bottom: 1px solid black;
-    margin-bottom: 10px;
+    padding-bottom: 25px;
 }
 .reservation-information-strong{
     font-weight: 700;
@@ -134,6 +132,7 @@ body{
 }
 .reservation-information-table{
     width: 100%;
+    border-top: 1px solid #1c1c1c;
 }
 .reservation-information-table-th{
     padding-top: 15px;
@@ -154,7 +153,6 @@ body{
     margin-bottom: 50px
 }
 .reservation-peple-strong{
-    border-bottom: 1px solid black;
     padding-bottom: 25px;
     font-size: 25px;
     font-weight: 700;
@@ -225,10 +223,6 @@ body{
     width: 100%;
 }
 
-
-.reservation-peple-price{
-    border-top: 1px solid black;
-}
 .reservation-peple-price-th{
     border-right: 1px solid #ccc;  
     border-bottom: 1px solid #ccc;

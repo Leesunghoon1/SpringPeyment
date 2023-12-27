@@ -7,17 +7,17 @@
 
 
 	<!-- 주문 정보 생성 -->
-	<!-- 주문 정보 생성 -->
+
 	<insert id="insert_pay" parameterType="orderVO">
-		INSERT INTO pay_order_user (order_num, pk_no, id, order_date, total_price,
-		imp_uid, user_count, sayong_pointeu, product_name)
-		VALUES (#{orderNum}, #{pkNo}, #{id}, #{orderDate}, #{totalPrice}, #{impUid},
-		#{userCount}, #{sayongPointeu}, #{productName});
+		INSERT INTO pay_order_user (order_num, id, order_date, total_price,
+		imp_uid, user_count, use_point, order_type, pk_no)
+		VALUES (#{orderNum}, #{id}, #{orderDate}, #{totalPrice}, #{impUid},
+		#{userCount}, #{usePoint}, 'P', #{pkNo});
 	</insert>
 
 
 	<insert id="freeinfo_pay" parameterType="ftoVO">
-		INSERT INTO pay_order_user (order_num, id, total_price, imp_uid, user_count, airplane)
+		INSERT INTO pay_order_user (order_num, id, total_price, imp_uid, user_count, order_type)
 		VALUES (#{orderNum}, #{id}, #{ftPrice}, #{impUid}, #{ftPeple}, 'A');
 	</insert>
 
@@ -29,10 +29,10 @@
 		insert into sc_pay
 		(id, order_num, pay_method, product_name,
 		pay_amount, pk_no,
-		sayong_pointeu)
+		use_point)
 		values (#{id}, #{orderNum}, #{payMethod},
 		#{productName},
-		#{payAmount}, #{pkNo}, #{sayongPointeu})
+		#{payAmount}, #{pkNo}, #{usePoint})
 	</insert>
 
 
@@ -79,7 +79,7 @@
 
 	<select id="OrderCount" resultType="int">
 		select count(id) from
-		pay_order_user;
+     	sc_pay where id=#{svNum}
 	</select>
 
 

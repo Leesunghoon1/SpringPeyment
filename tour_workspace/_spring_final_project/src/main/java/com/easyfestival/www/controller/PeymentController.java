@@ -22,10 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.easyfestival.www.domain.AirplaneInfoVO;
-import com.easyfestival.www.domain.FreeTitcketOrderVO;
 import com.easyfestival.www.domain.MemberShipVO;
 import com.easyfestival.www.domain.OllPayDTO;
 import com.easyfestival.www.domain.OrderVO;
@@ -33,12 +29,11 @@ import com.easyfestival.www.domain.PayDTO;
 import com.easyfestival.www.domain.ProductListDTO;
 import com.easyfestival.www.handler.PagingHandler;
 import com.easyfestival.www.security.UserVO;
-import com.easyfestival.www.service.FreeTitcketOrderService;
 import com.easyfestival.www.service.MemberShipService;
 import com.easyfestival.www.service.OrderService;
 import com.easyfestival.www.service.PayService;
 import com.easyfestival.www.service.ProductService;
-import com.mysql.cj.Session;
+import com.easyfestival.www.service.UserTicketOrderService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -70,9 +65,10 @@ public class PeymentController {
 
 	@Autowired
 	private MemberShipService memberShipService;
-
+	
 	@Autowired
-	private FreeTitcketOrderService freeTitcketOrderService;
+	private UserTicketOrderService userTicketOrderService;
+
 
 	public PeymentController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -106,7 +102,7 @@ public class PeymentController {
 
 		model.addAttribute("lastTotalCount", lastTotalCount);
 
-		return "/package/peyDetail";
+		return "/peyment/peyDetail";
 	}
 
 	@GetMapping("/OrderList")
@@ -130,7 +126,7 @@ public class PeymentController {
 
 		model.addAttribute("ollList", ollList);
 
-		return "/package/OrderList";
+		return "/peyment/OrderList";
 	}
 
 	@RequestMapping(value = "/peverifyIamport/{imp_uid}")
@@ -145,20 +141,10 @@ public class PeymentController {
 	@ResponseBody
 	public int orderCancle(OrderVO orderVO, PayDTO payDTO) throws Exception {
 
-		System.out.println("1111 : " + orderVO);
-		System.out.println("1111 : " + orderVO.getImpUid());
-		System.out.println("1111 : " + orderVO.getOrderNum());
-		System.out.println("1111 : " + orderVO.getTotalPrice());
 
 		orderVO = orderService.adminList(orderVO);
 
-		System.out.println("2222 : " + orderVO);
-		System.out.println("2222 : " + orderVO.getImpUid());
-		System.out.println("2222 : " + orderVO.getOrderNum());
-		System.out.println("2222 : " + orderVO.getTotalPrice());
-
 		int result1 = orderService.payMentCancle(payDTO);
-		System.out.println("rrr");
 
 		int result = orderService.orderCancle(orderVO);
 
@@ -167,13 +153,13 @@ public class PeymentController {
 		int result3 = memberShipService.ollCancle(orderVO);
 
 		if (result > 0) {
-			System.out.println("예약 DB 삭제성공");
+			log.info("예약 DB 삭제성공");
 		}
 		if (result1 > 0) {
-			System.out.println("Pay DB 삭제성공");
+			log.info("Pay DB 삭제성공");
 		}
 		if (result2 > 0) {
-			System.out.println("point DB 삭제 완료");
+	
 		}
 
 		return result;
@@ -185,7 +171,6 @@ public class PeymentController {
 
 		orderVO = orderService.adminList(orderVO);
 
-		System.out.println(orderVO);
 
 		int result = memberShipService.insert_point(orderVO);
 
@@ -194,12 +179,11 @@ public class PeymentController {
 		char updateYN = orderVO.getConfirmation();
 
 		String resultString = String.valueOf(updateYN);
-		System.out.println(resultString);
 		if (result > 0) {
-			System.out.println("구매 확정 포인트 등록 성공");
+			log.info("구매 확정 포인트 등록 성공");
 		}
 		if (result2 > 0) {
-			System.out.println("업데이트 성공");
+			log.info("업데이트 성공");
 		}
 
 		return resultString;
@@ -226,7 +210,9 @@ public class PeymentController {
 			payService.payMentCancle(token, orderVO.getImpUid(), amount, "결제 금액 오류");
 			return res;
 		}
-
+		
+		userTicketOrderService.insert_user_ticket(orderVO);
+		
 		orderService.insert_pay(orderVO);
 
 		return res;
@@ -237,13 +223,10 @@ public class PeymentController {
 	public String getOrderComplete(@RequestParam long payNum, OrderVO orderVO, HttpSession session, Model model)
 			throws Exception {
 
-		System.out.println("404에러 ");
 		PayDTO payDTO = orderService.getPay(payNum);
 		model.addAttribute("payDTO", payDTO);
 
 		List<ProductListDTO> pldto = productService.getdtoDetail(payDTO.getPkNo());
-		System.out.println("들어오나????" + payDTO.getPkNo());
-		System.out.println("pldto >>>>>" + pldto.get(0));
 		model.addAttribute("pldto", pldto.get(0));
 
 		MemberShipVO msVo = memberShipService.getmemberShip(((UserVO) session.getAttribute("uvo")).getId());
@@ -277,7 +260,7 @@ public class PeymentController {
 
 		model.addAttribute("orderNum", orderNum);
 
-		return "/package/complete";
+		return "/peyment/complete";
 	}
 
 	@RequestMapping(value = "pay_info", method = RequestMethod.GET)
@@ -299,19 +282,16 @@ public class PeymentController {
 			}
 		}
 
-		System.out.println(((UserVO) session.getAttribute("uvo")).getId());
 		payDTO.setId(((UserVO) session.getAttribute("uvo")).getId());
 		payDTO.setOrderNum(Long.parseLong(result.getResponse().getMerchantUid()));
 		payDTO.setPayMethod(result.getResponse().getPayMethod());
 		payDTO.setProductName(result.getResponse().getName());
-		System.out.println("result.getResponse().getName()" + result.getResponse().getName());
 		payDTO.setPayAmount(result.getResponse().getAmount().longValue());
 		payDTO.setPkNo(pkNo);
-		payDTO.setSayongPointeu(point);
+		payDTO.setUsePoint(point);
 		orderService.insert_payinfo(payDTO);
 
 		payDTO = orderService.getLastPay(payDTO);
-		System.out.println("이건" + payDTO);
 
 		int isOK = memberShipService.updateMemberShip(((UserVO) session.getAttribute("uvo")).getId(), point);
 
@@ -322,8 +302,6 @@ public class PeymentController {
 	@ResponseBody
 	public int payMentCancle(OrderVO orderVO) throws Exception {
 		int result = 0;
-		System.out.println("payMentCancel" + orderVO);
-		System.out.println("1 : " + orderVO.getOrderNum());
 		if (orderVO.getOrderNum() != null) {
 			result = 1;
 		}

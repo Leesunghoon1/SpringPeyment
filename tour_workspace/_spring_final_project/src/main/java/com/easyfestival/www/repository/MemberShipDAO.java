@@ -25,4 +25,6 @@ public interface MemberShipDAO {
 
 	void pointCancle(@Param("point") long point, @Param("id") String id);
 
+	void joinPoint(String id);
+
 }

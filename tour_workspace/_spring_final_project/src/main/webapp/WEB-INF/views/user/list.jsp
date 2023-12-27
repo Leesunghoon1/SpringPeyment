@@ -27,7 +27,7 @@
 				<div>
 					<span>${udto.id}</span>
 					<span>${empty udto.grade ? '브론즈' : udto.grade}</span>
-					<span>${udto.point}</span>
+					<span>${udto.point eq 0 ? 1000 : udto.point}</span>
 					<span>${udto.name}</span>
 					<span>${udto.age}</span>
 					<span>${udto.email}</span>

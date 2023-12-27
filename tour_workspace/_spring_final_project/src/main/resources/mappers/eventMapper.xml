@@ -28,7 +28,7 @@
 		where ev_no=#{evNo}
 	</update>
 	<insert id="registerPrize">
-		insert into event_prize values (#{id},#{prize})
+		insert into roulette_history values (#{evNo},#{id},#{prize},now())
 	</insert>
 	<select id="lastEvno" resultType="int">
 		select max(ev_no) from event;
@@ -69,4 +69,7 @@
 		special_point=#{specialPoint},full_attendance_prize=#{fullAttendancePrize}
 		where ev_no=#{evNo}
 	</update>
+	<select id="getRouletteHistory" resultType="com.easyfestival.www.domain.RouletteHistoryVO">
+		select * from roulette_history where id=#{id} and date=#{date} and ev_no=#{evNo}
+	</select>
 </mapper>

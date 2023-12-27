@@ -60,13 +60,6 @@ public class freeTourPeymentController {
 
 	@Autowired
 	private OrderService orderService;
-
-	@Autowired
-	private ProductService productService;
-
-	@Autowired
-	private MemberShipService memberShipService;
-	
 	@Autowired
 	private FreeTitcketOrderService freeTitcketOrderService;
 	
@@ -142,7 +135,7 @@ public class freeTourPeymentController {
 		model.addAttribute("ftvo",ftvo);
 
 		// 여기에서 폼 데이터를 사용하여 원하는 로직 수행
-		return "/package/PeyReservation";
+		return "/peyment/PeyReservation";
 		/* return "redirect:/peyment/PeyReservation"; */
 	}
 	

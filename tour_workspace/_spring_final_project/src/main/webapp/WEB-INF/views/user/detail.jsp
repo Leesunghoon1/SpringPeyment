@@ -59,7 +59,7 @@
 		
 			<div class="user-package-reservation">
 				<div>
-					<span>예약 내역</span>
+					<a href="/peyment/OrderList?pageNo=1"><span>예약 내역</span></a>
 				</div>
 				<div class="my-list">
 					<!-- 패키지예약내역 영역 -->
@@ -74,7 +74,7 @@
 								<c:forEach items="${packList}" var="pack">
 								<div class="qa-list">
 									<span class="packge-orderDate">${pack.orderDate}</span>
-									<span class="packge-name"><a href="/peyment/getList?orderNum=${pack.orderNum}">${pack.pkName}</a></span>
+									<span class="packge-name"><a href="/peyment/getList?orderNum=${pack.orderNum}&pkNo=${pack.pkNo}">${pack.pkName}</a></span>
 									<span class="packge-price"><fmt:formatNumber value="${pack.totalPrice}" pattern="#,###" />원</span>
 								</div>
 								</c:forEach>
@@ -105,15 +105,20 @@
 								</div>
 								<c:forEach items="${ftList}" var="ftList">
 								<div class="qa-list ticket-list" data-seat="${ftList.seatType}" data-city="${ftList.cityCode}" data-departure="${ftList.departureDay}"
-									 data-gate="${ftList.gate}">
-									<span class="ticket-date">${ftList.departureDay}/${ftList.arrivalDay}</span>
+									 data-gateNum="${ftList.gate}">
+									<span class="ticket-date">
+										<fmt:parseDate value="${ftList.departureDay}" pattern="yyyyMMddHHmm" var="depDate"/>
+										<fmt:formatDate value="${depDate}" pattern="yyyy-MM-dd"/>/
+										<fmt:parseDate value="${ftList.arrivalDay}" pattern="yyyyMMddHHmm" var="arrDate"/>
+										<fmt:formatDate value="${arrDate}" pattern="yyyy-MM-dd"/>
+									</span>
                                     <span class="ticket-arrival">${ftList.arrival}</span>
 									<span class="ticket-flighType">${ftList.flightType}</span>
 									<span class="ticket-seatType">${ftList.seatType}</span>
 									<span class="ticket-people">${ftList.ftPeple}</span>
 								</div>
 								</c:forEach>
-							</div>
+							</div>	
 						</c:when>
 						<c:otherwise>
 							<div class="noHistory"><i class="fa-solid fa-plane-slash"></i>예매한 항공권이 없습니다.</div>
@@ -136,14 +141,14 @@
 						<c:when test="${not empty faList}">
 							<div class="list-items">
 								<div class="fixed-title">
-									<span class="favvorite-name">상품명</span>
 									<span class="favvorite-continent">지역</span>
+									<span class="favvorite-name">상품명</span>
 									<span class="favvorite-price">패키지금액</span>
 								</div>
 								<c:forEach items="${faList}" var="faList">
 								<div class="qa-list">
-									<span class="favvorite-name">${faList.pkName}</span>
-									<span class="favvorite-continent"><a href="/product/detail?pkNo=${faList.pkNo}">${faList.pkContinent}</a></span>
+									<span class="favvorite-continent">${faList.pkContinent}</span>
+									<span class="favvorite-name"><a href="/product/detail?pkNo=${faList.pkNo}">${faList.pkName}</a></span>
 									<span class="favvorite-price"><fmt:formatNumber value="${faList.pkPrice}" pattern="#,###" />원</span>
 								</div>
 								</c:forEach>
@@ -192,7 +197,7 @@
 		
 		<div class="user-category">
 			<div>
-				<a href="/review/myreview/${uvo.id}">
+				<a href="/review/myreview?id=${uvo.id}">
 					<span><i class="fa-regular fa-pen-to-square"></i></span>
 					<span>내가쓴리뷰</span>
 				</a>

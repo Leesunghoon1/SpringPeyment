@@ -31,7 +31,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 	<c:set value="${pldto.hvo }" var="hvo" />
 	<c:set value="${pldto.fvo }" var="fvo" />
 	<c:set value="${pldto.plvo }" var="plvo" />
-
+	
 
 	<div class="main-container">
 		<div class="main-header">
@@ -41,23 +41,25 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 				<span class="titb">님, 안녕하세요.</span>
 				<div class="text-head">
 					<p>
-						포인트는<span>${msVo.point }P가 있어요 </span> 등급은 <span>${msVo.grade }입니다!!</span>
+						포인트는<span> ${msVo.point }P가 있어요 </span> 등급은 <span><strong>${msVo.grade }</strong>입니다!!</span>
 					</p>
 					<p>
 						<span>${uvo.name }</span>님이 좋아하는 여행 스타일은 어떤걸까요 ?
 					</p>
 				</div>
-
-				<div class="text-bottom"> <span>
-					제가 선택한 여행지는</span> <span class="current-icon">
-					</span><span class="titc">${packvo.pkName}</span>에요. <br>	<span class="current-icon"> </span><img
-						src="https://img-kyowontour.kyowontour.com/hp/icon/where.icon3.svg"
-						alt=""> <span class="current-icon"> </span>${packvo.pkContent}
-					즐기고 싶어요.
+<!--   https://cdn-icons-png.flaticon.com/512/7858/7858530.png-->
+				<div class="text-bottom"> 
+					<div>제가 선택한 여행지는</div>
+					<div class="titc">${packvo.pkName} <span> 입니다.</span></div> 
+					<h4>#여행정보</h4>
+					<div class="travle-info">
+						<img src="https://img-kyowontour.kyowontour.com/hp/icon/where.icon3.svg" alt="">
+						<span>${packvo.pkContent}</span>
+					</div>
 				</div>
 			</div>
 			<div class="my-icon">
-				<img src="https://cdn-icons-png.flaticon.com/512/7858/7858530.png "
+				<img src="https://cdn.pixabay.com/photo/2012/04/01/18/01/backpacking-23788_1280.png "
 					width="400" height="400">
 			</div>
 		</div>

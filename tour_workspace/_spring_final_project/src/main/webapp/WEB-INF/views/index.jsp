@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>랜드마크</title>
 	<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -151,6 +151,7 @@
 			<div class="sub-slider-wrapper">
 				<div id="subSlider" class="sub-slider">
 					<div class="sub-items sub-slider-item1">
+						<a href="/product/detail?pkNo=66" class="sub-items-link"></a>
 						<div class="item-label">1 위</div>
 						<div class="item-title">
 							<span class="item-city">오사카</span>
@@ -159,6 +160,7 @@
 						<div class="item-country">Japan</div>
 					</div>
 					<div class="sub-items sub-slider-item2">
+						<a href="/product/detail?pkNo=68" class="sub-items-link"></a>
 						<div class="item-label">2 위</div>
 						<div class="item-title">
 							<span class="item-city">방콕</span>
@@ -167,6 +169,7 @@
 						<div class="item-country">Thailand</div>
 					</div>
 					<div class="sub-items sub-slider-item3">
+						<a href="/product/detail?pkNo=67" class="sub-items-link"></a>
 						<div class="item-label">3 위</div>
 						<div class="item-title">
 							<span class="item-city">후쿠오카</span>
@@ -175,6 +178,7 @@
 						<div class="item-country">Japan</div>
 					</div>
 					<div class="sub-items sub-slider-item4">
+						<a href="/product/detail?pkNo=40" class="sub-items-link"></a>
 						<div class="item-label">4 위</div>
 						<div class="item-title">
 							<span class="item-city">칸쿤</span>
@@ -183,6 +187,7 @@
 						<div class="item-country">Mexico</div>
 					</div>
 					<div class="sub-items sub-slider-item5">
+						<a href="/product/detail?pkNo=33" class="sub-items-link"></a>
 						<div class="item-label">5 위</div>
 						<div class="item-title">
 							<span class="item-city">베니스</span>
@@ -191,6 +196,7 @@
 						<div class="item-country">Italy</div>
 					</div>
 					<div class="sub-items sub-slider-item6">
+						<a href="/product/detail?pkNo=69" class="sub-items-link"></a>
 						<div class="item-label">6 위</div>
 						<div class="item-title">
 							<span class="item-city">상해</span>
@@ -199,6 +205,7 @@
 						<div class="item-country">China</div>
 					</div>
 					<div class="sub-items sub-slider-item7">
+						<a href="/product/detail?pkNo=54" class="sub-items-link"></a>
 						<div class="item-label">7 위</div>
 						<div class="item-title">
 							<span class="item-city">프라하</span>

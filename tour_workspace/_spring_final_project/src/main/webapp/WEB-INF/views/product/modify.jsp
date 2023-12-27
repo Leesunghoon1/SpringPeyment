@@ -51,11 +51,21 @@
 							<td><input type="text" name="fvPrice" placeholder="축제 참여비용" class="product-input" id="festival-price" value="${fvo.fvPrice }"></td>
 							<td>
 								<select name="plContinent" class="product-continent">
-									<option>선택</option>
-									<option value="유럽">유럽</option>
-									<option value="아메리카">아메리카</option>
-									<option value="동북아">동북아</option>
-									<option value="동남아">동남아</option>
+									<option>카테고리</option>
+									<optgroup label="축제">					
+										<option value="유럽">유럽</option>
+										<option value="아메리카">아메리카</option>
+										<option value="동북아">동북아</option>
+										<option value="동남아">동남아</option>
+									</optgroup>
+									<optgroup label="테마여행">
+										<option value="이색여행지">이색여행지</option>
+										<option value="아름다운휴양지">아름다운휴양지</option>
+										<option value="아름다운도시">아름다운도시</option>
+										<option value="커플여행">커플여행</option>
+										<option value="럭셔리호캉스">럭셔리호캉스</option>
+										<option value="일본료칸(온천)">일본료칸(온천)</option>
+									</optgroup>
 								</select>
 							</td>
 						</tr>

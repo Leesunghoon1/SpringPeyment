@@ -151,7 +151,7 @@
 					
 					<div class="button-div">
 						<c:set value="peopleCount" var="peopleCnt" />
-						<a href="/product/reservation?pkNo=${packvo.pkNo}&peopleCount=${result}"><button type="button" class="option-submit-button">예약하기</button></a>
+						<a id="reservation-link" href="/product/reservation?pkNo=${packvo.pkNo}&peopleCount=1"><button type="button" class="option-submit-button">예약하기</button></a>
 					</div>
 					<div class="admin-product-controll">
 						<!-- 관리자만 보이게 만들기 -->
@@ -248,10 +248,6 @@
 	
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-<script type="text/javascript">
-	let cntPeople = `<c:out value="${result}" />`;
-	console.log(cntPeople);
-</script>
 <script type="text/javascript" src="/resources/js/product/product_detail.js"></script>
 <script type="text/javascript">
 	let country = `<c:out value="${plvo.plCountry}"/>`;

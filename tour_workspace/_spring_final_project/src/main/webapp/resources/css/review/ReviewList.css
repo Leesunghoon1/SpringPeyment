@@ -35,31 +35,36 @@ body {
 
 .review-search-select {
 	width: 150px;
-	height:44px;
+	height:40px;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     padding: 0px 13px;
     font-size: 14px;
     margin-right:5px;
 }
-
+.review-search-select:hover{
+	outline: 1px solid black;
+}
 .search-input {
 	width: 517px;
 	height: 40px;
 	font-size: 15px;
     margin-right:5px;
-	
+	box-sizing: border-box;
+	padding-left: 20px;
 }
 
 .search-input:hover{
-	border: 1px solid black;
+	outline: 1px solid black;
+	box-sizing: border-box;
 }
 
 .searchBtn{
-	height: 44px;
-	width: 50px;
+	height: 40px;
+	width: 40px;
 	background-color: black;
 	margin-right:5px;
+	cursor: pointer;
 }
 
 .material-symbols-outlined{
@@ -78,7 +83,7 @@ body {
 	float: right;
 	background-color: white;
 	margin-right: 10px;
-
+	cursor: pointer;
 }
 
 .middle-div, .review-paging-div {

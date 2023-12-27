@@ -96,8 +96,21 @@ body {
 }
 
 .item-info {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
    margin-left: 20px;
    width: 100%;
+}
+.payment-a-div{
+   display: flex;
+   justify-content: space-between;
+   flex-direction: row;
+   
+}
+.item-price{
+   display: flex;
+   align-items: center;
 }
 
 .text-bottom {
@@ -139,20 +152,19 @@ body {
 .payMentCancel {
    position: relative;
    width: 150px;
-   background: calc(100% - 7px) center no-repeat;
+   height: 55px;
+   background: #222;
    padding: 8px 18px;
-   font-size: 14px;
+   font-size: 16px;
+   color: #fff;
+   font-weight: 700;
    border-radius: 10px;
-   border: solid red;
-   margin-bottom: 30px;
+   border: none;
+   cursor: pointer;
 }
 
 .payMentCancel .optionList::-webkit-scrollbar-track {
    background: #303030;
-}
-
-.payMentCancel span {
-   color: red;
 }
 
 .payMentOk {
@@ -210,24 +222,32 @@ body {
 
 .btn-gradient-bottom {
    position: relative;
-   width: 150px;
-   background: calc(100% - 7px) center no-repeat;
-   padding: 8px 18px;
-   font-size: 14px;
-   border-radius: 10px;
-   border: solid #666;
-   margin-left: 130px;
+    width: 150px;
+    background: #fff;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #1c1c1c;
+    margin-left: 130px;
+    cursor: pointer;
+}
+.btn-gradient-bottom:hover{
+	background: #EEEDED;
 }
 
 .item-price {
    width: 100%;
-   padding-right: 40px;
-   margin-bottom: 20px;
    box-sizing: border-box;
    display: flex;
    justify-content: flex-end;
    align-items: center;
+   margin-right: 20px;
 }
+.item-price > strong{
+   font-size: 22px;
+   font-weight: 700;
+}
+
 
 .paging-container {
    display: flex;
@@ -305,3 +325,7 @@ body {
    margin-right: 40px;
    gap: 0.5rem;
 }
+.payment-detail-price{
+   padding-top: 50px;
+   padding-bottom: 20px;
+}  

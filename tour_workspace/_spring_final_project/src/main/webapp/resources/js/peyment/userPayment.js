@@ -1,81 +1,44 @@
 
-    const userS = userA.match(/id=([a-zA-Z0-9]+),\s*pwd=([^,]+),\s*name=([^,]+),\s*age=(\d+),\s*address=([^,]+),\s*email=([^,]+),\s*phoneNumber=([^,]+),\s*authList=([^,]+)+/);
-
-    const packageA = pldto.match(/pkNo=(\d+), pkName=([^,]+), pkPrice=(\d+), pkContinent=([^,]+), pkContent=([^)]+)/);
-
-    const regex = pppp.match(/point=(\d+), grade=([^}]+)/);
-
-    const point = parseInt(regex[1]);
-    const grade = regex[2];
 
 
-
-
-    const pkNo = parseInt(packageA[1]);
-    const pkName = packageA[2];
-    //가져온 가격
-
-    const pkPrice = parseInt(packageA[3]);
-    const pkContinent = packageA[4];
-    const pkContent = packageA[5];
-
-        // matches 배열에서 필요한 정보 추출
-        const id = userS[1];
-        const pwd = userS[2];
-        const Username = userS[3];
-        const age = parseInt(userS[4]);
-        const address = userS[5];
-        const email = userS[6];
-        const phoneNumber = userS[7];
-
-
+    console.log(pkName);
 
 
     //멤버쉽
-
-
     let memberDiscountPrice = 0;
-
-    memberDiscountPrice = document.getElementById('memberDiscountPrice').innerText;
-    console.log("memberDiscountPrice" +memberDiscountPrice);
-
     //포인트 ..."endPoint"
     let totalPoint = 0;
     //포인트 담을 그릇
     let PointPrice = 0;
-
-
-    let PointValue = document.getElementById('PointValue').innerText;
-    console.log("PointValue : "+ PointValue);
-
-    //변동 포인트
-    const pointSpan = document.getElementById('PointValue');
-
-
-
     //최종금액
     let endPrice = 0;
+    //최종 포인트
+    let endPoint = 0;
+    //포인트 쓰는 값s
+    let enteredPoints = 0;// 초기값을 0으로 할당
+    //totalPrice
+    let pkPriceValue;
+    // 금액 초기화
+    let priceP = totalPrice;
 
+
+
+
+    memberDiscountPrice = document.getElementById('memberDiscountPrice').innerText;
+
+    let PointValue = document.getElementById('PointValue').innerText;
+    //변동 포인트
+    const pointSpan = document.getElementById('PointValue');
 
     endPrice = document.getElementById('endPrice').innerText;
 
     const priceSpan = document.getElementById('endPrice');
 
-    let endPoint = 0;
-
-
     endPoint = document.getElementById('endPoint').innerText;
 
     const endPointSpan = document.getElementById('endPoint');
 
-    //최종가격
-    //totalPrice
-    let pkPriceValue;
 
-    //포인트 쓰는 값s
-    let enteredPoints = 0;// 초기값을 0으로 할당
-
-    let priceP = totalPrice;
 
 
 
@@ -120,9 +83,6 @@
                 alert("사용포인트가 최종 금액보다 많이 못씁니다.");
             }
             
-
-
-            
         } else {
             alert("올바른 포인트를 입력하세요.");
         }
@@ -140,18 +100,10 @@
             // 결제 취소 시, 이전 totalPrice로 초기화
             totalPrice = parseInt(priceP);
             totalPrice = totalPrice - parseInt(memberDiscountPrice);
-
-
-            console.log("1111" + totalPrice);
         } else {
             totalPrice = discountedPrice;
-            console.log("2222" + totalPrice);
+            
         }
-        
-    
-        
-
-        console.log("totalPrice----" + totalPrice);
 
         IMP.request_pay({ // param
             pg: selectedValue,
@@ -190,8 +142,11 @@
                                 "orderDate" : new Date().getTime(),
                                 "totalPrice" : rsp.paid_amount,
                                 "impUid" : rsp.imp_uid,
-                                "userCount" : userC,
-                                "sayongPointeu" : enteredPoints
+                                "userCount" : userCount,
+                                "usePoint" : enteredPoints,
+                                "cityName" : pkContent,
+                                "productContent" : pkContinent
+                                
                             });
                             console.log(data);
                         

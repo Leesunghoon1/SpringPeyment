@@ -9,36 +9,34 @@ import com.easyfestival.www.domain.reviewVO;
 public interface ReviewService {
 
 
-	int reviewRegister(reviewVO rvo);
+   int reviewRegister(reviewVO rvo);
 
-	List<reviewVO> list(pagingVO pgvo);
+   List<reviewVO> list(pagingVO pgvo);
 
-	reviewVO detail(int rvNo);
+   reviewVO detail(int rvNo);
 
-	int remove(int rvNo);
+   int remove(int rvNo);
 
-	int modify(reviewVO rvo);
+   int modify(reviewVO rvo);
 
-	int readCountUp(int rvNo);
+   int readCountUp(int rvNo);
 
-	int getTotalCount(pagingVO pgvo);
+   int getTotalCount(pagingVO pgvo);
 
-	ReviewLikeHistoryVO LikeDistinction(ReviewLikeHistoryVO rlh);
+   ReviewLikeHistoryVO LikeDistinction(ReviewLikeHistoryVO rlh);
 
-	int deleteLike(ReviewLikeHistoryVO rlhvo);
+   int deleteLike(ReviewLikeHistoryVO rlhvo);
 
-	int insertLike(ReviewLikeHistoryVO rlhvo);
+   int insertLike(ReviewLikeHistoryVO rlhvo);
 
-	List<reviewVO> bestList(pagingVO pgvo);
+   List<reviewVO> bestList(pagingVO pgvo);
 
-	int getbestTotalCount(pagingVO pgvo);
+   int getbestTotalCount(pagingVO pgvo);
 
-	int getLikeCount(int rvNo);
+   int getLikeCount(int rvNo);
 
-	List<reviewVO> mylist(String id, pagingVO pgvo);
+   int getMyTotalCount(String id);
 
-	int getMyTotalCount(String id, pagingVO pgvo);
-
-	
+   
 
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.easyfestival.www.repository.UserTicketOrderDAO">
+  
+<insert id="insert_user_ticket" parameterType="orderVO">
+    INSERT INTO user_ticket_order (order_num, pk_no, id, product_name, city_name, product_content)
+    VALUES (#{orderNum}, #{pkNo}, #{id}, #{productName}, #{cityName}, #{productContent});
+</insert>
+
+  </mapper>

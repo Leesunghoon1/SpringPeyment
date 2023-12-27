@@ -231,6 +231,7 @@ document.addEventListener('click',(e)=>{
     }
 })
 
+let reservationLink = document.querySelector('#reservation-link');
 document.addEventListener('click',(e)=>{
     let peple = document.getElementById('pepleCnt');
     let pepleval = parseInt(peple.value);
@@ -256,20 +257,18 @@ document.addEventListener('click',(e)=>{
             document.getElementById('price').value =  (hiddenPrice * pepleval);
             finalPrice.innerHTML = (hiddenPrice * pepleval).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
             peopleCountToServer(peple.value).then(e => {
-                console.log(e);
-
+                reservationLink.setAttribute('href', `/product/reservation?pkNo=${pkNoVal}&peopleCount=${e.result}`);
             })
         }
     }else if(e.target.id == "plus"){
         peple.value = (pepleval + 1);
         pepleval = pepleval+1;
-
+        
         document.getElementById('price').value =  (hiddenPrice * pepleval);
         finalPrice.innerHTML = (hiddenPrice * pepleval).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
         peopleCountToServer(peple.value).then(e => {
-                console.log(e);
+            reservationLink.setAttribute('href', `/product/reservation?pkNo=${pkNoVal}&peopleCount=${e.result}`);
             })
-        console.log("인원수변경 >> "+ cntPeople);
     }
 })
 
@@ -277,7 +276,7 @@ document.addEventListener('click',(e)=>{
 async function peopleCountToServer(peopleCount){
     try {
         let resp = await fetch("/product/peopleVal?peopleCount=" + peopleCount);
-        let result = await resp.JSON();
+        let result = await resp.json();
         return result;
     } catch (error) {
         console.log(error);
